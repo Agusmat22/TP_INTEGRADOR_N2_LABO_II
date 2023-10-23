@@ -22,5 +22,10 @@ namespace Formularios
 
             formRegistrarPaciente.ShowDialog();
         }
+
+        private void FormAdmision_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
