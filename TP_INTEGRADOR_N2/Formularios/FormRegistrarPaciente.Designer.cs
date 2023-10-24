@@ -29,37 +29,37 @@
         private void InitializeComponent()
         {
             groupBox1 = new GroupBox();
-            dateTimePicker1 = new DateTimePicker();
+            dtpFechaNacimiento = new DateTimePicker();
             label7 = new Label();
             label6 = new Label();
-            comboBox1 = new ComboBox();
+            cmbObraSocial = new ComboBox();
             label5 = new Label();
             label4 = new Label();
             label3 = new Label();
             label2 = new Label();
-            textBox4 = new TextBox();
-            textBox3 = new TextBox();
-            textBox2 = new TextBox();
-            textBox1 = new TextBox();
-            button1 = new Button();
+            txtNumAfiliado = new TextBox();
+            txtDni = new TextBox();
+            txtApellido = new TextBox();
+            txtNombre = new TextBox();
+            btnRegistrar = new Button();
             label1 = new Label();
             groupBox1.SuspendLayout();
             SuspendLayout();
             // 
             // groupBox1
             // 
-            groupBox1.Controls.Add(dateTimePicker1);
+            groupBox1.Controls.Add(dtpFechaNacimiento);
             groupBox1.Controls.Add(label7);
             groupBox1.Controls.Add(label6);
-            groupBox1.Controls.Add(comboBox1);
+            groupBox1.Controls.Add(cmbObraSocial);
             groupBox1.Controls.Add(label5);
             groupBox1.Controls.Add(label4);
             groupBox1.Controls.Add(label3);
             groupBox1.Controls.Add(label2);
-            groupBox1.Controls.Add(textBox4);
-            groupBox1.Controls.Add(textBox3);
-            groupBox1.Controls.Add(textBox2);
-            groupBox1.Controls.Add(textBox1);
+            groupBox1.Controls.Add(txtNumAfiliado);
+            groupBox1.Controls.Add(txtDni);
+            groupBox1.Controls.Add(txtApellido);
+            groupBox1.Controls.Add(txtNombre);
             groupBox1.Location = new Point(39, 85);
             groupBox1.Name = "groupBox1";
             groupBox1.Size = new Size(430, 227);
@@ -67,12 +67,12 @@
             groupBox1.TabStop = false;
             groupBox1.Text = "Campos a rellenar";
             // 
-            // dateTimePicker1
+            // dtpFechaNacimiento
             // 
-            dateTimePicker1.Location = new Point(231, 166);
-            dateTimePicker1.Name = "dateTimePicker1";
-            dateTimePicker1.Size = new Size(171, 23);
-            dateTimePicker1.TabIndex = 11;
+            dtpFechaNacimiento.Location = new Point(231, 166);
+            dtpFechaNacimiento.Name = "dtpFechaNacimiento";
+            dtpFechaNacimiento.Size = new Size(171, 23);
+            dtpFechaNacimiento.TabIndex = 11;
             // 
             // label7
             // 
@@ -94,14 +94,14 @@
             label6.TabIndex = 8;
             label6.Text = "Obra Social:";
             // 
-            // comboBox1
+            // cmbObraSocial
             // 
-            comboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(231, 54);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(171, 23);
-            comboBox1.TabIndex = 7;
+            cmbObraSocial.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbObraSocial.FormattingEnabled = true;
+            cmbObraSocial.Location = new Point(231, 54);
+            cmbObraSocial.Name = "cmbObraSocial";
+            cmbObraSocial.Size = new Size(171, 23);
+            cmbObraSocial.TabIndex = 7;
             // 
             // label5
             // 
@@ -143,42 +143,43 @@
             label2.TabIndex = 3;
             label2.Text = "Nombre:";
             // 
-            // textBox4
+            // txtNumAfiliado
             // 
-            textBox4.Location = new Point(231, 110);
-            textBox4.Name = "textBox4";
-            textBox4.Size = new Size(171, 23);
-            textBox4.TabIndex = 3;
+            txtNumAfiliado.Location = new Point(231, 110);
+            txtNumAfiliado.Name = "txtNumAfiliado";
+            txtNumAfiliado.Size = new Size(171, 23);
+            txtNumAfiliado.TabIndex = 3;
             // 
-            // textBox3
+            // txtDni
             // 
-            textBox3.Location = new Point(22, 166);
-            textBox3.Name = "textBox3";
-            textBox3.Size = new Size(171, 23);
-            textBox3.TabIndex = 2;
+            txtDni.Location = new Point(22, 166);
+            txtDni.Name = "txtDni";
+            txtDni.Size = new Size(171, 23);
+            txtDni.TabIndex = 2;
             // 
-            // textBox2
+            // txtApellido
             // 
-            textBox2.Location = new Point(22, 110);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(171, 23);
-            textBox2.TabIndex = 1;
+            txtApellido.Location = new Point(22, 110);
+            txtApellido.Name = "txtApellido";
+            txtApellido.Size = new Size(171, 23);
+            txtApellido.TabIndex = 1;
             // 
-            // textBox1
+            // txtNombre
             // 
-            textBox1.Location = new Point(22, 54);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(171, 23);
-            textBox1.TabIndex = 0;
+            txtNombre.Location = new Point(22, 54);
+            txtNombre.Name = "txtNombre";
+            txtNombre.Size = new Size(171, 23);
+            txtNombre.TabIndex = 0;
             // 
-            // button1
+            // btnRegistrar
             // 
-            button1.Location = new Point(199, 333);
-            button1.Name = "button1";
-            button1.Size = new Size(116, 31);
-            button1.TabIndex = 4;
-            button1.Text = "Registrar";
-            button1.UseVisualStyleBackColor = true;
+            btnRegistrar.Location = new Point(199, 333);
+            btnRegistrar.Name = "btnRegistrar";
+            btnRegistrar.Size = new Size(116, 31);
+            btnRegistrar.TabIndex = 4;
+            btnRegistrar.Text = "Registrar";
+            btnRegistrar.UseVisualStyleBackColor = true;
+            btnRegistrar.Click += btnRegistrar_Click;
             // 
             // label1
             // 
@@ -196,13 +197,15 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(508, 385);
             Controls.Add(groupBox1);
-            Controls.Add(button1);
+            Controls.Add(btnRegistrar);
             Controls.Add(label1);
             FormBorderStyle = FormBorderStyle.FixedSingle;
             MaximizeBox = false;
             MinimizeBox = false;
             Name = "FormRegistrarPaciente";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Registro";
+            Load += FormRegistrarPaciente_Load;
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
             ResumeLayout(false);
@@ -212,19 +215,19 @@
         #endregion
 
         private GroupBox groupBox1;
-        private DateTimePicker dateTimePicker1;
+        private DateTimePicker dtpFechaNacimiento;
         private Label label7;
         private Label label6;
-        private ComboBox comboBox1;
+        private ComboBox cmbObraSocial;
         private Label label5;
         private Label label4;
         private Label label3;
         private Label label2;
-        private TextBox textBox4;
-        private TextBox textBox3;
-        private TextBox textBox2;
-        private TextBox textBox1;
-        private Button button1;
+        private TextBox txtNumAfiliado;
+        private TextBox txtDni;
+        private TextBox txtApellido;
+        private TextBox txtNombre;
+        private Button btnRegistrar;
         private Label label1;
     }
 }

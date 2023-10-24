@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Lisandro\\Desktop\\TP_INTEGRADOR_N2_LABO_II\\TP_INTEGRADOR_N2\\Testing\\Consola.csproj": {}
+    "C:\\Users\\usuario\\Desktop\\ag\\TP_INTEGRADOR_N2\\TP_INTEGRADOR_N2\\Testing\\Consola.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Lisandro\\Desktop\\TP_INTEGRADOR_N2_LABO_II\\TP_INTEGRADOR_N2\\Entidades\\Entidades.csproj": {
+    "C:\\Users\\usuario\\Desktop\\ag\\TP_INTEGRADOR_N2\\TP_INTEGRADOR_N2\\Entidades\\Entidades.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Lisandro\\Desktop\\TP_INTEGRADOR_N2_LABO_II\\TP_INTEGRADOR_N2\\Entidades\\Entidades.csproj",
+        "projectUniqueName": "C:\\Users\\usuario\\Desktop\\ag\\TP_INTEGRADOR_N2\\TP_INTEGRADOR_N2\\Entidades\\Entidades.csproj",
         "projectName": "Entidades",
-        "projectPath": "C:\\Users\\Lisandro\\Desktop\\TP_INTEGRADOR_N2_LABO_II\\TP_INTEGRADOR_N2\\Entidades\\Entidades.csproj",
-        "packagesPath": "C:\\Users\\Lisandro\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Lisandro\\Desktop\\TP_INTEGRADOR_N2_LABO_II\\TP_INTEGRADOR_N2\\Entidades\\obj\\",
+        "projectPath": "C:\\Users\\usuario\\Desktop\\ag\\TP_INTEGRADOR_N2\\TP_INTEGRADOR_N2\\Entidades\\Entidades.csproj",
+        "packagesPath": "C:\\Users\\usuario\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\usuario\\Desktop\\ag\\TP_INTEGRADOR_N2\\TP_INTEGRADOR_N2\\Entidades\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Lisandro\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\usuario\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -55,21 +55,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.306\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\Lisandro\\Desktop\\TP_INTEGRADOR_N2_LABO_II\\TP_INTEGRADOR_N2\\Testing\\Consola.csproj": {
+    "C:\\Users\\usuario\\Desktop\\ag\\TP_INTEGRADOR_N2\\TP_INTEGRADOR_N2\\Testing\\Consola.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Lisandro\\Desktop\\TP_INTEGRADOR_N2_LABO_II\\TP_INTEGRADOR_N2\\Testing\\Consola.csproj",
+        "projectUniqueName": "C:\\Users\\usuario\\Desktop\\ag\\TP_INTEGRADOR_N2\\TP_INTEGRADOR_N2\\Testing\\Consola.csproj",
         "projectName": "Consola",
-        "projectPath": "C:\\Users\\Lisandro\\Desktop\\TP_INTEGRADOR_N2_LABO_II\\TP_INTEGRADOR_N2\\Testing\\Consola.csproj",
-        "packagesPath": "C:\\Users\\Lisandro\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Lisandro\\Desktop\\TP_INTEGRADOR_N2_LABO_II\\TP_INTEGRADOR_N2\\Testing\\obj\\",
+        "projectPath": "C:\\Users\\usuario\\Desktop\\ag\\TP_INTEGRADOR_N2\\TP_INTEGRADOR_N2\\Testing\\Consola.csproj",
+        "packagesPath": "C:\\Users\\usuario\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\usuario\\Desktop\\ag\\TP_INTEGRADOR_N2\\TP_INTEGRADOR_N2\\Testing\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Lisandro\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\usuario\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -83,8 +83,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\Lisandro\\Desktop\\TP_INTEGRADOR_N2_LABO_II\\TP_INTEGRADOR_N2\\Entidades\\Entidades.csproj": {
-                "projectPath": "C:\\Users\\Lisandro\\Desktop\\TP_INTEGRADOR_N2_LABO_II\\TP_INTEGRADOR_N2\\Entidades\\Entidades.csproj"
+              "C:\\Users\\usuario\\Desktop\\ag\\TP_INTEGRADOR_N2\\TP_INTEGRADOR_N2\\Entidades\\Entidades.csproj": {
+                "projectPath": "C:\\Users\\usuario\\Desktop\\ag\\TP_INTEGRADOR_N2\\TP_INTEGRADOR_N2\\Entidades\\Entidades.csproj"
               }
             }
           }
@@ -114,7 +114,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.306\\RuntimeIdentifierGraph.json"
         }
       }
     }

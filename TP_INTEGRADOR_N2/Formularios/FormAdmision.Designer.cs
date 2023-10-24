@@ -31,7 +31,7 @@
             label1 = new Label();
             btnCargarPaciente = new Button();
             btnIngreso = new Button();
-            lstbPacientesAtendidos = new ListBox();
+            lstbPacientesEnEspera = new ListBox();
             richTextBox1 = new RichTextBox();
             label2 = new Label();
             label3 = new Label();
@@ -39,14 +39,15 @@
             menuStrip1 = new MenuStrip();
             informacionToolStripMenuItem = new ToolStripMenuItem();
             pacientesToolStripMenuItem = new ToolStripMenuItem();
+            atendidosToolStripMenuItem = new ToolStripMenuItem();
+            listadoToolStripMenuItem = new ToolStripMenuItem();
+            historiaClinicaToolStripMenuItem = new ToolStripMenuItem();
             medicosToolStripMenuItem = new ToolStripMenuItem();
+            listadoToolStripMenuItem1 = new ToolStripMenuItem();
             registrarToolStripMenuItem1 = new ToolStripMenuItem();
             pacienteToolStripMenuItem1 = new ToolStripMenuItem();
             medicoToolStripMenuItem1 = new ToolStripMenuItem();
             informacionToolStripMenuItem1 = new ToolStripMenuItem();
-            atendidosToolStripMenuItem = new ToolStripMenuItem();
-            listadoToolStripMenuItem = new ToolStripMenuItem();
-            listadoToolStripMenuItem1 = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -85,14 +86,14 @@
             btnIngreso.Text = "Ingreso";
             btnIngreso.UseVisualStyleBackColor = false;
             // 
-            // lstbPacientesAtendidos
+            // lstbPacientesEnEspera
             // 
-            lstbPacientesAtendidos.FormattingEnabled = true;
-            lstbPacientesAtendidos.ItemHeight = 15;
-            lstbPacientesAtendidos.Location = new Point(512, 57);
-            lstbPacientesAtendidos.Name = "lstbPacientesAtendidos";
-            lstbPacientesAtendidos.Size = new Size(281, 364);
-            lstbPacientesAtendidos.TabIndex = 6;
+            lstbPacientesEnEspera.FormattingEnabled = true;
+            lstbPacientesEnEspera.ItemHeight = 15;
+            lstbPacientesEnEspera.Location = new Point(512, 57);
+            lstbPacientesEnEspera.Name = "lstbPacientesEnEspera";
+            lstbPacientesEnEspera.Size = new Size(281, 364);
+            lstbPacientesEnEspera.TabIndex = 6;
             // 
             // richTextBox1
             // 
@@ -153,60 +154,68 @@
             // 
             // pacientesToolStripMenuItem
             // 
-            pacientesToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { atendidosToolStripMenuItem, listadoToolStripMenuItem });
+            pacientesToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { atendidosToolStripMenuItem, listadoToolStripMenuItem, historiaClinicaToolStripMenuItem });
             pacientesToolStripMenuItem.Name = "pacientesToolStripMenuItem";
-            pacientesToolStripMenuItem.Size = new Size(180, 22);
+            pacientesToolStripMenuItem.Size = new Size(124, 22);
             pacientesToolStripMenuItem.Text = "Pacientes";
+            // 
+            // atendidosToolStripMenuItem
+            // 
+            atendidosToolStripMenuItem.Name = "atendidosToolStripMenuItem";
+            atendidosToolStripMenuItem.Size = new Size(154, 22);
+            atendidosToolStripMenuItem.Text = "Atendidos";
+            // 
+            // listadoToolStripMenuItem
+            // 
+            listadoToolStripMenuItem.Name = "listadoToolStripMenuItem";
+            listadoToolStripMenuItem.Size = new Size(154, 22);
+            listadoToolStripMenuItem.Text = "Listado";
+            // 
+            // historiaClinicaToolStripMenuItem
+            // 
+            historiaClinicaToolStripMenuItem.Name = "historiaClinicaToolStripMenuItem";
+            historiaClinicaToolStripMenuItem.Size = new Size(154, 22);
+            historiaClinicaToolStripMenuItem.Text = "Historia Clinica";
             // 
             // medicosToolStripMenuItem
             // 
             medicosToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { listadoToolStripMenuItem1 });
             medicosToolStripMenuItem.Name = "medicosToolStripMenuItem";
-            medicosToolStripMenuItem.Size = new Size(180, 22);
+            medicosToolStripMenuItem.Size = new Size(124, 22);
             medicosToolStripMenuItem.Text = "Medicos";
+            // 
+            // listadoToolStripMenuItem1
+            // 
+            listadoToolStripMenuItem1.Name = "listadoToolStripMenuItem1";
+            listadoToolStripMenuItem1.Size = new Size(112, 22);
+            listadoToolStripMenuItem1.Text = "Listado";
             // 
             // registrarToolStripMenuItem1
             // 
             registrarToolStripMenuItem1.DropDownItems.AddRange(new ToolStripItem[] { pacienteToolStripMenuItem1, medicoToolStripMenuItem1 });
             registrarToolStripMenuItem1.Name = "registrarToolStripMenuItem1";
-            registrarToolStripMenuItem1.Size = new Size(180, 22);
+            registrarToolStripMenuItem1.Size = new Size(124, 22);
             registrarToolStripMenuItem1.Text = "Registrar";
             // 
             // pacienteToolStripMenuItem1
             // 
             pacienteToolStripMenuItem1.Name = "pacienteToolStripMenuItem1";
-            pacienteToolStripMenuItem1.Size = new Size(180, 22);
+            pacienteToolStripMenuItem1.Size = new Size(119, 22);
             pacienteToolStripMenuItem1.Text = "Paciente";
+            pacienteToolStripMenuItem1.Click += pacienteToolStripMenuItem1_Click;
             // 
             // medicoToolStripMenuItem1
             // 
             medicoToolStripMenuItem1.Name = "medicoToolStripMenuItem1";
-            medicoToolStripMenuItem1.Size = new Size(180, 22);
+            medicoToolStripMenuItem1.Size = new Size(119, 22);
             medicoToolStripMenuItem1.Text = "Medico";
+            medicoToolStripMenuItem1.Click += medicoToolStripMenuItem1_Click;
             // 
             // informacionToolStripMenuItem1
             // 
             informacionToolStripMenuItem1.Name = "informacionToolStripMenuItem1";
             informacionToolStripMenuItem1.Size = new Size(84, 20);
             informacionToolStripMenuItem1.Text = "Informacion";
-            // 
-            // atendidosToolStripMenuItem
-            // 
-            atendidosToolStripMenuItem.Name = "atendidosToolStripMenuItem";
-            atendidosToolStripMenuItem.Size = new Size(180, 22);
-            atendidosToolStripMenuItem.Text = "Atendidos";
-            // 
-            // listadoToolStripMenuItem
-            // 
-            listadoToolStripMenuItem.Name = "listadoToolStripMenuItem";
-            listadoToolStripMenuItem.Size = new Size(180, 22);
-            listadoToolStripMenuItem.Text = "Listado";
-            // 
-            // listadoToolStripMenuItem1
-            // 
-            listadoToolStripMenuItem1.Name = "listadoToolStripMenuItem1";
-            listadoToolStripMenuItem1.Size = new Size(180, 22);
-            listadoToolStripMenuItem1.Text = "Listado";
             // 
             // FormAdmision
             // 
@@ -217,7 +226,7 @@
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(richTextBox1);
-            Controls.Add(lstbPacientesAtendidos);
+            Controls.Add(lstbPacientesEnEspera);
             Controls.Add(btnIngreso);
             Controls.Add(btnCargarPaciente);
             Controls.Add(label1);
@@ -239,7 +248,7 @@
         private Label label1;
         private Button btnCargarPaciente;
         private Button btnIngreso;
-        private ListBox lstbPacientesAtendidos;
+        private ListBox lstbPacientesEnEspera;
         private RichTextBox richTextBox1;
         private Label label2;
         private Label label3;
@@ -255,5 +264,6 @@
         private ToolStripMenuItem atendidosToolStripMenuItem;
         private ToolStripMenuItem listadoToolStripMenuItem;
         private ToolStripMenuItem listadoToolStripMenuItem1;
+        private ToolStripMenuItem historiaClinicaToolStripMenuItem;
     }
 }

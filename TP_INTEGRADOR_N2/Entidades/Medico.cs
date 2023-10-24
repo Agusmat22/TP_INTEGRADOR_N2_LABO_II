@@ -64,19 +64,21 @@ namespace Entidades
         /// Este metodo atendera a un paciente en la guardia, valida si este NO fue atendido y lo atendera, 
         /// caso contrario NO lo atendera y retornara false
         /// </summary>
-        /// <param name="paciente"></param>
+        /// <param name="paciente">El paciente que sera atendido</param>
         /// <returns>Retornara true si el paciente no estaba atendido, caso contrario false</returns>
         public bool AtenderPaciente(Paciente paciente)
         {
-            if (paciente.Atendido is false)
-            {
-                paciente.Atendido = true;
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return paciente.Atenderse();
+        }
+
+        /// <summary>
+        /// Compara por la sobrecarga de operadores de la clase base y tambien por el numero de matrico
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        public override bool Equals(object? obj)
+        {
+            return obj is not null && obj is Medico medico && this == medico && this.NumeroMatricula == medico.NumeroMatricula;
         }
     }
 }
