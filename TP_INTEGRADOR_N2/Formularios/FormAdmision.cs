@@ -14,6 +14,14 @@ namespace Formularios
 
         private void FormAdmision_Load(object sender, EventArgs e)
         {
+            foreach (EEspecialidad item in Enum.GetValues(typeof(EEspecialidad)))
+            {
+                this.cmbTipoGuardia.Items.Add(item);
+            }
+
+            this.cmbTipoGuardia.SelectedIndex = 0;
+
+
         }
 
         private void pacienteToolStripMenuItem1_Click(object sender, EventArgs e)
@@ -51,6 +59,18 @@ namespace Formularios
                 this.richTextBox1.Text = string.Empty;
             }
 
+        }
+
+        private void btnIngreso_Click(object sender, EventArgs e)
+        {
+            FormIngresoPaciente formIngresoPaciente = new FormIngresoPaciente();
+
+            DialogResult resultado = formIngresoPaciente.ShowDialog();
+
+            if (resultado == DialogResult.OK)
+            {
+                MessageBox.Show("Paciente ingresado a Guardia");
+            }
         }
     }
 }

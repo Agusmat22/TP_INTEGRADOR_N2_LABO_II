@@ -13,6 +13,7 @@ namespace Entidades
         private bool atendido;
         private int cantidadAtenciones;
         private EObrasSociales obraSocial;
+        private List<string> historiaClinica;
         public Paciente(string nombre, string apellido, long dni,DateTime fechaNacimiento, EObrasSociales obraSocial) 
             : base(nombre, apellido, dni, fechaNacimiento)
         {
@@ -23,15 +24,16 @@ namespace Entidades
         }
 
         //Sobrecargo el constructor para que se pueda agregar el numero de afiliado
-        public Paciente(string nombre, string apellido, long dni, DateTime fechaNacimiento, EObrasSociales obraSocial, long numeroAfiliado)
+        public Paciente(string nombre, string apellido, long dni, DateTime fechaNacimiento, EObrasSociales obraSocial, long numeroAfiliado, List<string> historiaClinica)
             :this(nombre,apellido,dni,fechaNacimiento, obraSocial)
         {
             this.numeroAfiliado = numeroAfiliado;
+            this.historiaClinica = historiaClinica;
         }
 
         //Sobrecargo el constructor para que se pueda agregar la cantidad de atenciones
-        public Paciente(string nombre, string apellido, long dni, DateTime fechaNacimiento, EObrasSociales obraSocial, long numeroAfiliado, int cantidadAtenciones)
-            : this(nombre, apellido, dni, fechaNacimiento,obraSocial ,numeroAfiliado)
+        public Paciente(string nombre, string apellido, long dni, DateTime fechaNacimiento, EObrasSociales obraSocial, long numeroAfiliado, List<string> historiaClinica, int cantidadAtenciones)
+            : this(nombre, apellido, dni, fechaNacimiento,obraSocial ,numeroAfiliado,historiaClinica)
         {
             this.cantidadAtenciones = cantidadAtenciones;
         }

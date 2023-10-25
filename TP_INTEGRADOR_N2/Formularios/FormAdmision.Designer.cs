@@ -35,7 +35,7 @@
             richTextBox1 = new RichTextBox();
             label2 = new Label();
             label3 = new Label();
-            comboBox1 = new ComboBox();
+            cmbTipoGuardia = new ComboBox();
             menuStrip1 = new MenuStrip();
             informacionToolStripMenuItem = new ToolStripMenuItem();
             pacientesToolStripMenuItem = new ToolStripMenuItem();
@@ -85,6 +85,7 @@
             btnIngreso.TabIndex = 5;
             btnIngreso.Text = "Ingreso";
             btnIngreso.UseVisualStyleBackColor = false;
+            btnIngreso.Click += btnIngreso_Click;
             // 
             // lstbPacientesEnEspera
             // 
@@ -125,16 +126,16 @@
             label3.TabIndex = 9;
             label3.Text = "Tipo de guardia:";
             // 
-            // comboBox1
+            // cmbTipoGuardia
             // 
-            comboBox1.Cursor = Cursors.Hand;
-            comboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
-            comboBox1.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(24, 77);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(281, 28);
-            comboBox1.TabIndex = 10;
+            cmbTipoGuardia.Cursor = Cursors.Hand;
+            cmbTipoGuardia.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbTipoGuardia.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
+            cmbTipoGuardia.FormattingEnabled = true;
+            cmbTipoGuardia.Location = new Point(24, 77);
+            cmbTipoGuardia.Name = "cmbTipoGuardia";
+            cmbTipoGuardia.Size = new Size(281, 28);
+            cmbTipoGuardia.TabIndex = 10;
             // 
             // menuStrip1
             // 
@@ -222,7 +223,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(814, 440);
-            Controls.Add(comboBox1);
+            Controls.Add(cmbTipoGuardia);
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(richTextBox1);
@@ -252,7 +253,7 @@
         private RichTextBox richTextBox1;
         private Label label2;
         private Label label3;
-        private ComboBox comboBox1;
+        private ComboBox cmbTipoGuardia;
         private MenuStrip menuStrip1;
         private ToolStripMenuItem informacionToolStripMenuItem;
         private ToolStripMenuItem pacientesToolStripMenuItem;
