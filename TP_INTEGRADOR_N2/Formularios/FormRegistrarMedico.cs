@@ -1,4 +1,5 @@
 ﻿using Entidades;
+using Entidades.Excepciones;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -35,14 +36,22 @@ namespace Formularios
                 //Obtengo todos los datos que contienen los elementos del formulario
                 string nombre = this.txtNombre.Text;
                 string apellido = this.txtApellido.Text;
-                long.TryParse(this.txtDni.Text, out long dni);
-                long.TryParse(this.txtMatricula.Text, out long numeroMatricula);
+                bool estadoValor = long.TryParse(this.txtDni.Text, out long dni);
+                bool estadoNumeroMatriculo = long.TryParse(this.txtMatricula.Text, out long numeroMatricula);
                 DateTime fechaNacimiento = DateTime.Parse(this.dtpFechaNacimiento.Text);
                 Enum.TryParse(this.cmbEspecialidad.SelectedItem.ToString().ToUpper(), out EEspecialidad especialidad);
 
-                //Instancio la clase paciente y creo el objeto
-                medico = new Medico(nombre, apellido, dni, numeroMatricula ,fechaNacimiento, especialidad);
-                MessageBox.Show($"Registro exitoso");
+                if (nombre != string.Empty && apellido != string.Empty && estadoValor && estadoNumeroMatriculo)
+                {
+                    //Instancio la clase paciente y creo el objeto
+                    medico = new Medico(nombre, apellido, dni, numeroMatricula, fechaNacimiento, especialidad);
+                    MessageBox.Show($"Registro exitoso");
+                }
+                else
+                {
+                    throw new CampoVacioExcepcion("Error, el formulario contiene campos vacios");
+                }
+
 
             }
             catch (Exception ex)
