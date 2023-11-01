@@ -12,11 +12,13 @@ namespace Entidades
         private long numeroAfiliado;
         private bool atendido;
         private int cantidadAtenciones;
-        private EObrasSociales obraSocial;
+        private EObrasSocial obraSocial;
         private List<string> historiaClinica;
-        public Paciente(string nombre, string apellido, long dni,DateTime fechaNacimiento, EObrasSociales obraSocial) 
+        public Paciente(string nombre, string apellido, long dni,DateTime fechaNacimiento, EObrasSocial obraSocial, long numeroAfiliado) 
             : base(nombre, apellido, dni, fechaNacimiento)
         {
+            this.numeroAfiliado = numeroAfiliado;
+
             //El paciente cuando se cargue por defecto no estara atendido
             this.atendido = false;
             this.obraSocial = obraSocial;
@@ -24,15 +26,14 @@ namespace Entidades
         }
 
         //Sobrecargo el constructor para que se pueda agregar el numero de afiliado
-        public Paciente(string nombre, string apellido, long dni, DateTime fechaNacimiento, EObrasSociales obraSocial, long numeroAfiliado, List<string> historiaClinica)
-            :this(nombre,apellido,dni,fechaNacimiento, obraSocial)
+        public Paciente(string nombre, string apellido, long dni, DateTime fechaNacimiento, EObrasSocial obraSocial, long numeroAfiliado, List<string> historiaClinica)
+            :this(nombre,apellido,dni,fechaNacimiento, obraSocial,numeroAfiliado)
         {
-            this.numeroAfiliado = numeroAfiliado;
             this.historiaClinica = historiaClinica;
         }
 
         //Sobrecargo el constructor para que se pueda agregar la cantidad de atenciones
-        public Paciente(string nombre, string apellido, long dni, DateTime fechaNacimiento, EObrasSociales obraSocial, long numeroAfiliado, List<string> historiaClinica, int cantidadAtenciones)
+        public Paciente(string nombre, string apellido, long dni, DateTime fechaNacimiento, EObrasSocial obraSocial, long numeroAfiliado, List<string> historiaClinica, int cantidadAtenciones)
             : this(nombre, apellido, dni, fechaNacimiento,obraSocial ,numeroAfiliado,historiaClinica)
         {
             this.cantidadAtenciones = cantidadAtenciones;
@@ -56,6 +57,12 @@ namespace Entidades
         {
             get { return this.CantidadDeConsultas; }
 
+        }
+
+        public long NumeroAfiliado
+        {
+            get {return this.numeroAfiliado; } 
+                   
         }
 
         /// <summary>
@@ -89,6 +96,17 @@ namespace Entidades
             return obj is not null && obj is Paciente paciente && paciente == this && paciente.numeroAfiliado == this.numeroAfiliado;
         }
 
+
+        //sobreescribo el TOSTRING para que se muestre en el listbox
+
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder();
+
+            sb.Append(base.ToString() + $" | {this.NumeroAfiliado} | {this.obraSocial}");
+
+            return sb.ToString();
+        }
 
     }
 }

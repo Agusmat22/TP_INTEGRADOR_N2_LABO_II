@@ -46,6 +46,7 @@ namespace Formularios
                     //Instancio la clase paciente y creo el objeto
                     medico = new Medico(nombre, apellido, dni, numeroMatricula, fechaNacimiento, especialidad);
                     MessageBox.Show($"Registro exitoso");
+                    this.DialogResult = DialogResult.OK;
                 }
                 else
                 {

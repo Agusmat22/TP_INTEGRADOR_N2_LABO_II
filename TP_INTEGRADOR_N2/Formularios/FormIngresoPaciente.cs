@@ -22,6 +22,12 @@ namespace Formularios
 
         private void FormIngresoPaciente_Load(object sender, EventArgs e)
         {
+            foreach (EEspecialidad item in Enum.GetValues(typeof(EEspecialidad)))
+            {
+                this.cmbTipoGuardia.Items.Add(item);
+            }
+
+            this.cmbTipoGuardia.SelectedIndex = 0;
 
         }
 

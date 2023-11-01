@@ -53,6 +53,11 @@
             return !(a == b);
         }
 
-         
+
+        public override string ToString()
+        {
+            return $"{this.Nombre.ToUpper()} {this.Apellido.ToUpper()}";
+        }
+
     }
 }

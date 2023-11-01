@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Entidades
 {
-    public enum EObrasSociales
+    public enum EObrasSocial
     {
         OSECAC,
         OSMEDICA,
@@ -53,7 +53,7 @@ namespace Entidades
         /// </summary>
         /// <param name="persona"></param>
         /// <returns>True si se pudo agregar, False si no se pudo</returns>
-        public bool AgregarPaciente(Paciente paciente2)
+        public bool Agregar(Paciente paciente2)
         {
             //Valido que sea del tipo medico y pregunto si no son iguales
             foreach (Paciente paciente in this.Pacientes)
@@ -73,7 +73,7 @@ namespace Entidades
         /// </summary>
         /// <param name="persona"></param>
         /// <returns>True si se pudo agregar, False si no se pudo</returns>
-        public bool AgregarMedico(Medico medico2)
+        public bool Agregar(Medico medico2)
         {
             //Valido que sea del tipo medico y pregunto si no son iguales
             foreach (Medico paciente in this.Medicos)

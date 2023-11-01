@@ -32,16 +32,18 @@ namespace Formularios
                 string nombre = this.txtNombre.Text;
                 string apellido = this.txtApellido.Text;
                 bool estadoDni = long.TryParse(this.txtDni.Text, out long dni);
+                bool estadoNumeroAfiliado = long.TryParse(this.txtNumAfiliado.Text, out long numeroAfiliado);
                 string obreSocialSeleccionada = this.cmbObraSocial.SelectedItem.ToString().ToUpper();
-                bool estadoObraSocial = Enum.TryParse(obreSocialSeleccionada, out EObrasSociales obraSocial);
+                bool estadoObraSocial = Enum.TryParse(obreSocialSeleccionada, out EObrasSocial obraSocial);
                 DateTime fechaNacimiento = DateTime.Parse(this.dtpFechaNacimiento.Text);
 
                 //valido que los campos no esten vacios
-                if (nombre != string.Empty && apellido != string.Empty && estadoDni&& estadoObraSocial)
+                if (nombre != string.Empty && apellido != string.Empty && estadoDni && estadoObraSocial)
                 {
                     //Instancio la clase paciente y creo el objeto
-                    paciente = new Paciente(nombre, apellido, dni, fechaNacimiento, obraSocial);
+                    paciente = new Paciente(nombre, apellido, dni, fechaNacimiento, obraSocial,numeroAfiliado);
                     MessageBox.Show($"Registro exitoso");
+                    this.DialogResult = DialogResult.OK;
 
                 }
                 else
@@ -67,7 +69,7 @@ namespace Formularios
 
         private void FormRegistrarPaciente_Load(object sender, EventArgs e)
         {
-            foreach (EEspecialidad item in Enum.GetValues(typeof(EEspecialidad)))
+            foreach (EObrasSocial item in Enum.GetValues(typeof(EObrasSocial)))
             {
                 cmbObraSocial.Items.Add(item); 
             }

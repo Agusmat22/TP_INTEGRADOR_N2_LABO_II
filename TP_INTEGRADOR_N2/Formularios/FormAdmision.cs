@@ -14,50 +14,40 @@ namespace Formularios
 
         private void FormAdmision_Load(object sender, EventArgs e)
         {
-            foreach (EEspecialidad item in Enum.GetValues(typeof(EEspecialidad)))
-            {
-                this.cmbTipoGuardia.Items.Add(item);
-            }
-
-            this.cmbTipoGuardia.SelectedIndex = 0;
-
 
         }
 
-        private void pacienteToolStripMenuItem1_Click(object sender, EventArgs e)
+        private void RegistrarPacienteToolStrip_Click(object sender, EventArgs e)
         {
             FormRegistrarPaciente formRegistrarPaciente = new FormRegistrarPaciente();
 
-            formRegistrarPaciente.ShowDialog();
+            DialogResult resultado = formRegistrarPaciente.ShowDialog();
 
-            if (formRegistrarPaciente.PacienteRegistrado is not null)
+            if (resultado == DialogResult.OK)
             {
-                this.centroMedico.AgregarPaciente(formRegistrarPaciente.PacienteRegistrado);
+                this.centroMedico.Agregar(formRegistrarPaciente.PacienteRegistrado);
+                this.ActualizarElementos();
             }
 
         }
 
-        private void medicoToolStripMenuItem1_Click(object sender, EventArgs e)
+        private void RegistrarMedicoToolStrip_Click(object sender, EventArgs e)
         {
             FormRegistrarMedico formRegistrarMedico = new FormRegistrarMedico();
 
-            formRegistrarMedico.ShowDialog();
+            DialogResult resultado = formRegistrarMedico.ShowDialog();
 
-            if (formRegistrarMedico.MedicoRegistrado is not null)
+            if (resultado == DialogResult.OK)
             {
-                this.centroMedico.AgregarMedico(formRegistrarMedico.MedicoRegistrado);
+                this.centroMedico.Agregar(formRegistrarMedico.MedicoRegistrado);
             }
 
         }
 
         private void ActualizarElementos()
         {
+            this.lstbPacientesEnEspera.DataSource = null;
             this.lstbPacientesEnEspera.DataSource = centroMedico.Pacientes;
-
-            if (this.richTextBox1.Text != string.Empty)
-            {
-                this.richTextBox1.Text = string.Empty;
-            }
 
         }
 
