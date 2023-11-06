@@ -36,7 +36,7 @@ namespace Formularios
                 //Obtengo todos los datos que contienen los elementos del formulario
                 string nombre = this.txtNombre.Text;
                 string apellido = this.txtApellido.Text;
-                bool estadoValor = long.TryParse(this.txtDni.Text, out long dni);
+                bool estadoValor = int.TryParse(this.txtDni.Text, out int dni);
                 bool estadoNumeroMatriculo = long.TryParse(this.txtMatricula.Text, out long numeroMatricula);
                 DateTime fechaNacimiento = DateTime.Parse(this.dtpFechaNacimiento.Text);
                 Enum.TryParse(this.cmbEspecialidad.SelectedItem.ToString().ToUpper(), out EEspecialidad especialidad);
@@ -59,6 +59,11 @@ namespace Formularios
             {
                 MessageBox.Show($"Error al intentar registrar al medico");
             }
+        }
+
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.Cancel;
         }
     }
 }

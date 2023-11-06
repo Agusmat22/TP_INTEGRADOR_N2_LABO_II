@@ -43,6 +43,7 @@
             txtNombre = new TextBox();
             btnRegistrar = new Button();
             label1 = new Label();
+            btnCancelar = new Button();
             groupBox1.SuspendLayout();
             SuspendLayout();
             // 
@@ -174,29 +175,45 @@
             // 
             // btnRegistrar
             // 
-            btnRegistrar.Location = new Point(196, 324);
+            btnRegistrar.BackColor = SystemColors.ScrollBar;
+            btnRegistrar.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
+            btnRegistrar.Location = new Point(360, 331);
             btnRegistrar.Name = "btnRegistrar";
-            btnRegistrar.Size = new Size(116, 31);
+            btnRegistrar.Size = new Size(116, 34);
             btnRegistrar.TabIndex = 4;
             btnRegistrar.Text = "Registrar";
-            btnRegistrar.UseVisualStyleBackColor = true;
+            btnRegistrar.UseVisualStyleBackColor = false;
             btnRegistrar.Click += btnRegistrar_Click;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            label1.Location = new Point(175, 25);
+            label1.Font = new Font("Arial", 12.75F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            label1.Location = new Point(171, 32);
             label1.Name = "label1";
-            label1.Size = new Size(158, 21);
+            label1.Size = new Size(180, 19);
             label1.TabIndex = 3;
             label1.Text = "REGISTRAR MEDICO";
+            // 
+            // btnCancelar
+            // 
+            btnCancelar.BackColor = SystemColors.Control;
+            btnCancelar.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
+            btnCancelar.Location = new Point(46, 331);
+            btnCancelar.Name = "btnCancelar";
+            btnCancelar.Size = new Size(116, 34);
+            btnCancelar.TabIndex = 6;
+            btnCancelar.Text = "Cancelar";
+            btnCancelar.UseVisualStyleBackColor = false;
+            btnCancelar.Click += btnCancelar_Click;
             // 
             // FormRegistrarMedico
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = SystemColors.GradientActiveCaption;
             ClientSize = new Size(514, 377);
+            Controls.Add(btnCancelar);
             Controls.Add(groupBox1);
             Controls.Add(btnRegistrar);
             Controls.Add(label1);
@@ -229,5 +246,6 @@
         private Label label6;
         private Label label7;
         private ComboBox cmbEspecialidad;
+        protected Button btnCancelar;
     }
 }

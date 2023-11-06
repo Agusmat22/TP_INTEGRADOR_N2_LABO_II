@@ -11,10 +11,17 @@ namespace Entidades
     {
         private long numeroAfiliado;
         private bool atendido;
-        private int cantidadAtenciones;
         private EObrasSocial obraSocial;
-        private List<string> historiaClinica;
-        public Paciente(string nombre, string apellido, long dni,DateTime fechaNacimiento, EObrasSocial obraSocial, long numeroAfiliado) 
+        private string historiaClinica;
+
+        //ESTA LOGICA LA ESTOY IMPLEMENTANDO PARA QUE EL MEDICO PUEDA SABER LOS PACIENTES QUE DEBE ATENDER
+        public Paciente(): base()
+        {
+
+        }
+
+
+        public Paciente(string nombre, string apellido, int dni,DateTime fechaNacimiento, EObrasSocial obraSocial, long numeroAfiliado) 
             : base(nombre, apellido, dni, fechaNacimiento)
         {
             this.numeroAfiliado = numeroAfiliado;
@@ -25,22 +32,60 @@ namespace Entidades
 
         }
 
-        //Sobrecargo el constructor para que se pueda agregar el numero de afiliado
-        public Paciente(string nombre, string apellido, long dni, DateTime fechaNacimiento, EObrasSocial obraSocial, long numeroAfiliado, List<string> historiaClinica)
-            :this(nombre,apellido,dni,fechaNacimiento, obraSocial,numeroAfiliado)
+        public Paciente(string nombre, string apellido, int dni, DateTime fechaNacimiento, EObrasSocial obraSocial, long numeroAfiliado,int id)
+            : base(nombre, apellido, dni, fechaNacimiento,id)
+        {
+            this.numeroAfiliado = numeroAfiliado;
+
+            //El paciente cuando se cargue por defecto no estara atendido
+            this.atendido = false;
+            this.obraSocial = obraSocial;
+
+        }
+
+        /// <summary>
+        /// Constructor sobrecargado con ID
+        /// </summary>
+        /// <param name="nombre"></param>
+        /// <param name="apellido"></param>
+        /// <param name="dni"></param>
+        /// <param name="fechaNacimiento"></param>
+        /// <param name="obraSocial"></param>
+        /// <param name="numeroAfiliado"></param>
+        /// <param name="id"></param>
+        /// <param name="historiaClinica"></param>
+        public Paciente(string nombre, string apellido, int dni, DateTime fechaNacimiento, EObrasSocial obraSocial, long numeroAfiliado, int id, string historiaClinica)
+            : this(nombre, apellido, dni, fechaNacimiento, obraSocial, numeroAfiliado,id)
         {
             this.historiaClinica = historiaClinica;
         }
 
-        //Sobrecargo el constructor para que se pueda agregar la cantidad de atenciones
-        public Paciente(string nombre, string apellido, long dni, DateTime fechaNacimiento, EObrasSocial obraSocial, long numeroAfiliado, List<string> historiaClinica, int cantidadAtenciones)
-            : this(nombre, apellido, dni, fechaNacimiento,obraSocial ,numeroAfiliado,historiaClinica)
+        /// <summary>
+        /// Constructor sobrecargado con sin ID
+        /// </summary>
+        /// <param name="nombre"></param>
+        /// <param name="apellido"></param>
+        /// <param name="dni"></param>
+        /// <param name="fechaNacimiento"></param>
+        /// <param name="obraSocial"></param>
+        /// <param name="numeroAfiliado"></param>
+        /// <param name="historiaClinica"></param>
+        public Paciente(string nombre, string apellido, int dni, DateTime fechaNacimiento, EObrasSocial obraSocial, long numeroAfiliado, string historiaClinica)
+            : this(nombre, apellido, dni, fechaNacimiento, obraSocial, numeroAfiliado)
         {
-            this.cantidadAtenciones = cantidadAtenciones;
+            this.historiaClinica = historiaClinica;
         }
 
+        public Paciente(string nombre, string apellido, int dni, DateTime fechaNacimiento, EObrasSocial obraSocial, long numeroAfiliado,bool atendido)
+            : this(nombre, apellido, dni, fechaNacimiento, obraSocial, numeroAfiliado)
+        {
+            this.atendido = atendido;   
+        }
+
+
+
         //Aca aplicare la logica para cuando el paciente sea atendido
-        private bool Atendido
+        public bool Atendido
         {
             get 
             { 
@@ -53,17 +98,26 @@ namespace Entidades
             }
         }
 
-        public int CantidadDeConsultas
-        {
-            get { return this.CantidadDeConsultas; }
-
-        }
-
         public long NumeroAfiliado
         {
             get {return this.numeroAfiliado; } 
+            set { this.numeroAfiliado= value; }
                    
         }
+
+        public string HistoriaClinica
+        {
+            get { return this.historiaClinica; }
+            set { this.historiaClinica = value; }
+        
+        }
+
+        public EObrasSocial ObraSocial
+        {
+            get { return this.obraSocial; }
+            set { this.obraSocial = value; }
+        }
+
 
         /// <summary>
         /// El paciente realizara una consulta
@@ -74,7 +128,6 @@ namespace Entidades
             if(this.Atendido is false)
             {
                 this.Atendido = true;
-                this.cantidadAtenciones++;
 
                 return true;
             }

@@ -2,36 +2,60 @@
 {
     public abstract class Persona
     {
+        protected int id;
         protected string nombre;
         protected string apellido;
-        protected long dni;
+        protected int dni;
         protected DateTime fechaNacimiento;
 
         public string Nombre
         {
             get { return this.nombre; }
+            set { this.nombre = value; }
         }
         public string Apellido
         {
             get { return this.apellido; }
+            set { this.apellido = value; }
         }
 
-        public long Dni
+        public int Dni
         {
             get { return this.dni; }
+            set { this.dni = value; }
         }
 
         public DateTime FechaNacimiento
         {
             get { return this.fechaNacimiento; }
+            set { this.fechaNacimiento = value; }
+        }
+        
+        public int Id
+        {
+            get { return this.id; } 
+            set { this.id = value; }
         }
 
-        protected Persona(string nombre, string apellido, long dni, DateTime fechaNacimiento)
+
+        protected Persona()
+        {
+
+        }
+
+        protected Persona(string nombre, string apellido, int dni, DateTime fechaNacimiento)
         {
             this.nombre = nombre;
             this.apellido = apellido;
             this.dni = dni;
             this.fechaNacimiento = fechaNacimiento;
+        }
+
+        protected Persona(string nombre, string apellido, int dni, DateTime fechaNacimiento, int id) 
+            :this(nombre,apellido,dni,fechaNacimiento)
+        {
+            this.id = id;
+
         }
 
 

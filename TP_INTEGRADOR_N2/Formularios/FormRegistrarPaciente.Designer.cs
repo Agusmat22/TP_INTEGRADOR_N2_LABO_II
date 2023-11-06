@@ -42,7 +42,8 @@
             txtApellido = new TextBox();
             txtNombre = new TextBox();
             btnRegistrar = new Button();
-            label1 = new Label();
+            label8 = new Label();
+            btnCancelar = new Button();
             groupBox1.SuspendLayout();
             SuspendLayout();
             // 
@@ -173,32 +174,48 @@
             // 
             // btnRegistrar
             // 
-            btnRegistrar.Location = new Point(199, 333);
+            btnRegistrar.BackColor = SystemColors.ScrollBar;
+            btnRegistrar.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            btnRegistrar.Location = new Point(353, 337);
             btnRegistrar.Name = "btnRegistrar";
-            btnRegistrar.Size = new Size(116, 31);
+            btnRegistrar.Size = new Size(116, 36);
             btnRegistrar.TabIndex = 4;
             btnRegistrar.Text = "Registrar";
-            btnRegistrar.UseVisualStyleBackColor = true;
+            btnRegistrar.UseVisualStyleBackColor = false;
             btnRegistrar.Click += btnRegistrar_Click;
             // 
-            // label1
+            // label8
             // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            label1.Location = new Point(170, 25);
-            label1.Name = "label1";
-            label1.Size = new Size(168, 21);
-            label1.TabIndex = 3;
-            label1.Text = "REGISTRAR PACIENTE";
+            label8.AutoSize = true;
+            label8.Font = new Font("Arial", 15F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            label8.Location = new Point(142, 28);
+            label8.Name = "label8";
+            label8.Size = new Size(232, 24);
+            label8.TabIndex = 12;
+            label8.Text = "REGISTRAR PACIENTE";
+            // 
+            // btnCancelar
+            // 
+            btnCancelar.BackColor = SystemColors.Control;
+            btnCancelar.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            btnCancelar.Location = new Point(39, 337);
+            btnCancelar.Name = "btnCancelar";
+            btnCancelar.Size = new Size(116, 36);
+            btnCancelar.TabIndex = 13;
+            btnCancelar.Text = "Cancelar";
+            btnCancelar.UseVisualStyleBackColor = false;
+            btnCancelar.Click += btnCancelar_Click;
             // 
             // FormRegistrarPaciente
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = SystemColors.GradientActiveCaption;
             ClientSize = new Size(508, 385);
+            Controls.Add(btnCancelar);
+            Controls.Add(label8);
             Controls.Add(groupBox1);
             Controls.Add(btnRegistrar);
-            Controls.Add(label1);
             FormBorderStyle = FormBorderStyle.FixedSingle;
             MaximizeBox = false;
             MinimizeBox = false;
@@ -228,6 +245,7 @@
         private TextBox txtApellido;
         private TextBox txtNombre;
         private Button btnRegistrar;
-        private Label label1;
+        private Label label8;
+        private Button btnCancelar;
     }
 }

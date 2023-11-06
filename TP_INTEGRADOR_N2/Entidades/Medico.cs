@@ -24,8 +24,14 @@ namespace Entidades
         /// <param name="nombre"></param>
         /// <param name="apellido"></param>
         /// <param name="dni"></param>
-        private Medico(string nombre, string apellido, long dni, DateTime fechaNacimiento) 
+        private Medico(string nombre, string apellido, int dni, DateTime fechaNacimiento) 
             : base(nombre, apellido, dni, fechaNacimiento)
+        {
+
+        }
+
+        private Medico(string nombre, string apellido, int dni, DateTime fechaNacimiento,int id)
+            : base(nombre, apellido, dni, fechaNacimiento,id)
         {
 
         }
@@ -38,8 +44,15 @@ namespace Entidades
         /// <param name="dni"></param>
         /// <param name="numeroMatricula"></param>
         /// <param name="especialidad"></param>
-        public Medico(string nombre, string apellido, long dni, long numeroMatricula, DateTime fechaNacimiento, EEspecialidad especialidad)
+        public Medico(string nombre, string apellido, int dni, long numeroMatricula, DateTime fechaNacimiento, EEspecialidad especialidad)
             :this(nombre,apellido,dni, fechaNacimiento)
+        {
+            this.numeroMatricula = numeroMatricula;
+            this.especialidad = especialidad;
+        }
+
+        public Medico(string nombre, string apellido, int dni, long numeroMatricula, DateTime fechaNacimiento, EEspecialidad especialidad, int id)
+            : this(nombre, apellido, dni, fechaNacimiento, id)
         {
             this.numeroMatricula = numeroMatricula;
             this.especialidad = especialidad;

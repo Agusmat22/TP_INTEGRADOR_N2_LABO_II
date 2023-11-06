@@ -43,3 +43,11 @@ C:\Users\Lisandro\Desktop\TP_INTEGRADOR_N2_LABO_II\TP_INTEGRADOR_N2\Formularios\
 C:\Users\Lisandro\Desktop\TP_INTEGRADOR_N2_LABO_II\TP_INTEGRADOR_N2\Formularios\obj\Debug\net6.0-windows\Formularios.genruntimeconfig.cache
 C:\Users\Lisandro\Desktop\TP_INTEGRADOR_N2_LABO_II\TP_INTEGRADOR_N2\Formularios\obj\Debug\net6.0-windows\ref\Formularios.dll
 C:\Users\usuario\Desktop\ag\TP_INTEGRADOR_N2\TP_INTEGRADOR_N2\Formularios\obj\Debug\net6.0-windows\Formularios.FormIngresoPaciente.resources
+C:\Users\Lisandro\Desktop\TP_INTEGRADOR_N2_LABO_II\TP_INTEGRADOR_N2\Formularios\obj\Debug\net6.0-windows\Formularios.FormIngresoPaciente.resources
+C:\Users\Lisandro\Desktop\TP_INTEGRADOR_N2_LABO_II\TP_INTEGRADOR_N2\Formularios\obj\Debug\net6.0-windows\Formularios.FormMenu.resources
+C:\Users\Lisandro\Desktop\TP_INTEGRADOR_N2_LABO_II\TP_INTEGRADOR_N2\Formularios\bin\Debug\net6.0-windows\System.Data.SqlClient.dll
+C:\Users\Lisandro\Desktop\TP_INTEGRADOR_N2_LABO_II\TP_INTEGRADOR_N2\Formularios\bin\Debug\net6.0-windows\runtimes\win-arm64\native\sni.dll
+C:\Users\Lisandro\Desktop\TP_INTEGRADOR_N2_LABO_II\TP_INTEGRADOR_N2\Formularios\bin\Debug\net6.0-windows\runtimes\win-x64\native\sni.dll
+C:\Users\Lisandro\Desktop\TP_INTEGRADOR_N2_LABO_II\TP_INTEGRADOR_N2\Formularios\bin\Debug\net6.0-windows\runtimes\win-x86\native\sni.dll
+C:\Users\Lisandro\Desktop\TP_INTEGRADOR_N2_LABO_II\TP_INTEGRADOR_N2\Formularios\bin\Debug\net6.0-windows\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
+C:\Users\Lisandro\Desktop\TP_INTEGRADOR_N2_LABO_II\TP_INTEGRADOR_N2\Formularios\bin\Debug\net6.0-windows\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll

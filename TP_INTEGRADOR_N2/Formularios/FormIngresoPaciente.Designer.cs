@@ -31,17 +31,17 @@
             cmbTipoGuardia = new ComboBox();
             label3 = new Label();
             label2 = new Label();
-            richTextBox1 = new RichTextBox();
-            textBox1 = new TextBox();
+            rtbSintomas = new RichTextBox();
+            txtDatosBusqueda = new TextBox();
             groupBox1 = new GroupBox();
             btnBuscar = new Button();
             label5 = new Label();
             label4 = new Label();
-            radioButton3 = new RadioButton();
-            radioButton2 = new RadioButton();
-            textBox2 = new TextBox();
+            rdbDni = new RadioButton();
+            rdbAfiliado = new RadioButton();
+            txtAfiliadoEncontrado = new TextBox();
             label1 = new Label();
-            button1 = new Button();
+            btnIngresar = new Button();
             btnCancelar = new Button();
             label6 = new Label();
             groupBox1.SuspendLayout();
@@ -53,7 +53,7 @@
             cmbTipoGuardia.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbTipoGuardia.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
             cmbTipoGuardia.FormattingEnabled = true;
-            cmbTipoGuardia.Location = new Point(51, 258);
+            cmbTipoGuardia.Location = new Point(51, 273);
             cmbTipoGuardia.Name = "cmbTipoGuardia";
             cmbTipoGuardia.Size = new Size(257, 23);
             cmbTipoGuardia.TabIndex = 14;
@@ -62,7 +62,7 @@
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            label3.Location = new Point(127, 236);
+            label3.Location = new Point(127, 251);
             label3.Name = "label3";
             label3.Size = new Size(107, 19);
             label3.TabIndex = 13;
@@ -72,41 +72,41 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            label2.Location = new Point(127, 295);
+            label2.Location = new Point(127, 310);
             label2.Name = "label2";
             label2.Size = new Size(104, 19);
             label2.TabIndex = 12;
             label2.Text = "Sintomatologia:";
             // 
-            // richTextBox1
+            // rtbSintomas
             // 
-            richTextBox1.Cursor = Cursors.IBeam;
-            richTextBox1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            richTextBox1.Location = new Point(51, 317);
-            richTextBox1.Name = "richTextBox1";
-            richTextBox1.Size = new Size(257, 195);
-            richTextBox1.TabIndex = 11;
-            richTextBox1.Text = "";
+            rtbSintomas.Cursor = Cursors.IBeam;
+            rtbSintomas.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            rtbSintomas.Location = new Point(51, 332);
+            rtbSintomas.Name = "rtbSintomas";
+            rtbSintomas.Size = new Size(257, 195);
+            rtbSintomas.TabIndex = 11;
+            rtbSintomas.Text = "";
             // 
-            // textBox1
+            // txtDatosBusqueda
             // 
-            textBox1.Location = new Point(18, 75);
-            textBox1.Name = "textBox1";
-            textBox1.PlaceholderText = "Completar";
-            textBox1.Size = new Size(223, 23);
-            textBox1.TabIndex = 15;
+            txtDatosBusqueda.Location = new Point(18, 75);
+            txtDatosBusqueda.Name = "txtDatosBusqueda";
+            txtDatosBusqueda.PlaceholderText = "Completar";
+            txtDatosBusqueda.Size = new Size(223, 23);
+            txtDatosBusqueda.TabIndex = 15;
             // 
             // groupBox1
             // 
             groupBox1.Controls.Add(btnBuscar);
             groupBox1.Controls.Add(label5);
             groupBox1.Controls.Add(label4);
-            groupBox1.Controls.Add(radioButton3);
-            groupBox1.Controls.Add(radioButton2);
-            groupBox1.Controls.Add(textBox2);
+            groupBox1.Controls.Add(rdbDni);
+            groupBox1.Controls.Add(rdbAfiliado);
+            groupBox1.Controls.Add(txtAfiliadoEncontrado);
             groupBox1.Controls.Add(label1);
-            groupBox1.Controls.Add(textBox1);
-            groupBox1.Location = new Point(51, 55);
+            groupBox1.Controls.Add(txtDatosBusqueda);
+            groupBox1.Location = new Point(51, 70);
             groupBox1.Name = "groupBox1";
             groupBox1.Size = new Size(257, 178);
             groupBox1.TabIndex = 16;
@@ -142,36 +142,36 @@
             label4.TabIndex = 21;
             label4.Text = "Nº AFILIADO";
             // 
-            // radioButton3
+            // rdbDni
             // 
-            radioButton3.AutoSize = true;
-            radioButton3.Font = new Font("Segoe UI", 8F, FontStyle.Regular, GraphicsUnit.Point);
-            radioButton3.Location = new Point(179, 41);
-            radioButton3.Name = "radioButton3";
-            radioButton3.Size = new Size(14, 13);
-            radioButton3.TabIndex = 20;
-            radioButton3.TabStop = true;
-            radioButton3.UseVisualStyleBackColor = true;
+            rdbDni.AutoSize = true;
+            rdbDni.Font = new Font("Segoe UI", 8F, FontStyle.Regular, GraphicsUnit.Point);
+            rdbDni.Location = new Point(179, 41);
+            rdbDni.Name = "rdbDni";
+            rdbDni.Size = new Size(14, 13);
+            rdbDni.TabIndex = 20;
+            rdbDni.TabStop = true;
+            rdbDni.UseVisualStyleBackColor = true;
             // 
-            // radioButton2
+            // rdbAfiliado
             // 
-            radioButton2.AutoSize = true;
-            radioButton2.Font = new Font("Segoe UI", 8F, FontStyle.Regular, GraphicsUnit.Point);
-            radioButton2.Location = new Point(59, 41);
-            radioButton2.Name = "radioButton2";
-            radioButton2.Size = new Size(14, 13);
-            radioButton2.TabIndex = 19;
-            radioButton2.TabStop = true;
-            radioButton2.UseVisualStyleBackColor = true;
+            rdbAfiliado.AutoSize = true;
+            rdbAfiliado.Font = new Font("Segoe UI", 8F, FontStyle.Regular, GraphicsUnit.Point);
+            rdbAfiliado.Location = new Point(59, 41);
+            rdbAfiliado.Name = "rdbAfiliado";
+            rdbAfiliado.Size = new Size(14, 13);
+            rdbAfiliado.TabIndex = 19;
+            rdbAfiliado.TabStop = true;
+            rdbAfiliado.UseVisualStyleBackColor = true;
             // 
-            // textBox2
+            // txtAfiliadoEncontrado
             // 
-            textBox2.Location = new Point(18, 142);
-            textBox2.Name = "textBox2";
-            textBox2.PlaceholderText = "Mostrara el afiliado encontrado";
-            textBox2.ReadOnly = true;
-            textBox2.Size = new Size(223, 23);
-            textBox2.TabIndex = 16;
+            txtAfiliadoEncontrado.Location = new Point(18, 142);
+            txtAfiliadoEncontrado.Name = "txtAfiliadoEncontrado";
+            txtAfiliadoEncontrado.PlaceholderText = "Mostrara el afiliado encontrado";
+            txtAfiliadoEncontrado.ReadOnly = true;
+            txtAfiliadoEncontrado.Size = new Size(223, 23);
+            txtAfiliadoEncontrado.TabIndex = 16;
             // 
             // label1
             // 
@@ -182,34 +182,36 @@
             label1.TabIndex = 17;
             label1.Text = "Datos:";
             // 
-            // button1
+            // btnIngresar
             // 
-            button1.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            button1.Location = new Point(204, 532);
-            button1.Name = "button1";
-            button1.Size = new Size(104, 39);
-            button1.TabIndex = 24;
-            button1.Text = "Ingresar";
-            button1.UseVisualStyleBackColor = true;
+            btnIngresar.BackColor = SystemColors.ScrollBar;
+            btnIngresar.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            btnIngresar.Location = new Point(204, 547);
+            btnIngresar.Name = "btnIngresar";
+            btnIngresar.Size = new Size(104, 39);
+            btnIngresar.TabIndex = 24;
+            btnIngresar.Text = "Ingresar";
+            btnIngresar.UseVisualStyleBackColor = false;
             // 
             // btnCancelar
             // 
-            btnCancelar.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            btnCancelar.Location = new Point(51, 532);
+            btnCancelar.BackColor = SystemColors.Control;
+            btnCancelar.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            btnCancelar.Location = new Point(51, 547);
             btnCancelar.Name = "btnCancelar";
             btnCancelar.Size = new Size(104, 39);
             btnCancelar.TabIndex = 25;
             btnCancelar.Text = "Cancelar";
-            btnCancelar.UseVisualStyleBackColor = true;
+            btnCancelar.UseVisualStyleBackColor = false;
             btnCancelar.Click += btnCancelar_Click;
             // 
             // label6
             // 
             label6.AutoSize = true;
-            label6.Font = new Font("Segoe UI Semibold", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
-            label6.Location = new Point(101, 9);
+            label6.Font = new Font("Arial", 14.25F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            label6.Location = new Point(97, 19);
             label6.Name = "label6";
-            label6.Size = new Size(146, 25);
+            label6.Size = new Size(160, 23);
             label6.TabIndex = 26;
             label6.Text = "Cargar Paciente";
             // 
@@ -217,16 +219,17 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(367, 588);
+            BackColor = SystemColors.GradientActiveCaption;
+            ClientSize = new Size(360, 606);
             Controls.Add(label6);
             Controls.Add(btnCancelar);
-            Controls.Add(button1);
+            Controls.Add(btnIngresar);
             Controls.Add(groupBox1);
             Controls.Add(cmbTipoGuardia);
             Controls.Add(label3);
             Controls.Add(label2);
-            Controls.Add(richTextBox1);
-            FormBorderStyle = FormBorderStyle.None;
+            Controls.Add(rtbSintomas);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             Name = "FormIngresoPaciente";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Ingreso de paciente";
@@ -242,17 +245,17 @@
         private ComboBox cmbTipoGuardia;
         private Label label3;
         private Label label2;
-        private RichTextBox richTextBox1;
-        private TextBox textBox1;
+        private RichTextBox rtbSintomas;
+        private TextBox txtDatosBusqueda;
         private GroupBox groupBox1;
-        private TextBox textBox2;
+        private TextBox txtAfiliadoEncontrado;
         private Label label1;
         private Label label5;
         private Label label4;
-        private RadioButton radioButton3;
-        private RadioButton radioButton2;
+        private RadioButton rdbDni;
+        private RadioButton rdbAfiliado;
         private Button btnBuscar;
-        private Button button1;
+        private Button btnIngresar;
         private Button btnCancelar;
         private Label label6;
     }

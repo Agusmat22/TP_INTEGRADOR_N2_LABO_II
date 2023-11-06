@@ -1,9 +1,20 @@
-using Entidades;
+﻿using Entidades;
+using Entidades.BaseDeDatos;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
 namespace Formularios
 {
     public partial class FormAdmision : Form
     {
-        CentroMedico centroMedico;
+        private CentroMedico centroMedico;
 
         public FormAdmision()
         {
@@ -11,56 +22,33 @@ namespace Formularios
             centroMedico = new CentroMedico();
         }
 
-
-        private void FormAdmision_Load(object sender, EventArgs e)
+        private void btnIngreso_Click(object sender, EventArgs e)
         {
-
-        }
-
-        private void RegistrarPacienteToolStrip_Click(object sender, EventArgs e)
-        {
-            FormRegistrarPaciente formRegistrarPaciente = new FormRegistrarPaciente();
-
-            DialogResult resultado = formRegistrarPaciente.ShowDialog();
-
+            FormIngresoPaciente formIngresoPaciente = new FormIngresoPaciente();
+            DialogResult resultado = formIngresoPaciente.ShowDialog();
             if (resultado == DialogResult.OK)
             {
-                this.centroMedico.Agregar(formRegistrarPaciente.PacienteRegistrado);
-                this.ActualizarElementos();
+
             }
-
-        }
-
-        private void RegistrarMedicoToolStrip_Click(object sender, EventArgs e)
-        {
-            FormRegistrarMedico formRegistrarMedico = new FormRegistrarMedico();
-
-            DialogResult resultado = formRegistrarMedico.ShowDialog();
-
-            if (resultado == DialogResult.OK)
-            {
-                this.centroMedico.Agregar(formRegistrarMedico.MedicoRegistrado);
-            }
-
+            this.ActualizarElementos();
         }
 
         private void ActualizarElementos()
         {
             this.lstbPacientesEnEspera.DataSource = null;
-            this.lstbPacientesEnEspera.DataSource = centroMedico.Pacientes;
+            this.lstbPacientesEnEspera.DataSource = ADOPacientes.ObtenerPacientesTotales(0);
 
         }
 
-        private void btnIngreso_Click(object sender, EventArgs e)
+        private void btnVolver_Click(object sender, EventArgs e)
         {
-            FormIngresoPaciente formIngresoPaciente = new FormIngresoPaciente();
-
-            DialogResult resultado = formIngresoPaciente.ShowDialog();
-
-            if (resultado == DialogResult.OK)
-            {
-                MessageBox.Show("Paciente ingresado a Guardia");
-            }
+            this.Close();
         }
+
+        private void FormAdmision_Load(object sender, EventArgs e)
+        {
+            this.ActualizarElementos();
+        }
+
     }
 }

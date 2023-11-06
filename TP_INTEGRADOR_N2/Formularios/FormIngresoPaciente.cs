@@ -35,5 +35,7 @@ namespace Formularios
         {
             this.DialogResult = DialogResult.Cancel;
         }
+
+
     }
 }

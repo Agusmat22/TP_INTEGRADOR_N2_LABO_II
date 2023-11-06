@@ -1,5 +1,6 @@
 ﻿using Entidades;
 using Entidades.Excepciones;
+using Entidades.BaseDeDatos;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+
 
 namespace Formularios
 {
@@ -31,7 +33,7 @@ namespace Formularios
                 //Obtengo todos los datos que contienen los elementos del formulario
                 string nombre = this.txtNombre.Text;
                 string apellido = this.txtApellido.Text;
-                bool estadoDni = long.TryParse(this.txtDni.Text, out long dni);
+                bool estadoDni = int.TryParse(this.txtDni.Text, out int dni);
                 bool estadoNumeroAfiliado = long.TryParse(this.txtNumAfiliado.Text, out long numeroAfiliado);
                 string obreSocialSeleccionada = this.cmbObraSocial.SelectedItem.ToString().ToUpper();
                 bool estadoObraSocial = Enum.TryParse(obreSocialSeleccionada, out EObrasSocial obraSocial);
@@ -40,8 +42,9 @@ namespace Formularios
                 //valido que los campos no esten vacios
                 if (nombre != string.Empty && apellido != string.Empty && estadoDni && estadoObraSocial)
                 {
-                    //Instancio la clase paciente y creo el objeto
-                    paciente = new Paciente(nombre, apellido, dni, fechaNacimiento, obraSocial,numeroAfiliado);
+                    //Instancio la clase paciente y creo el objeto, le paso true como si fue atendido para que no se muestre en la admision
+                    paciente = new Paciente(nombre, apellido, dni , fechaNacimiento, obraSocial, numeroAfiliado, true);
+                    ADOPacientes.Guardar(paciente);
                     MessageBox.Show($"Registro exitoso");
                     this.DialogResult = DialogResult.OK;
 
@@ -53,7 +56,7 @@ namespace Formularios
 
 
             }
-            catch(CampoVacioExcepcion ex)
+            catch (CampoVacioExcepcion ex)
             {
                 MessageBox.Show(ex.Message);
             }
@@ -71,10 +74,15 @@ namespace Formularios
         {
             foreach (EObrasSocial item in Enum.GetValues(typeof(EObrasSocial)))
             {
-                cmbObraSocial.Items.Add(item); 
+                cmbObraSocial.Items.Add(item);
             }
 
             cmbObraSocial.SelectedIndex = 0;
+        }
+
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.Cancel;
         }
     }
 }
