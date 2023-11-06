@@ -1,4 +1,5 @@
 ﻿using Entidades;
+using Entidades.BaseDeDatos;
 using Entidades.Excepciones;
 using System;
 using System.Collections.Generic;
@@ -24,10 +25,7 @@ namespace Formularios
             InitializeComponent();
         }
 
-        private void groupBox1_Enter(object sender, EventArgs e)
-        {
 
-        }
 
         private void btnRegistrar_Click(object sender, EventArgs e)
         {
@@ -45,6 +43,7 @@ namespace Formularios
                 {
                     //Instancio la clase paciente y creo el objeto
                     medico = new Medico(nombre, apellido, dni, numeroMatricula, fechaNacimiento, especialidad);
+                    ADOMedicos.Guardar(medico);
                     MessageBox.Show($"Registro exitoso");
                     this.DialogResult = DialogResult.OK;
                 }
@@ -57,13 +56,23 @@ namespace Formularios
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error al intentar registrar al medico");
+                MessageBox.Show(ex.Message);
             }
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.Cancel;
+        }
+
+        private void FormRegistrarMedico_Load(object sender, EventArgs e)
+        {
+            foreach (EEspecialidad item in Enum.GetValues(typeof(EEspecialidad)))
+            {
+                this.cmbEspecialidad.Items.Add(item);
+            }
+
+            this.cmbEspecialidad.SelectedIndex = 0;
         }
     }
 }

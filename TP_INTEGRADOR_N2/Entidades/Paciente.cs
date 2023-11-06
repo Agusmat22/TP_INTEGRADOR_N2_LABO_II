@@ -161,5 +161,15 @@ namespace Entidades
             return sb.ToString();
         }
 
+        public static bool operator ==(Paciente pac1,Paciente pac2)
+        {
+            return pac1.Id == pac2.Id;  
+        }
+
+        public static bool operator !=(Paciente pac1, Paciente pac2)
+        {
+            return !(pac1 == pac2);
+        }
+
     }
 }

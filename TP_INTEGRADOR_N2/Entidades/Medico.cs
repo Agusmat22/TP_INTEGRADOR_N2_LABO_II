@@ -18,6 +18,11 @@ namespace Entidades
         private long numeroMatricula;
         private EEspecialidad especialidad; 
 
+        public Medico():base()
+        {
+
+        }
+
         /// <summary>
         /// Llamara al constructor de la clase base
         /// </summary>
@@ -63,6 +68,7 @@ namespace Entidades
         public long NumeroMatricula
         {
             get { return this.numeroMatricula; }
+            set { this.numeroMatricula = value; }
         }
 
         public EEspecialidad Especialidad

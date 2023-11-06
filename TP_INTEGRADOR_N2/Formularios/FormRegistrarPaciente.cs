@@ -26,6 +26,12 @@ namespace Formularios
             InitializeComponent();
         }
 
+        public FormRegistrarPaciente(string nombreTitulo,string nombreBoton) : this()
+        {
+            this.lblTitulo.Text = nombreTitulo;
+            this.btnRegistrar.Text = nombreBoton;
+        }
+
         private void btnRegistrar_Click(object sender, EventArgs e)
         {
             try
@@ -43,7 +49,7 @@ namespace Formularios
                 if (nombre != string.Empty && apellido != string.Empty && estadoDni && estadoObraSocial)
                 {
                     //Instancio la clase paciente y creo el objeto, le paso true como si fue atendido para que no se muestre en la admision
-                    paciente = new Paciente(nombre, apellido, dni , fechaNacimiento, obraSocial, numeroAfiliado, true);
+                    paciente = new Paciente(nombre, apellido, dni, fechaNacimiento, obraSocial, numeroAfiliado, true);
                     ADOPacientes.Guardar(paciente);
                     MessageBox.Show($"Registro exitoso");
                     this.DialogResult = DialogResult.OK;

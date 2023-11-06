@@ -67,7 +67,6 @@
             groupBox1.TabIndex = 5;
             groupBox1.TabStop = false;
             groupBox1.Text = "Completar informacion";
-            groupBox1.Enter += groupBox1_Enter;
             // 
             // label7
             // 
@@ -223,6 +222,7 @@
             Name = "FormRegistrarMedico";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Registro";
+            Load += FormRegistrarMedico_Load;
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
             ResumeLayout(false);

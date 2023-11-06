@@ -11,3 +11,21 @@ obra_social VARCHAR(80) NOT NULL,
 historia_clinica VARCHAR(MAX)
 CONSTRAINT pk_id PRIMARY KEY (id)
 )
+
+--CREA LA TABLA DE MEDICOS
+
+CREATE TABLE Medicos(
+id_medico INT NOT NULL IDENTITY,
+nombre VARCHAR(50) NOT NULL,
+apellido VARCHAR(50) NOT NULL,
+dni INT NOT NULL,
+fecha_nacimiento DATE NOT NULL,
+matricula BIGINT NOT NULL, --NUMERO DE MATRICULA
+especialidad VARCHAR(60) NOT NULL
+
+CONSTRAINT pk_id_medico PRIMARY KEY (id_medico)
+)
+
+--ELIMINA LA TABLA
+DROP TABLE Medicos 
+

@@ -66,5 +66,14 @@ namespace Formularios
             this.Show();
 
         }
+
+        private void informacionToolStripMen_Click(object sender, EventArgs e)
+        {
+            FormInformacion formInformacion = new FormInformacion();
+
+            this.Hide();
+            formInformacion.ShowDialog();
+            this.Show();
+        }
     }
 }

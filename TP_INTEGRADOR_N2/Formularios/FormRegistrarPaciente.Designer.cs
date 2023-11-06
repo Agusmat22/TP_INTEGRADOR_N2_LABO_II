@@ -42,7 +42,7 @@
             txtApellido = new TextBox();
             txtNombre = new TextBox();
             btnRegistrar = new Button();
-            label8 = new Label();
+            lblTitulo = new Label();
             btnCancelar = new Button();
             groupBox1.SuspendLayout();
             SuspendLayout();
@@ -184,15 +184,15 @@
             btnRegistrar.UseVisualStyleBackColor = false;
             btnRegistrar.Click += btnRegistrar_Click;
             // 
-            // label8
+            // lblTitulo
             // 
-            label8.AutoSize = true;
-            label8.Font = new Font("Arial", 15F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
-            label8.Location = new Point(142, 28);
-            label8.Name = "label8";
-            label8.Size = new Size(232, 24);
-            label8.TabIndex = 12;
-            label8.Text = "REGISTRAR PACIENTE";
+            lblTitulo.AutoSize = true;
+            lblTitulo.Font = new Font("Arial", 15F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            lblTitulo.Location = new Point(142, 28);
+            lblTitulo.Name = "lblTitulo";
+            lblTitulo.Size = new Size(232, 24);
+            lblTitulo.TabIndex = 12;
+            lblTitulo.Text = "REGISTRAR PACIENTE";
             // 
             // btnCancelar
             // 
@@ -213,7 +213,7 @@
             BackColor = SystemColors.GradientActiveCaption;
             ClientSize = new Size(508, 385);
             Controls.Add(btnCancelar);
-            Controls.Add(label8);
+            Controls.Add(lblTitulo);
             Controls.Add(groupBox1);
             Controls.Add(btnRegistrar);
             FormBorderStyle = FormBorderStyle.FixedSingle;
@@ -245,7 +245,7 @@
         private TextBox txtApellido;
         private TextBox txtNombre;
         private Button btnRegistrar;
-        private Label label8;
+        private Label lblTitulo;
         private Button btnCancelar;
     }
 }
