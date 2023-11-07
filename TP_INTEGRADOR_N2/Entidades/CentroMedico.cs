@@ -17,17 +17,17 @@ namespace Entidades
 
     public class CentroMedico
     {
-        
 
+            
         private List<Paciente> pacientes;
         private List<Medico> medicos;
-       
+
 
         public CentroMedico()
         {
             this.pacientes = new List<Paciente>();
             this.medicos = new List<Medico>();
-       
+
         }
 
         public List<Paciente> Pacientes

@@ -19,5 +19,8 @@
     <Compile Update="FormRegistrarPaciente.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="FormSelectorImportacion.cs">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
 </Project>

@@ -25,7 +25,7 @@ namespace Formularios
 
         private void FormInformacionPacientes_Load(object sender, EventArgs e)
         {
-            this.ActualizarElementos(); 
+            this.ActualizarElementos();
         }
 
         /// <summary>
@@ -36,13 +36,25 @@ namespace Formularios
 
             this.lstbPacientes.DataSource = null;
             this.lstbPacientes.DataSource = ADOPacientes.ObtenerPacientesTotales();
-            this.lstbPacientes.SelectedItem = null; 
+            this.lstbPacientes.SelectedItem = null;
 
             this.lstbMedicos.DataSource = null;
             this.lstbMedicos.DataSource = ADOMedicos.ObtenerMedicosTotales();
             this.lstbMedicos.SelectedItem = null;
 
 
+        }
+
+        private void btnImportar_Click(object sender, EventArgs e)
+        {
+            FormSelectorImportacion selectorImportacion = new FormSelectorImportacion();
+
+            DialogResult resultado = selectorImportacion.ShowDialog();
+
+            if (resultado == DialogResult.OK)
+            {
+                MessageBox.Show("Importacion con exito");
+            }
         }
     }
 }

@@ -28,6 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormInformacion));
             label6 = new Label();
             lstbPacientes = new ListBox();
             label3 = new Label();
@@ -35,6 +37,8 @@
             btnEliminar = new Button();
             label1 = new Label();
             lstbMedicos = new ListBox();
+            btnImportar = new Button();
+            imageList1 = new ImageList(components);
             SuspendLayout();
             // 
             // label6
@@ -109,12 +113,34 @@
             lstbMedicos.Size = new Size(272, 289);
             lstbMedicos.TabIndex = 32;
             // 
-            // FormInformacionPacientes
+            // btnImportar
+            // 
+            btnImportar.BackColor = Color.White;
+            btnImportar.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            btnImportar.ImageKey = "import.png";
+            btnImportar.ImageList = imageList1;
+            btnImportar.Location = new Point(370, 250);
+            btnImportar.Name = "btnImportar";
+            btnImportar.Size = new Size(50, 49);
+            btnImportar.TabIndex = 34;
+            btnImportar.UseVisualStyleBackColor = false;
+            btnImportar.Click += btnImportar_Click;
+            // 
+            // imageList1
+            // 
+            imageList1.ColorDepth = ColorDepth.Depth8Bit;
+            imageList1.ImageStream = (ImageListStreamer)resources.GetObject("imageList1.ImageStream");
+            imageList1.TransparentColor = Color.Transparent;
+            imageList1.Images.SetKeyName(0, "pngwing.com.png");
+            imageList1.Images.SetKeyName(1, "import.png");
+            // 
+            // FormInformacion
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.GradientActiveCaption;
             ClientSize = new Size(784, 450);
+            Controls.Add(btnImportar);
             Controls.Add(label1);
             Controls.Add(lstbMedicos);
             Controls.Add(btnEliminar);
@@ -125,7 +151,7 @@
             FormBorderStyle = FormBorderStyle.FixedSingle;
             MaximizeBox = false;
             MinimizeBox = false;
-            Name = "FormInformacionPacientes";
+            Name = "FormInformacion";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Registros de pacientes";
             Load += FormInformacionPacientes_Load;
@@ -142,5 +168,7 @@
         private Button btnEliminar;
         private Label label1;
         private ListBox lstbMedicos;
+        private Button btnImportar;
+        private ImageList imageList1;
     }
 }
