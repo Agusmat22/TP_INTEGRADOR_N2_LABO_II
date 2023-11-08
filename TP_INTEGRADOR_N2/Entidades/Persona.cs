@@ -2,7 +2,7 @@
 {
     public abstract class Persona
     {
-        protected int id;
+
         protected string nombre;
         protected string apellido;
         protected int dni;
@@ -31,13 +31,6 @@
             set { this.fechaNacimiento = value; }
         }
         
-        public int Id
-        {
-            get { return this.id; } 
-            set { this.id = value; }
-        }
-
-
         protected Persona()
         {
 
@@ -51,15 +44,8 @@
             this.fechaNacimiento = fechaNacimiento;
         }
 
-        protected Persona(string nombre, string apellido, int dni, DateTime fechaNacimiento, int id) 
-            :this(nombre,apellido,dni,fechaNacimiento)
-        {
-            this.id = id;
 
-        }
-
-
-        //SOBRECARGA DE OPERADOR
+        //SOBRECARGA DE OPERADORES
 
         /// <summary>
         /// Valida si dos personas son iguales por el DNI

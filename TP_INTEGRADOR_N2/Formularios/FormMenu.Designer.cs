@@ -30,19 +30,18 @@
         {
             menuStrip1 = new MenuStrip();
             admisionToolStrip = new ToolStripMenuItem();
-            informacionToolStripMenu = new ToolStripMenuItem();
+            informacionToolStrip = new ToolStripMenuItem();
+            informacionToolStripMen = new ToolStripMenuItem();
             registrarToolStripMenu = new ToolStripMenuItem();
             registrarPacienteToolStrip = new ToolStripMenuItem();
             registrarMedicoToolStrip = new ToolStripMenuItem();
-            informacionToolStrip = new ToolStripMenuItem();
             label1 = new Label();
-            informacionToolStripMen = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // menuStrip1
             // 
-            menuStrip1.Items.AddRange(new ToolStripItem[] { admisionToolStrip, informacionToolStripMenu, informacionToolStrip });
+            menuStrip1.Items.AddRange(new ToolStripItem[] { admisionToolStrip, informacionToolStrip });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Size = new Size(814, 24);
@@ -56,12 +55,19 @@
             admisionToolStrip.Text = "Admision";
             admisionToolStrip.Click += admisionToolStrip_Click;
             // 
-            // informacionToolStripMenu
+            // informacionToolStrip
             // 
-            informacionToolStripMenu.DropDownItems.AddRange(new ToolStripItem[] { informacionToolStripMen, registrarToolStripMenu });
-            informacionToolStripMenu.Name = "informacionToolStripMenu";
-            informacionToolStripMenu.Size = new Size(67, 20);
-            informacionToolStripMenu.Text = "Registros";
+            informacionToolStrip.DropDownItems.AddRange(new ToolStripItem[] { informacionToolStripMen, registrarToolStripMenu });
+            informacionToolStrip.Name = "informacionToolStrip";
+            informacionToolStrip.Size = new Size(67, 20);
+            informacionToolStrip.Text = "Registros";
+            // 
+            // informacionToolStripMen
+            // 
+            informacionToolStripMen.Name = "informacionToolStripMen";
+            informacionToolStripMen.Size = new Size(180, 22);
+            informacionToolStripMen.Text = "Informacion";
+            informacionToolStripMen.Click += informacionToolStripMen_Click;
             // 
             // registrarToolStripMenu
             // 
@@ -73,22 +79,16 @@
             // registrarPacienteToolStrip
             // 
             registrarPacienteToolStrip.Name = "registrarPacienteToolStrip";
-            registrarPacienteToolStrip.Size = new Size(180, 22);
+            registrarPacienteToolStrip.Size = new Size(119, 22);
             registrarPacienteToolStrip.Text = "Paciente";
             registrarPacienteToolStrip.Click += RegistrarPacienteToolStrip_Click;
             // 
             // registrarMedicoToolStrip
             // 
             registrarMedicoToolStrip.Name = "registrarMedicoToolStrip";
-            registrarMedicoToolStrip.Size = new Size(180, 22);
+            registrarMedicoToolStrip.Size = new Size(119, 22);
             registrarMedicoToolStrip.Text = "Medico";
             registrarMedicoToolStrip.Click += RegistrarMedicoToolStrip_Click;
-            // 
-            // informacionToolStrip
-            // 
-            informacionToolStrip.Name = "informacionToolStrip";
-            informacionToolStrip.Size = new Size(84, 20);
-            informacionToolStrip.Text = "Informacion";
             // 
             // label1
             // 
@@ -102,13 +102,6 @@
             label1.Size = new Size(416, 52);
             label1.TabIndex = 12;
             label1.Text = "Urgencias Medicas";
-            // 
-            // informacionToolStripMen
-            // 
-            informacionToolStripMen.Name = "informacionToolStripMen";
-            informacionToolStripMen.Size = new Size(180, 22);
-            informacionToolStripMen.Text = "Informacion";
-            informacionToolStripMen.Click += informacionToolStripMen_Click;
             // 
             // FormMenu
             // 
@@ -134,7 +127,6 @@
 
         #endregion
         private MenuStrip menuStrip1;
-        private ToolStripMenuItem informacionToolStripMenu;
         private ToolStripMenuItem registrarToolStripMenu;
         private ToolStripMenuItem registrarPacienteToolStrip;
         private ToolStripMenuItem registrarMedicoToolStrip;

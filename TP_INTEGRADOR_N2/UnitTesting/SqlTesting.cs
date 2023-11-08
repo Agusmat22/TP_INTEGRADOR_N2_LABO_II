@@ -1,7 +1,7 @@
 namespace UnitTesting
 {
     [TestClass]
-    public class UnitTest1
+    public class SqlTesting
     {
         [TestMethod]
         public void TestMethod1()

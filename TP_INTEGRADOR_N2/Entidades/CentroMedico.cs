@@ -12,13 +12,11 @@ namespace Entidades
         OSMEDICA,
         UP,
         OSPRERA
-
     }
 
     public class CentroMedico
     {
-
-            
+        
         private List<Paciente> pacientes;
         private List<Medico> medicos;
 
@@ -35,7 +33,11 @@ namespace Entidades
             get 
             {
                 return this.pacientes;
-            }           
+            }     
+            set
+            { 
+                this.pacientes = value;
+            }
         }
 
         public List<Medico> Medicos
@@ -44,8 +46,11 @@ namespace Entidades
             {
                 return this.medicos;
             }
+            set 
+            { 
+                this.medicos = value;
+            }
         }
-
 
 
         /// <summary>
@@ -127,11 +132,6 @@ namespace Entidades
 
             return false;
         }
-
-
-
-
-
 
     }
 }

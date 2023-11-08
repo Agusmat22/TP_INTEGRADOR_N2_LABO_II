@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Entidades.Interfaces;
 
 
 namespace Entidades
 {
-    public class Paciente : Persona
+    public class Paciente : Persona, IIdentificadorSql
     {
         private long numeroAfiliado;
         private bool atendido;
@@ -33,13 +34,11 @@ namespace Entidades
         }
 
         public Paciente(string nombre, string apellido, int dni, DateTime fechaNacimiento, EObrasSocial obraSocial, long numeroAfiliado,int id)
-            : base(nombre, apellido, dni, fechaNacimiento,id)
+            : this(nombre, apellido, dni, fechaNacimiento,obraSocial,numeroAfiliado)
         {
-            this.numeroAfiliado = numeroAfiliado;
-
-            //El paciente cuando se cargue por defecto no estara atendido
-            this.atendido = false;
-            this.obraSocial = obraSocial;
+           
+            //Le asigno a la propiedad hederada de la interfaz
+            this.Id = id;
 
         }
 
@@ -74,12 +73,6 @@ namespace Entidades
             : this(nombre, apellido, dni, fechaNacimiento, obraSocial, numeroAfiliado)
         {
             this.historiaClinica = historiaClinica;
-        }
-
-        public Paciente(string nombre, string apellido, int dni, DateTime fechaNacimiento, EObrasSocial obraSocial, long numeroAfiliado,bool atendido)
-            : this(nombre, apellido, dni, fechaNacimiento, obraSocial, numeroAfiliado)
-        {
-            this.atendido = atendido;   
         }
 
 
@@ -119,6 +112,15 @@ namespace Entidades
         }
 
 
+        //INTERFAZ
+       
+        public int Id { get; set; }
+       
+        public DateTime FechaCreacion { get ; set ; }
+ 
+        public DateTime FechaEliminacion { get ; set ; }
+
+
         /// <summary>
         /// El paciente realizara una consulta
         /// </summary>
@@ -150,8 +152,10 @@ namespace Entidades
         }
 
 
-        //sobreescribo el TOSTRING para que se muestre en el listbox
-
+        /// <summary>
+        /// sobreescribo el TOSTRING para que se muestre en el listbox
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();

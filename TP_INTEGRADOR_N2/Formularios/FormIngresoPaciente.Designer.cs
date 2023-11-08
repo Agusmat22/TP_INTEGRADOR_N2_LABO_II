@@ -33,7 +33,7 @@
             label2 = new Label();
             rtbSintomas = new RichTextBox();
             txtDatosBusqueda = new TextBox();
-            groupBox1 = new GroupBox();
+            grbPaciente = new GroupBox();
             btnBuscar = new Button();
             label5 = new Label();
             label4 = new Label();
@@ -44,7 +44,7 @@
             btnIngresar = new Button();
             btnCancelar = new Button();
             label6 = new Label();
-            groupBox1.SuspendLayout();
+            grbPaciente.SuspendLayout();
             SuspendLayout();
             // 
             // cmbTipoGuardia
@@ -96,22 +96,22 @@
             txtDatosBusqueda.Size = new Size(223, 23);
             txtDatosBusqueda.TabIndex = 15;
             // 
-            // groupBox1
+            // grbPaciente
             // 
-            groupBox1.Controls.Add(btnBuscar);
-            groupBox1.Controls.Add(label5);
-            groupBox1.Controls.Add(label4);
-            groupBox1.Controls.Add(rdbDni);
-            groupBox1.Controls.Add(rdbAfiliado);
-            groupBox1.Controls.Add(txtAfiliadoEncontrado);
-            groupBox1.Controls.Add(label1);
-            groupBox1.Controls.Add(txtDatosBusqueda);
-            groupBox1.Location = new Point(51, 70);
-            groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(257, 178);
-            groupBox1.TabIndex = 16;
-            groupBox1.TabStop = false;
-            groupBox1.Text = "Buscar Paciente";
+            grbPaciente.Controls.Add(btnBuscar);
+            grbPaciente.Controls.Add(label5);
+            grbPaciente.Controls.Add(label4);
+            grbPaciente.Controls.Add(rdbDni);
+            grbPaciente.Controls.Add(rdbAfiliado);
+            grbPaciente.Controls.Add(txtAfiliadoEncontrado);
+            grbPaciente.Controls.Add(label1);
+            grbPaciente.Controls.Add(txtDatosBusqueda);
+            grbPaciente.Location = new Point(51, 70);
+            grbPaciente.Name = "grbPaciente";
+            grbPaciente.Size = new Size(257, 178);
+            grbPaciente.TabIndex = 16;
+            grbPaciente.TabStop = false;
+            grbPaciente.Text = "Buscar Paciente";
             // 
             // btnBuscar
             // 
@@ -169,7 +169,6 @@
             txtAfiliadoEncontrado.Location = new Point(18, 142);
             txtAfiliadoEncontrado.Name = "txtAfiliadoEncontrado";
             txtAfiliadoEncontrado.PlaceholderText = "Mostrara el afiliado encontrado";
-            txtAfiliadoEncontrado.ReadOnly = true;
             txtAfiliadoEncontrado.Size = new Size(223, 23);
             txtAfiliadoEncontrado.TabIndex = 16;
             // 
@@ -219,12 +218,12 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = SystemColors.GradientActiveCaption;
+            BackColor = Color.CadetBlue;
             ClientSize = new Size(360, 606);
             Controls.Add(label6);
             Controls.Add(btnCancelar);
             Controls.Add(btnIngresar);
-            Controls.Add(groupBox1);
+            Controls.Add(grbPaciente);
             Controls.Add(cmbTipoGuardia);
             Controls.Add(label3);
             Controls.Add(label2);
@@ -234,8 +233,8 @@
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Ingreso de paciente";
             Load += FormIngresoPaciente_Load;
-            groupBox1.ResumeLayout(false);
-            groupBox1.PerformLayout();
+            grbPaciente.ResumeLayout(false);
+            grbPaciente.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -247,7 +246,7 @@
         private Label label2;
         private RichTextBox rtbSintomas;
         private TextBox txtDatosBusqueda;
-        private GroupBox groupBox1;
+        private GroupBox grbPaciente;
         private TextBox txtAfiliadoEncontrado;
         private Label label1;
         private Label label5;

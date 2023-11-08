@@ -1,4 +1,5 @@
-﻿using Entidades.BaseDeDatos;
+﻿using Entidades;
+using Entidades.BaseDeDatos;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,9 +14,11 @@ namespace Formularios
 {
     public partial class FormInformacion : Form
     {
+        private CentroMedico centroMedico;
         public FormInformacion()
         {
             InitializeComponent();
+            centroMedico = new CentroMedico();  
         }
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -25,6 +28,10 @@ namespace Formularios
 
         private void FormInformacionPacientes_Load(object sender, EventArgs e)
         {
+            centroMedico.Pacientes = ADOPacientes.ObtenerPacientesTotales();
+            centroMedico.Medicos = ADOMedicos.ObtenerMedicosTotales();
+
+
             this.ActualizarElementos();
         }
 
@@ -35,11 +42,11 @@ namespace Formularios
         {
 
             this.lstbPacientes.DataSource = null;
-            this.lstbPacientes.DataSource = ADOPacientes.ObtenerPacientesTotales();
+            this.lstbPacientes.DataSource = centroMedico.Pacientes;
             this.lstbPacientes.SelectedItem = null;
 
             this.lstbMedicos.DataSource = null;
-            this.lstbMedicos.DataSource = ADOMedicos.ObtenerMedicosTotales();
+            this.lstbMedicos.DataSource = centroMedico.Medicos;
             this.lstbMedicos.SelectedItem = null;
 
 
@@ -47,13 +54,17 @@ namespace Formularios
 
         private void btnImportar_Click(object sender, EventArgs e)
         {
-            FormSelectorImportacion selectorImportacion = new FormSelectorImportacion();
+            FormSelectorImportacion selectorImportacion = new FormSelectorImportacion(centroMedico);
 
             DialogResult resultado = selectorImportacion.ShowDialog();
 
             if (resultado == DialogResult.OK)
             {
                 MessageBox.Show("Importacion con exito");
+            }
+            else if(resultado == DialogResult.Cancel)
+            {
+                MessageBox.Show("Importacion cancelada");
             }
         }
     }

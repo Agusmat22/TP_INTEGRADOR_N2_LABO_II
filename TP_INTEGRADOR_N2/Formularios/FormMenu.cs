@@ -22,12 +22,12 @@ namespace Formularios
             FormRegistrarPaciente formRegistrarPaciente = new FormRegistrarPaciente();
 
             DialogResult resultado = formRegistrarPaciente.ShowDialog();
-            /*
+            
             if (resultado == DialogResult.OK)
             {
-                this.centroMedico.Agregar(formRegistrarPaciente.PacienteRegistrado);
-                this.ActualizarElementos();
-            }*/
+                MessageBox.Show("Registro con exito");
+                //this.centroMedico.Agregar(formRegistrarPaciente.PacienteRegistrado);
+            }
 
         }
 

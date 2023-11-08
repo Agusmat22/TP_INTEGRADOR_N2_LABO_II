@@ -49,9 +49,15 @@ namespace Formularios
                 if (nombre != string.Empty && apellido != string.Empty && estadoDni && estadoObraSocial)
                 {
                     //Instancio la clase paciente y creo el objeto, le paso true como si fue atendido para que no se muestre en la admision
-                    paciente = new Paciente(nombre, apellido, dni, fechaNacimiento, obraSocial, numeroAfiliado, true);
+                    paciente = new Paciente(nombre, apellido, dni, fechaNacimiento, obraSocial, numeroAfiliado);
+
+                    //PREGUNTAR AL PROFE SI ES UNA BUENA PRACTICA
+                    paciente.FechaCreacion = DateTime.Now;
+
+
+                    //guardo el paciente en la DB
                     ADOPacientes.Guardar(paciente);
-                    MessageBox.Show($"Registro exitoso");
+
                     this.DialogResult = DialogResult.OK;
 
                 }

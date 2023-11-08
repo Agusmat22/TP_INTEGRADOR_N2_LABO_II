@@ -82,3 +82,5 @@ C:\TP_INTEGRADOR_N2_LABO_II\TP_INTEGRADOR_N2\Formularios\obj\Debug\net6.0-window
 C:\TP_INTEGRADOR_N2_LABO_II\TP_INTEGRADOR_N2\Formularios\obj\Debug\net6.0-windows\Formularios.genruntimeconfig.cache
 C:\TP_INTEGRADOR_N2_LABO_II\TP_INTEGRADOR_N2\Formularios\obj\Debug\net6.0-windows\ref\Formularios.dll
 C:\TP_INTEGRADOR_N2_LABO_II\TP_INTEGRADOR_N2\Formularios\obj\Debug\net6.0-windows\Formularios.FormInformacion.resources
+C:\TP_INTEGRADOR_N2_LABO_II\TP_INTEGRADOR_N2\Formularios\obj\Debug\net6.0-windows\Formularios.FormSelectorImportacion.resources
+C:\TP_INTEGRADOR_N2_LABO_II\TP_INTEGRADOR_N2\Formularios\obj\Debug\net6.0-windows\Formularios.Properties.Resources.resources

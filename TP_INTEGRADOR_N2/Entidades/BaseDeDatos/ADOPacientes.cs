@@ -30,10 +30,10 @@ namespace Entidades.BaseDeDatos
             try
             {
                 string sentencia = "SELECT * FROM Pacientes";
-                List<Paciente> listaPacientes = new List<Paciente>();
 
                 using (SqlConnection connection = new SqlConnection(ADOPacientes.stringConnection))
                 {
+                    List<Paciente> listaPacientes = new List<Paciente>();
 
                     SqlCommand command = new SqlCommand(sentencia, connection);
                     connection.Open();
@@ -128,7 +128,11 @@ namespace Entidades.BaseDeDatos
                             throw new IntentoDeAlmacenarPacienteException("Error al internar obtener pacientes de DB");
                         }
 
-                        paciente.HistoriaClinica = reader.GetString(8);
+                        //valido que la historial clinica no sea null, por parametro le paso la posicion de la columna
+                        if (!reader.IsDBNull(8))
+                        {
+                            paciente.HistoriaClinica = reader.GetString(8);
+                        }
 
                         listaPacientes.Add(paciente);
                     }

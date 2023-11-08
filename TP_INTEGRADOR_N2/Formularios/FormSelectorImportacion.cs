@@ -17,9 +17,10 @@ namespace Formularios
     {
         private string rutaAlmacenamiento;
         private CentroMedico centroMedico;
-        public FormSelectorImportacion()
+        public FormSelectorImportacion(CentroMedico centroMedico)
         {
             InitializeComponent();
+            this.centroMedico = centroMedico;
         }
 
         private void openFileDialog1_FileOk(object sender, CancelEventArgs e)
@@ -33,7 +34,7 @@ namespace Formularios
             using (FolderBrowserDialog folderBrowser = new FolderBrowserDialog())
             {
                 //descripcion del dialogo
-                folderBrowser.Description = "Seleccion una carpeta";
+                folderBrowser.Description = "Seleccionar carpeta";
 
                 //Le indico al dialogo que empiece en Mi pc
                 folderBrowser.RootFolder = Environment.SpecialFolder.MyComputer;
@@ -79,7 +80,7 @@ namespace Formularios
 
                         string listaSerializada;
 
-                        if (this.cmbLista.SelectedText == "Pacientes")
+                        if (this.cmbLista.SelectedItem.ToString() == "Pacientes")
                         {
                             listaSerializada = JsonSerializer.Serialize<List<Paciente>>(centroMedico.Pacientes, options);
 
@@ -93,6 +94,8 @@ namespace Formularios
 
                         //escribo el archivo
                         streamWriter.Write(listaSerializada);
+
+                        this.DialogResult |= DialogResult.OK;
 
                     }
 
@@ -109,8 +112,14 @@ namespace Formularios
 
         private void FormSelectorImportacion_Load(object sender, EventArgs e)
         {
+            //agrego los items para seleccionar el tipo de lista
             this.cmbLista.Items.Add("Pacientes");
             this.cmbLista.Items.Add("Medicos");
+            //asigno un tipo predeterminado
+            this.cmbLista.SelectedIndex = 0;
+
         }
+
+        
     }
 }

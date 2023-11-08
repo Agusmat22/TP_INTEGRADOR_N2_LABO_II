@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Entidades.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,7 +14,7 @@ namespace Entidades
         Traumatologia
     }
 
-    public class Medico : Persona
+    public class Medico : Persona, IIdentificadorSql
     {
         private long numeroMatricula;
         private EEspecialidad especialidad; 
@@ -35,11 +36,6 @@ namespace Entidades
 
         }
 
-        private Medico(string nombre, string apellido, int dni, DateTime fechaNacimiento,int id)
-            : base(nombre, apellido, dni, fechaNacimiento,id)
-        {
-
-        }
 
         /// <summary>
         /// Este constructor sobrecargado sera publico y utilizado para crear los medicos 
@@ -57,10 +53,9 @@ namespace Entidades
         }
 
         public Medico(string nombre, string apellido, int dni, long numeroMatricula, DateTime fechaNacimiento, EEspecialidad especialidad, int id)
-            : this(nombre, apellido, dni, fechaNacimiento, id)
+            : this(nombre, apellido, dni,numeroMatricula, fechaNacimiento, especialidad)
         {
-            this.numeroMatricula = numeroMatricula;
-            this.especialidad = especialidad;
+            this.Id = id;
         }
 
         //PROPIEDADES
@@ -76,6 +71,11 @@ namespace Entidades
             get { return this.especialidad; }
             set { this.especialidad = value; }
         }
+
+        //INTERFAZ
+        public int Id { get; set; }
+        public DateTime FechaCreacion { get; set; }
+        public DateTime FechaEliminacion { get; set; }
 
         //METODOS
 
