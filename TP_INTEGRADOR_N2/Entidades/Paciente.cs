@@ -116,9 +116,8 @@ namespace Entidades
        
         public int Id { get; set; }
        
-        public DateTime FechaCreacion { get ; set ; }
+        public DateTime FechaAlta { get ; set ; }
  
-        public DateTime FechaEliminacion { get ; set ; }
 
 
         /// <summary>

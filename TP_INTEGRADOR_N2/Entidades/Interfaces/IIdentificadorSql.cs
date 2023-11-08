@@ -16,11 +16,7 @@ namespace Entidades.Interfaces
         /// <summary>
         /// Fecha que se crea dicho objeto 
         /// </summary>
-        public DateTime FechaCreacion { get; set; }
+        public DateTime FechaAlta { get; set; }
 
-        /// <summary>
-        /// Fecha que se elimina el objeto dentro de la DB
-        /// </summary>
-        public DateTime FechaEliminacion { get; set; }
     }
 }

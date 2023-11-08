@@ -26,7 +26,6 @@ namespace Formularios
             if (resultado == DialogResult.OK)
             {
                 MessageBox.Show("Registro con exito");
-                //this.centroMedico.Agregar(formRegistrarPaciente.PacienteRegistrado);
             }
 
         }

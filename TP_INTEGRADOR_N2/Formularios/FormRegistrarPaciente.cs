@@ -52,7 +52,7 @@ namespace Formularios
                     paciente = new Paciente(nombre, apellido, dni, fechaNacimiento, obraSocial, numeroAfiliado);
 
                     //PREGUNTAR AL PROFE SI ES UNA BUENA PRACTICA
-                    paciente.FechaCreacion = DateTime.Now;
+                    paciente.FechaAlta = DateTime.Now;
 
 
                     //guardo el paciente en la DB

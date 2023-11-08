@@ -121,6 +121,7 @@
             btnBuscar.TabIndex = 23;
             btnBuscar.Text = "Buscar";
             btnBuscar.UseVisualStyleBackColor = true;
+            btnBuscar.Click += btnBuscar_Click;
             // 
             // label5
             // 

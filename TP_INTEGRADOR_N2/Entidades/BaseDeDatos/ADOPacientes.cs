@@ -23,7 +23,7 @@ namespace Entidades.BaseDeDatos
         /// Obtiene una lista del total de pacientes almacenados en la DB
         /// </summary>
         /// <returns></returns>
-        /// <exception cref="LecturaRegistrosExcepcion"></exception>
+        /// <exception cref="FalloBusquedaPacienteException"></exception>
         public static List<Paciente> ObtenerPacientesTotales()
         {
 
@@ -78,7 +78,7 @@ namespace Entidades.BaseDeDatos
             }
             catch (Exception ex) 
             {
-                throw new LecturaRegistrosExcepcion("Error al leer los pacientes de la DB",ex);
+                throw new FalloBusquedaPacienteException("Error al leer los pacientes de la DB",ex);
 
             }
 
@@ -90,8 +90,8 @@ namespace Entidades.BaseDeDatos
         /// </summary>
         /// <param name="paciente"></param>
         /// <param name="booleano">1=true o 0=false</param>
-        /// <exception cref="IntentoDeAlmacenarPacienteException"></exception>
-        public static List<Paciente> ObtenerPacientesTotales(int booleano)
+        /// <exception cref="FalloObtenerPacienteException"></exception>
+        public static List<Paciente> ObtenerPacientesTotales(int valor)
         {
             try
             {
@@ -102,7 +102,7 @@ namespace Entidades.BaseDeDatos
                 {
 
                     SqlCommand command = new SqlCommand(sentencia, connection);
-                    command.Parameters.AddWithValue("atendido", booleano);
+                    command.Parameters.AddWithValue("atendido", valor);
                     connection.Open();
 
                     SqlDataReader reader = command.ExecuteReader();
@@ -125,7 +125,7 @@ namespace Entidades.BaseDeDatos
                         }
                         else
                         {
-                            throw new IntentoDeAlmacenarPacienteException("Error al internar obtener pacientes de DB");
+                            throw new FalloObtenerPacienteException("Error al internar obtener pacientes de DB");
                         }
 
                         //valido que la historial clinica no sea null, por parametro le paso la posicion de la columna
@@ -133,6 +133,8 @@ namespace Entidades.BaseDeDatos
                         {
                             paciente.HistoriaClinica = reader.GetString(8);
                         }
+
+                        paciente.FechaAlta = reader.GetDateTime(9);
 
                         listaPacientes.Add(paciente);
                     }
@@ -144,23 +146,104 @@ namespace Entidades.BaseDeDatos
             }
             catch
             {
-                throw new LecturaRegistrosExcepcion("Error al leer los pacientes de la DB");
+                throw new FalloBusquedaPacienteException("Error al leer los pacientes de la DB");
 
             }
 
         }
         
         /// <summary>
+        /// Devuelve el paciente encontrado por su clave
+        /// </summary>
+        /// <param name="clave"></param>
+        /// <param name="valor"></param>
+        /// <returns></returns>
+        /// <exception cref="FalloBusquedaPacienteException"></exception>
+        public static Paciente ObtenerPaciente(string clave,int valor)
+        {
+            try
+            {
+                string sentencia = "SELECT * FROM Pacientes WHERE ";
+                string columna;
+
+                /* IBA A VALIDAR PERO MEJOR VA SER TIRAR UNA EXCEPCION
+                if (clave == "numero_afiliado")
+                {
+                    columna = 
+                }
+                else if (clave == "dni")
+                {
+
+                }*/
+                clave.ToLower();
+
+                sentencia += $"{clave} = @{clave}";
+
+
+
+                using (SqlConnection connection = new SqlConnection(ADOPacientes.stringConnection))
+                {
+                    SqlCommand command = new SqlCommand(sentencia, connection);
+
+                    command.Parameters.AddWithValue($"{clave}", valor);
+
+                    connection.Open();
+
+                    SqlDataReader reader = command.ExecuteReader();
+
+                    Paciente paciente = new Paciente();
+
+                    while (reader.Read())
+                    {
+
+                        paciente.Id = reader.GetInt32(0);
+                        paciente.Nombre = reader.GetString(1);
+                        paciente.Apellido = reader.GetString(2);
+                        paciente.Dni = reader.GetInt32(3);
+                        paciente.FechaNacimiento = reader.GetDateTime(4);
+                        paciente.NumeroAfiliado = reader.GetInt64(5);
+                        paciente.Atendido = reader.GetBoolean(6);
+
+                        if (Enum.TryParse(reader.GetString(7), out EObrasSocial obraSocial))
+                        {
+                            paciente.ObraSocial = obraSocial;
+                        }
+                        
+
+                        //valido que la historial clinica no sea null, por parametro le paso la posicion de la columna
+                        if (!reader.IsDBNull(8))
+                        {
+                            paciente.HistoriaClinica = reader.GetString(8);
+                        }
+
+                        paciente.FechaAlta = reader.GetDateTime(9);
+
+                    }
+                    return paciente;
+
+                }
+
+
+            }
+            catch (Exception ex) 
+            {
+                throw new FalloBusquedaPacienteException("Error al buscar el paciente", ex);
+            }
+        }
+
+
+
+        /// <summary>
         /// Guarda en la DB un paciente nuevo
         /// </summary>
         /// <param name="paciente"></param>
-        /// <exception cref="IntentoDeAlmacenarPacienteException"></exception>
+        /// <exception cref="FalloObtenerPacienteException"></exception>
         public static void Guardar(Paciente paciente)
         {
             try
             {
-                string sentencia = "INSERT INTO Pacientes (nombre,apellido,dni,fecha_nacimiento,numero,atendido,obra_social)" +
-                    "VALUES (@nombre,@apellido,@dni,@fecha_nacimiento,@numero,@atendido,@obra_social)";
+                string sentencia = "INSERT INTO Pacientes (nombre,apellido,dni,fecha_nacimiento,numero,atendido,obra_social,historia_clinica,fecha_alta)" +
+                    "VALUES (@nombre,@apellido,@dni,@fecha_nacimiento,@numero,@atendido,@obra_social,@historia_clinica,@fecha_alta)";
 
                 using (SqlConnection connection = new SqlConnection(ADOPacientes.stringConnection))
                 {
@@ -172,7 +255,12 @@ namespace Entidades.BaseDeDatos
                     command.Parameters.AddWithValue("fecha_nacimiento", paciente.FechaNacimiento);
                     command.Parameters.AddWithValue("numero", paciente.NumeroAfiliado);
                     command.Parameters.AddWithValue("atendido", paciente.Atendido);
-                    command.Parameters.AddWithValue("obra_social", paciente.ObraSocial.ToString());                   
+                    command.Parameters.AddWithValue("obra_social", paciente.ObraSocial.ToString());
+
+                    //PREGUNTAR AL PROFE
+                    command.Parameters.AddWithValue("historia_clinica", paciente.HistoriaClinica ?? (object)DBNull.Value);
+                    
+                    command.Parameters.AddWithValue("fecha_alta", paciente.FechaAlta);
                     //command.Parameters.AddWithValue("historia_clinica", paciente.HistoriaClinica);                       
                     
 
@@ -184,7 +272,7 @@ namespace Entidades.BaseDeDatos
             }
             catch 
             {
-                throw new IntentoDeAlmacenarPacienteException("Error al guardar un paciente");
+                throw new FalloObtenerPacienteException("Error al guardar un paciente");
 
             }
 
@@ -270,7 +358,7 @@ namespace Entidades.BaseDeDatos
             catch (Exception ex) 
             { 
             
-                throw ex;
+                throw new FalloModificarPacienteException("Error, no pudo modificar el paciente",ex);
             }
 
 

@@ -23,7 +23,7 @@ namespace Entidades.BaseDeDatos
         /// Obtiene todos los medicos de la DB
         /// </summary>
         /// <returns></returns>
-        /// <exception cref="LecturaRegistrosExcepcion"></exception>
+        /// <exception cref="FalloBusquedaPacienteException"></exception>
         public static List<Medico> ObtenerMedicosTotales()
         {
 
@@ -72,7 +72,7 @@ namespace Entidades.BaseDeDatos
             }
             catch
             {
-                throw new LecturaRegistrosExcepcion("Error al leer los medicos de la DB");
+                throw new FalloBusquedaPacienteException("Error al leer los medicos de la DB");
 
             }
 
@@ -84,7 +84,7 @@ namespace Entidades.BaseDeDatos
         /// </summary>
         /// <param name="id"></param>
         /// <returns>Un objeto del tipo Medico</returns>
-        /// <exception cref="LecturaRegistrosExcepcion"></exception>
+        /// <exception cref="FalloBusquedaPacienteException"></exception>
         public static Medico ObtenerMedicoPorId(int id)
         {
             try
@@ -124,7 +124,7 @@ namespace Entidades.BaseDeDatos
             }
             catch (Exception ex)            
             {
-                throw new LecturaRegistrosExcepcion("Error al obtener el medico por su ID");
+                throw new FalloBusquedaPacienteException("Error al obtener el medico por su ID");
             
             }
             
