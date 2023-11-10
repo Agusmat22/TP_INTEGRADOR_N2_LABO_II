@@ -35,3 +35,8 @@ CONSTRAINT pk_id_medico PRIMARY KEY (id_medico)
 --ELIMINA LA TABLA
 DROP TABLE Medicos 
 
+--AGREGO UN PACIENTE
+
+INSERT INTO Pacientes (nombre,apellido,dni,fecha_nacimiento,numero,atendido,obra_social,fecha_alta) 
+VALUES ('vanesa','pinto',5141541,'1976-02-18',1231354,1,'UP',)
+

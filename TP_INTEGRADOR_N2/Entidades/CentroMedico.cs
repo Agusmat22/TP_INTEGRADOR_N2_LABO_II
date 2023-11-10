@@ -133,5 +133,23 @@ namespace Entidades
             return false;
         }
 
+        /// <summary>
+        /// Devuelve un paciente dependiendo el delagado pasado por parametro
+        /// </summary>
+        /// <param name="busqueda">El parametro sera un paciente y retornara un bool</param>
+        /// <returns></returns>
+        public Paciente ObtenerPaciente(Func<Paciente,bool> busqueda)
+        {
+            foreach (Paciente item in this.pacientes)
+            {
+                if (busqueda(item))
+                {
+                    return item;
+                }
+            }
+
+            return null;
+        }
+        
     }
 }

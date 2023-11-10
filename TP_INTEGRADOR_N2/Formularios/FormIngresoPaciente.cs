@@ -68,6 +68,7 @@ namespace Formularios
                                 int numero = int.Parse(txt.Text);
 
                                 //guardo el paciente
+
                                 this.paciente = ADOPacientes.ObtenerPaciente(tipoBusqueda, numero);
                             }
                             catch (FalloBusquedaPacienteException ex)

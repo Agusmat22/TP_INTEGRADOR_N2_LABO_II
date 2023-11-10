@@ -193,41 +193,53 @@ namespace Entidades.BaseDeDatos
 
                     Paciente paciente = new Paciente();
 
-                    while (reader.Read())
+                    if (reader.HasRows)
                     {
-
-                        paciente.Id = reader.GetInt32(0);
-                        paciente.Nombre = reader.GetString(1);
-                        paciente.Apellido = reader.GetString(2);
-                        paciente.Dni = reader.GetInt32(3);
-                        paciente.FechaNacimiento = reader.GetDateTime(4);
-                        paciente.NumeroAfiliado = reader.GetInt64(5);
-                        paciente.Atendido = reader.GetBoolean(6);
-
-                        if (Enum.TryParse(reader.GetString(7), out EObrasSocial obraSocial))
+                        while (reader.Read())
                         {
-                            paciente.ObraSocial = obraSocial;
+
+                            paciente.Id = reader.GetInt32(0);
+                            paciente.Nombre = reader.GetString(1);
+                            paciente.Apellido = reader.GetString(2);
+                            paciente.Dni = reader.GetInt32(3);
+                            paciente.FechaNacimiento = reader.GetDateTime(4);
+                            paciente.NumeroAfiliado = reader.GetInt64(5);
+                            paciente.Atendido = reader.GetBoolean(6);
+
+                            if (Enum.TryParse(reader.GetString(7), out EObrasSocial obraSocial))
+                            {
+                                paciente.ObraSocial = obraSocial;
+                            }
+
+
+                            //valido que la historial clinica no sea null, por parametro le paso la posicion de la columna
+                            if (!reader.IsDBNull(8))
+                            {
+                                paciente.HistoriaClinica = reader.GetString(8);
+                            }
+
+                            paciente.FechaAlta = reader.GetDateTime(9);
+
                         }
-                        
-
-                        //valido que la historial clinica no sea null, por parametro le paso la posicion de la columna
-                        if (!reader.IsDBNull(8))
-                        {
-                            paciente.HistoriaClinica = reader.GetString(8);
-                        }
-
-                        paciente.FechaAlta = reader.GetDateTime(9);
-
                     }
+                    else
+                    {
+                        throw new PacienteNoEncontradoException("No se encontro el paciente");
+                    }
+                    
                     return paciente;
 
                 }
 
 
             }
-            catch (Exception ex) 
+            catch (PacienteNoEncontradoException ex)
             {
-                throw new FalloBusquedaPacienteException("Error al buscar el paciente", ex);
+                throw ex;
+            }
+            catch (Exception) 
+            {
+                throw new FalloBusquedaPacienteException("Error al buscar el paciente");
             }
         }
 
@@ -278,8 +290,12 @@ namespace Entidades.BaseDeDatos
 
         }
 
-
-        public static void Modificar(Paciente pacienteModificado,Paciente pacienteOriginal)
+        /// <summary>
+        /// REVISAR
+        /// </summary>
+        /// <param name="pacienteModificado"></param>
+        /// <exception cref="FalloModificarPacienteException"></exception>
+        public static void Modificar(Paciente pacienteModificado)
         {
             try
             {
@@ -288,6 +304,9 @@ namespace Entidades.BaseDeDatos
                 {
                     SqlCommand command = new SqlCommand();
                     command.Connection = connection;
+
+                    //OBTENGO EL PACIENTE DE LA DB PARA BUSCAR LAS DIFERENCIAS Y MODIFICARLO
+                    Paciente pacienteOriginal = ADOPacientes.ObtenerPaciente("id", pacienteModificado.Id);
 
                     //De esta manera hago mas eficiente y no arbitrariamente debo actualizar todas las columnas
                     if (pacienteModificado == pacienteOriginal)
@@ -325,7 +344,7 @@ namespace Entidades.BaseDeDatos
                         if (pacienteModificado.Atendido != pacienteOriginal.Atendido)
                         {
                             sentencia += "atendido = @atendido, ";
-                            command.Parameters.AddWithValue("atendido", pacienteModificado.NumeroAfiliado);
+                            command.Parameters.AddWithValue("atendido", pacienteModificado.Atendido);
                         }
 
                         if (pacienteModificado.ObraSocial != pacienteOriginal.ObraSocial)
@@ -340,14 +359,18 @@ namespace Entidades.BaseDeDatos
                             command.Parameters.AddWithValue("historia_clinica", pacienteModificado.HistoriaClinica);
                         }
 
-                        //elimino la , final y el espacio
-                        sentencia.TrimEnd(',');
+                        //elimino la coma final y el espacio
+                        sentencia = sentencia.TrimEnd(',',' ');
 
-                        sentencia += "WHERE id=@id";
+                        //le agrego un espacio para que quede mas prolijo
+                        sentencia += " WHERE id=@id";
                         command.Parameters.AddWithValue("id", pacienteModificado.Id);
 
                         //le asigno la sentencia
                         command.CommandText = sentencia;
+
+                        //abro la coneccion
+                        connection.Open();
 
                         //ejecuto el comando 
                         command.ExecuteNonQuery();
