@@ -488,7 +488,7 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\usuario\\.nuget\\packages\\": {}
+    "C:\\Users\\Lisandro\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
@@ -496,11 +496,11 @@
       "projectUniqueName": "C:\\TP_INTEGRADOR_N2_LABO_II\\TP_INTEGRADOR_N2\\Testing\\Consola.csproj",
       "projectName": "Consola",
       "projectPath": "C:\\TP_INTEGRADOR_N2_LABO_II\\TP_INTEGRADOR_N2\\Testing\\Consola.csproj",
-      "packagesPath": "C:\\Users\\usuario\\.nuget\\packages\\",
+      "packagesPath": "C:\\Users\\Lisandro\\.nuget\\packages\\",
       "outputPath": "C:\\TP_INTEGRADOR_N2_LABO_II\\TP_INTEGRADOR_N2\\Testing\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\usuario\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Lisandro\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -545,7 +545,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.306\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
       }
     }
   }

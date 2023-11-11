@@ -20,7 +20,7 @@ namespace CentroMedicoTP
         private RestablecerMenuPrincipal restablecer;
         private Paciente pacienteEncotrado;
 
-        public FormAdmision(CentroMedico centroMedico,RestablecerMenuPrincipal restablecer)
+        public FormAdmision(CentroMedico centroMedico, RestablecerMenuPrincipal restablecer)
         {
             InitializeComponent();
             this.centroMedico = centroMedico;
@@ -39,8 +39,7 @@ namespace CentroMedicoTP
             else
             {
                 //deshabilito el grp
-                this.LimpiarGrp();
-                this.btnDesbloquear.ImageIndex = 0;
+                this.restablecerControles();
             }
 
 
@@ -56,7 +55,7 @@ namespace CentroMedicoTP
             //le paso una funcion lambda para que me traiga solo los pacientes que no estan atendidos
             this.lstbPacientesEnEspera.DataSource = (centroMedico.Pacientes).Where(paciente => paciente.Atendido == false).ToList();
 
-            this.LimpiarGrp();
+            this.restablecerControles();
         }
 
         private void btnVolver_Click(object sender, EventArgs e)
@@ -88,7 +87,7 @@ namespace CentroMedicoTP
                 //valido que este vacio ya que si lo encontro no quiero que ingrese de nuevo
                 if (item is RadioButton rdb && tipoBusqueda == string.Empty)
                 {
-                    if (rdb == this.rdbAfiliado && rdb.Checked)
+                    if (rdb == this.rdbNumAfiliado && rdb.Checked)
                     {
                         tipoBusqueda = "numero";
                     }
@@ -97,12 +96,12 @@ namespace CentroMedicoTP
                         tipoBusqueda = "dni";
 
                     }
-                    else
+                    /*else
                     {
                         this.txtAfiliadoEncontrado.Text = "Error, debe seleccionar el tipo de busqueda";
                         this.txtAfiliadoEncontrado.BackColor = Color.Red;
                         break;
-                    }
+                    }*/
                 }
                 else if (item is TextBox txt && txt == this.txtDatosBusqueda)
                 {
@@ -125,7 +124,7 @@ namespace CentroMedicoTP
                 if (tipoBusqueda == "dni")
                 {
                     //Le paso una funcion lambda
-                    pacienteEncotrado = centroMedico.ObtenerPaciente(paciente => paciente.Dni == numero);                   
+                    pacienteEncotrado = centroMedico.ObtenerPaciente(paciente => paciente.Dni == numero);
                 }
                 else
                 {
@@ -139,7 +138,7 @@ namespace CentroMedicoTP
                 this.btnIngresar.Enabled = true;
 
             }
-            
+
         }
 
 
@@ -157,8 +156,8 @@ namespace CentroMedicoTP
                 //modifico en la DB para que el medico pueda visualizar los pacientes en guardia
                 ADOPacientes.Modificar(this.pacienteEncotrado);
                 centroMedico.Agregar(this.pacienteEncotrado);
-                
-               
+
+
             }
             catch (FalloModificarPacienteException ex)
             {
@@ -174,15 +173,16 @@ namespace CentroMedicoTP
         /// <summary>
         /// Limpia todos los controles del groupBox
         /// </summary>
-        private void LimpiarGrp()
+        private void restablecerControles()
         {
             this.txtDatosBusqueda.Clear();
             this.txtAfiliadoEncontrado.Clear();
             this.txtAfiliadoEncontrado.BackColor = Color.White;
             this.cmbTipoGuardia.SelectedIndex = 0;
-            this.rdbAfiliado.Checked = true;
+            this.rdbNumAfiliado.Checked = true;
             this.btnIngresar.Enabled = false;
             this.grpCargarPaciente.Enabled = false;
+            this.btnDesbloquear.ImageIndex = 0;
 
         }
     }

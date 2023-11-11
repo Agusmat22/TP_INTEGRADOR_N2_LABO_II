@@ -10,6 +10,7 @@ namespace CentroMedicoTP
     public partial class FormMenuPrincipal : Form
     {
         private CentroMedico centroMedico;
+        private RestablecerMenuPrincipal restablecerMenu;
         public FormMenuPrincipal()
         {
             InitializeComponent();
@@ -17,6 +18,10 @@ namespace CentroMedicoTP
             centroMedico = new CentroMedico();
         }
 
+        /// <summary>
+        /// Permite contener un formulario dentro del panel
+        /// </summary>
+        /// <param name="formulario"></param>
         private void MostrarFormulario(Form formulario)
         {
             //limpia el panel antes de agregar un form
@@ -24,7 +29,7 @@ namespace CentroMedicoTP
 
             // Configura el formulario que se va a mostrar
             formulario.TopLevel = false;
-            formulario.AutoScroll = true;
+            //formulario.AutoScroll = true;
             panelForm.Controls.Add(formulario);
             formulario.FormBorderStyle = FormBorderStyle.None;
             formulario.Dock = DockStyle.Fill;
@@ -33,8 +38,7 @@ namespace CentroMedicoTP
 
         private void btnAdmision_Click(object sender, EventArgs e)
         {
-            RestablecerMenuPrincipal restablecerMenu = this.AgregarTitulo;
-            this.MostrarFormulario(new FormAdmision(centroMedico,restablecerMenu));
+            this.MostrarFormulario(new FormAdmision(centroMedico, restablecerMenu));
         }
 
 
@@ -53,6 +57,16 @@ namespace CentroMedicoTP
         {
             centroMedico.Pacientes = ADOPacientes.ObtenerPacientesTotales();
             centroMedico.Medicos = ADOMedicos.ObtenerMedicosTotales();
+
+            this.restablecerMenu = this.AgregarTitulo;
+
+        }
+
+        private void btnRegistrar_Click(object sender, EventArgs e)
+        {
+            FormRegistrarPaciente registrarPaciente = new FormRegistrarPaciente("REGISTRAR PACIENTE",centroMedico, restablecerMenu);
+            this.MostrarFormulario(registrarPaciente);
+
         }
     }
 }

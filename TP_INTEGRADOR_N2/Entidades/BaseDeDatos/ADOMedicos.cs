@@ -70,7 +70,7 @@ namespace Entidades.BaseDeDatos
                 return listaMedicos;
 
             }
-            catch
+            catch(Exception ex)
             {
                 throw new FalloBusquedaPacienteException("Error al leer los medicos de la DB");
 

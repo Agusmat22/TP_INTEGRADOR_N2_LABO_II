@@ -38,11 +38,11 @@
             btnVolver = new Button();
             label6 = new Label();
             grbBuscarPaciente = new GroupBox();
+            rdbNumAfiliado = new RadioButton();
             btnBuscar = new Button();
             label5 = new Label();
             label4 = new Label();
             rdbDni = new RadioButton();
-            rdbAfiliado = new RadioButton();
             txtAfiliadoEncontrado = new TextBox();
             label3 = new Label();
             txtDatosBusqueda = new TextBox();
@@ -130,11 +130,11 @@
             // 
             // grbBuscarPaciente
             // 
+            grbBuscarPaciente.Controls.Add(rdbNumAfiliado);
             grbBuscarPaciente.Controls.Add(btnBuscar);
             grbBuscarPaciente.Controls.Add(label5);
             grbBuscarPaciente.Controls.Add(label4);
             grbBuscarPaciente.Controls.Add(rdbDni);
-            grbBuscarPaciente.Controls.Add(rdbAfiliado);
             grbBuscarPaciente.Controls.Add(txtAfiliadoEncontrado);
             grbBuscarPaciente.Controls.Add(label3);
             grbBuscarPaciente.Controls.Add(txtDatosBusqueda);
@@ -144,6 +144,17 @@
             grbBuscarPaciente.TabIndex = 29;
             grbBuscarPaciente.TabStop = false;
             grbBuscarPaciente.Text = "Buscar Paciente";
+            // 
+            // rdbNumAfiliado
+            // 
+            rdbNumAfiliado.AutoSize = true;
+            rdbNumAfiliado.Font = new Font("Segoe UI", 8F, FontStyle.Regular, GraphicsUnit.Point);
+            rdbNumAfiliado.Location = new Point(59, 41);
+            rdbNumAfiliado.Name = "rdbNumAfiliado";
+            rdbNumAfiliado.Size = new Size(14, 13);
+            rdbNumAfiliado.TabIndex = 24;
+            rdbNumAfiliado.TabStop = true;
+            rdbNumAfiliado.UseVisualStyleBackColor = true;
             // 
             // btnBuscar
             // 
@@ -186,22 +197,12 @@
             rdbDni.TabStop = true;
             rdbDni.UseVisualStyleBackColor = true;
             // 
-            // rdbAfiliado
-            // 
-            rdbAfiliado.AutoSize = true;
-            rdbAfiliado.Font = new Font("Segoe UI", 8F, FontStyle.Regular, GraphicsUnit.Point);
-            rdbAfiliado.Location = new Point(59, 41);
-            rdbAfiliado.Name = "rdbAfiliado";
-            rdbAfiliado.Size = new Size(14, 13);
-            rdbAfiliado.TabIndex = 19;
-            rdbAfiliado.TabStop = true;
-            rdbAfiliado.UseVisualStyleBackColor = true;
-            // 
             // txtAfiliadoEncontrado
             // 
             txtAfiliadoEncontrado.Location = new Point(18, 142);
             txtAfiliadoEncontrado.Name = "txtAfiliadoEncontrado";
             txtAfiliadoEncontrado.PlaceholderText = "Mostrara el afiliado encontrado";
+            txtAfiliadoEncontrado.ReadOnly = true;
             txtAfiliadoEncontrado.Size = new Size(223, 23);
             txtAfiliadoEncontrado.TabIndex = 16;
             // 
@@ -309,7 +310,6 @@
         private Label label5;
         private Label label4;
         private RadioButton rdbDni;
-        private RadioButton rdbAfiliado;
         private TextBox txtAfiliadoEncontrado;
         private Label label3;
         private TextBox txtDatosBusqueda;
@@ -318,5 +318,6 @@
         private GroupBox grpCargarPaciente;
         private Button btnIngresar;
         private ImageList imageList1;
+        private RadioButton rdbNumAfiliado;
     }
 }

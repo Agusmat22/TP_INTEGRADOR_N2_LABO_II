@@ -38,5 +38,11 @@ DROP TABLE Medicos
 --AGREGO UN PACIENTE
 
 INSERT INTO Pacientes (nombre,apellido,dni,fecha_nacimiento,numero,atendido,obra_social,fecha_alta) 
-VALUES ('vanesa','pinto',5141541,'1976-02-18',1231354,1,'UP',)
+VALUES ('agustin','garcia',43173652,'2001-02-24',1231354,1,'UP','2023-11-10')
+
+INSERT INTO Pacientes (nombre,apellido,dni,fecha_nacimiento,numero,atendido,obra_social,fecha_alta) 
+VALUES ('vanesa','pinto',5141541,'1976-02-18',321313,1,'UP','2023-02-01')
+
+INSERT INTO Pacientes (nombre,apellido,dni,fecha_nacimiento,numero,atendido,obra_social,fecha_alta) 
+VALUES ('sofia','isunza',43615289,'2001-10-15',1231354,1,'UP','2022-01-10')
 

@@ -25,3 +25,4 @@ C:\TP_INTEGRADOR_N2_LABO_II\TP_INTEGRADOR_N2\CentroMedicoTP\bin\Debug\net6.0-win
 C:\TP_INTEGRADOR_N2_LABO_II\TP_INTEGRADOR_N2\CentroMedicoTP\obj\Debug\net6.0-windows\CentroMedicoTP.csproj.CopyComplete
 C:\TP_INTEGRADOR_N2_LABO_II\TP_INTEGRADOR_N2\CentroMedicoTP\obj\Debug\net6.0-windows\CentroMedicoTP.FormMenuPrincipal.resources
 C:\TP_INTEGRADOR_N2_LABO_II\TP_INTEGRADOR_N2\CentroMedicoTP\obj\Debug\net6.0-windows\CentroMedicoTP.FormAdmision.resources
+C:\TP_INTEGRADOR_N2_LABO_II\TP_INTEGRADOR_N2\CentroMedicoTP\obj\Debug\net6.0-windows\CentroMedicoTP.FormRegistrarPaciente.resources
