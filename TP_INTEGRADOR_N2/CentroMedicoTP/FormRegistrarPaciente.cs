@@ -102,7 +102,7 @@ namespace CentroMedicoTP
         {
             this.restablecerMenu();
             this.Close();
-            
+
         }
 
         private void LimpiarRegistro()
@@ -110,7 +110,7 @@ namespace CentroMedicoTP
             foreach (Control item in grpRegistrar.Controls)
             {
                 //reseteo todos los controle
-                if(item is TextBox txt)
+                if (item is TextBox txt)
                 {
                     txt.Clear();
                 }
@@ -118,7 +118,7 @@ namespace CentroMedicoTP
                 {
                     cmb.SelectedIndex = 0;
                 }
-                else if(item is DateTimePicker dtp)
+                else if (item is DateTimePicker dtp)
                 {
                     dtp.Value = DateTime.Now;
                 }

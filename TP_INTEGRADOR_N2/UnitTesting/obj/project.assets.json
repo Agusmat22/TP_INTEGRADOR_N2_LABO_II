@@ -6336,7 +6336,7 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Lisandro\\.nuget\\packages\\": {}
+    "C:\\Users\\purri\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
@@ -6344,11 +6344,11 @@
       "projectUniqueName": "C:\\TP_INTEGRADOR_N2_LABO_II\\TP_INTEGRADOR_N2\\UnitTesting\\UnitTesting.csproj",
       "projectName": "UnitTesting",
       "projectPath": "C:\\TP_INTEGRADOR_N2_LABO_II\\TP_INTEGRADOR_N2\\UnitTesting\\UnitTesting.csproj",
-      "packagesPath": "C:\\Users\\Lisandro\\.nuget\\packages\\",
+      "packagesPath": "C:\\Users\\purri\\.nuget\\packages\\",
       "outputPath": "C:\\TP_INTEGRADOR_N2_LABO_II\\TP_INTEGRADOR_N2\\UnitTesting\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Lisandro\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\purri\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

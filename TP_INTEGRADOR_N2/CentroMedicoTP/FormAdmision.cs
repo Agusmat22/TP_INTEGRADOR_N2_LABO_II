@@ -79,6 +79,7 @@ namespace CentroMedicoTP
 
         private void btnBuscar_Click(object sender, EventArgs e)
         {
+
             string tipoBusqueda = string.Empty;
             int numero = 0;
 
@@ -118,8 +119,12 @@ namespace CentroMedicoTP
 
             }
 
-            if (tipoBusqueda != string.Empty && numero != -1)
+            if (numero != -1)
             {
+                //lo hago aca para ahorrarme un else
+                string mensajeDeBusqueda = "El paciente no se encontro";
+                Color colorFondoText = Color.Red;
+
 
                 if (tipoBusqueda == "dni")
                 {
@@ -132,10 +137,19 @@ namespace CentroMedicoTP
 
                 }
 
-                this.txtAfiliadoEncontrado.Text = pacienteEncotrado.ToString();
-                this.txtAfiliadoEncontrado.BackColor = Color.Green;
+                //si se encontro un paciente cambio los valores
+                if (pacienteEncotrado is not null)
+                {
+                    mensajeDeBusqueda = pacienteEncotrado.ToString();
+                    colorFondoText = Color.Green;
+                    this.btnIngresar.Enabled = true;
+                }
 
-                this.btnIngresar.Enabled = true;
+
+                this.txtAfiliadoEncontrado.Text = mensajeDeBusqueda;
+                this.txtAfiliadoEncontrado.BackColor = colorFondoText;
+
+
 
             }
 

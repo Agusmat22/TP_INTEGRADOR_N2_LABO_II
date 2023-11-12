@@ -33,6 +33,7 @@ namespace CentroMedicoTP
             panelForm.Controls.Add(formulario);
             formulario.FormBorderStyle = FormBorderStyle.None;
             formulario.Dock = DockStyle.Fill;
+            //aca muestro el formulario
             formulario.Show();
         }
 

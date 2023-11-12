@@ -198,7 +198,7 @@
             // 
             lblTitulo.AutoSize = true;
             lblTitulo.Font = new Font("Arial", 15F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
-            lblTitulo.Location = new Point(292, 22);
+            lblTitulo.Location = new Point(257, 19);
             lblTitulo.Name = "lblTitulo";
             lblTitulo.Size = new Size(127, 24);
             lblTitulo.TabIndex = 12;
