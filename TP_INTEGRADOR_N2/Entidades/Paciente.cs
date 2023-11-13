@@ -8,7 +8,7 @@ using Entidades.Interfaces;
 
 namespace Entidades
 {
-    public class Paciente : Persona, IIdentificadorSql
+    public class Paciente : Persona, IIdentificadorSql, IGuardia
     {
         private long numeroAfiliado;
         private bool atendido;
@@ -42,6 +42,7 @@ namespace Entidades
 
         }
 
+        /*
         /// <summary>
         /// Constructor sobrecargado con ID
         /// </summary>
@@ -74,7 +75,7 @@ namespace Entidades
         {
             this.historiaClinica = historiaClinica;
         }
-
+        */
 
 
         //Aca aplicare la logica para cuando el paciente sea atendido

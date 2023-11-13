@@ -31,6 +31,7 @@
             components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormInformacion));
             btnImportar = new Button();
+            imageList1 = new ImageList(components);
             label1 = new Label();
             lstbMedicos = new ListBox();
             btnEliminar = new Button();
@@ -38,7 +39,6 @@
             label3 = new Label();
             lstbPacientes = new ListBox();
             label6 = new Label();
-            imageList1 = new ImageList(components);
             SuspendLayout();
             // 
             // btnImportar
@@ -52,6 +52,14 @@
             btnImportar.Size = new Size(50, 49);
             btnImportar.TabIndex = 42;
             btnImportar.UseVisualStyleBackColor = false;
+            btnImportar.Click += btnImportar_Click;
+            // 
+            // imageList1
+            // 
+            imageList1.ColorDepth = ColorDepth.Depth8Bit;
+            imageList1.ImageStream = (ImageListStreamer)resources.GetObject("imageList1.ImageStream");
+            imageList1.TransparentColor = Color.Transparent;
+            imageList1.Images.SetKeyName(0, "import.png");
             // 
             // label1
             // 
@@ -124,13 +132,6 @@
             label6.TabIndex = 35;
             label6.Text = "Registros";
             // 
-            // imageList1
-            // 
-            imageList1.ColorDepth = ColorDepth.Depth8Bit;
-            imageList1.ImageStream = (ImageListStreamer)resources.GetObject("imageList1.ImageStream");
-            imageList1.TransparentColor = Color.Transparent;
-            imageList1.Images.SetKeyName(0, "import.png");
-            // 
             // FormInformacion
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -147,6 +148,7 @@
             Controls.Add(label6);
             Name = "FormInformacion";
             Text = "Informacion";
+            Load += FormInformacion_Load;
             ResumeLayout(false);
             PerformLayout();
         }

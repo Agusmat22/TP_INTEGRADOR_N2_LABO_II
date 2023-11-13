@@ -19,12 +19,26 @@ namespace CentroMedicoTP
         private CentroMedico centroMedico;
         private RestablecerMenuPrincipal restablecer;
         private Paciente pacienteEncotrado;
+        private ActualizarListboxGenerico actualizarListBox;
 
-        public FormAdmision(CentroMedico centroMedico, RestablecerMenuPrincipal restablecer)
+        public FormAdmision(CentroMedico centroMedico, RestablecerMenuPrincipal restablecer, ActualizarListboxGenerico actualizarListBox)
         {
             InitializeComponent();
             this.centroMedico = centroMedico;
             this.restablecer = restablecer;
+            this.actualizarListBox = actualizarListBox;
+        }
+
+        private void FormAdmision_Load(object sender, EventArgs e)
+        {
+            foreach (EEspecialidad item in Enum.GetValues(typeof(EEspecialidad)))
+            {
+                this.cmbTipoGuardia.Items.Add(item);
+            }
+
+
+            //ejecuto en un subproceso la actualizacion de la lista
+            Task tarea = Task.Run(() =>this.actualizarListBox(this.lstbPacientesEnEspera, paciente => paciente.Atendido == false));
         }
 
         private void btnDesbloquear_Click(object sender, EventArgs e)
@@ -64,17 +78,7 @@ namespace CentroMedicoTP
             this.Close();
         }
 
-        private void FormAdmision_Load(object sender, EventArgs e)
-        {
-            foreach (EEspecialidad item in Enum.GetValues(typeof(EEspecialidad)))
-            {
-                this.cmbTipoGuardia.Items.Add(item);
-            }
-
-
-
-            this.ActualizarElementos();
-        }
+        
 
 
         private void btnBuscar_Click(object sender, EventArgs e)

@@ -80,6 +80,7 @@
             btnInformacion.TabIndex = 5;
             btnInformacion.Text = "Informacion";
             btnInformacion.UseVisualStyleBackColor = true;
+            btnInformacion.Click += btnInformacion_Click;
             // 
             // btnAdmision
             // 
