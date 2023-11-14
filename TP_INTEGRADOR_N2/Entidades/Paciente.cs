@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using Entidades.Interfaces;
 
@@ -41,41 +42,6 @@ namespace Entidades
             this.Id = id;
 
         }
-
-        /*
-        /// <summary>
-        /// Constructor sobrecargado con ID
-        /// </summary>
-        /// <param name="nombre"></param>
-        /// <param name="apellido"></param>
-        /// <param name="dni"></param>
-        /// <param name="fechaNacimiento"></param>
-        /// <param name="obraSocial"></param>
-        /// <param name="numeroAfiliado"></param>
-        /// <param name="id"></param>
-        /// <param name="historiaClinica"></param>
-        public Paciente(string nombre, string apellido, int dni, DateTime fechaNacimiento, EObrasSocial obraSocial, long numeroAfiliado, int id, string historiaClinica)
-            : this(nombre, apellido, dni, fechaNacimiento, obraSocial, numeroAfiliado,id)
-        {
-            this.historiaClinica = historiaClinica;
-        }
-
-        /// <summary>
-        /// Constructor sobrecargado con sin ID
-        /// </summary>
-        /// <param name="nombre"></param>
-        /// <param name="apellido"></param>
-        /// <param name="dni"></param>
-        /// <param name="fechaNacimiento"></param>
-        /// <param name="obraSocial"></param>
-        /// <param name="numeroAfiliado"></param>
-        /// <param name="historiaClinica"></param>
-        public Paciente(string nombre, string apellido, int dni, DateTime fechaNacimiento, EObrasSocial obraSocial, long numeroAfiliado, string historiaClinica)
-            : this(nombre, apellido, dni, fechaNacimiento, obraSocial, numeroAfiliado)
-        {
-            this.historiaClinica = historiaClinica;
-        }
-        */
 
 
         //Aca aplicare la logica para cuando el paciente sea atendido
@@ -118,7 +84,12 @@ namespace Entidades
         public int Id { get; set; }
        
         public DateTime FechaAlta { get ; set ; }
- 
+
+        //DARLE LOGICA REVISARLA
+        [JsonIgnore]
+        public string TipoGuardia { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
+        public bool EnEspera { get; set; }
 
 
         /// <summary>

@@ -1,0 +1,38 @@
+[
+  {
+    "Atendido": false,
+    "NumeroAfiliado": 1231456421,
+    "HistoriaClinica": null,
+    "ObraSocial": 0,
+    "Id": 1,
+    "FechaAlta": "0001-01-01T00:00:00",
+    "Nombre": "AGUSTIN",
+    "Apellido": "GARCIA",
+    "Dni": 43173652,
+    "FechaNacimiento": "2023-11-08T00:00:00"
+  },
+  {
+    "Atendido": false,
+    "NumeroAfiliado": 41546546,
+    "HistoriaClinica": null,
+    "ObraSocial": 0,
+    "Id": 2,
+    "FechaAlta": "0001-01-01T00:00:00",
+    "Nombre": "Olmedo",
+    "Apellido": "Garcia",
+    "Dni": 4654646,
+    "FechaNacimiento": "2023-11-08T00:00:00"
+  },
+  {
+    "Atendido": false,
+    "NumeroAfiliado": 1231354,
+    "HistoriaClinica": null,
+    "ObraSocial": 2,
+    "Id": 3,
+    "FechaAlta": "0001-01-01T00:00:00",
+    "Nombre": "vanesa",
+    "Apellido": "pinto",
+    "Dni": 5141541,
+    "FechaNacimiento": "1976-02-18T00:00:00"
+  }
+]

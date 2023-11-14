@@ -58,13 +58,15 @@ namespace CentroMedicoTP
         //TESTEAR QUE FUNCIONE PORQUE NO LA PROBE TODAVIA
         private void btnImportar_Click(object sender, EventArgs e)
         {
-            if (this.rutaAlmacenamiento != string.Empty)
+            
+            if (this.rutaAlmacenamiento is not null)
             {
+                //this.rutaAlmacenamiento = string.Empty; //actualizo la ruta
 
                 try
                 {
                     //combino la ruta con el nombre del archivo ingresado por el textBox
-                    this.rutaAlmacenamiento = Path.Combine(this.rutaAlmacenamiento, this.txtNombreArchivo.Text);
+                    this.rutaAlmacenamiento = Path.Combine(this.rutaAlmacenamiento, this.txtNombreArchivo.Text +".json");
 
                     //OPCIONES DE IDENTADO
                     JsonSerializerOptions options = new JsonSerializerOptions();
@@ -105,6 +107,10 @@ namespace CentroMedicoTP
                 }
 
 
+            }
+            else
+            {
+                this.txtRuta.PlaceholderText = "ERROR, seleccione un directorio";
             }
         }
 

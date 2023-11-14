@@ -135,6 +135,7 @@
             MaximizeBox = false;
             MinimizeBox = false;
             Name = "FormSelectorImportacion";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Importacion";
             Load += FormSelectorImportacion_Load;
             ResumeLayout(false);

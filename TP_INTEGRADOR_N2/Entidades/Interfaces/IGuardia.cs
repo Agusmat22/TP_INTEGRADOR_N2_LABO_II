@@ -12,5 +12,6 @@ namespace Entidades.Interfaces
         //Con esta etiqueta ignoro para que al momento de realizar la exportacion no lo lo lea
         [JsonIgnore]
         public string TipoGuardia { get; set; }
+        public bool EnEspera { get; set; }
     }
 }

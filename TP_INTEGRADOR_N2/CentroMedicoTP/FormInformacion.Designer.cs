@@ -44,6 +44,7 @@
             // btnImportar
             // 
             btnImportar.BackColor = Color.White;
+            btnImportar.Cursor = Cursors.Hand;
             btnImportar.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
             btnImportar.ImageIndex = 0;
             btnImportar.ImageList = imageList1;
@@ -83,6 +84,7 @@
             // btnEliminar
             // 
             btnEliminar.BackColor = Color.IndianRed;
+            btnEliminar.Cursor = Cursors.Hand;
             btnEliminar.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
             btnEliminar.Location = new Point(338, 192);
             btnEliminar.Name = "btnEliminar";
@@ -94,6 +96,7 @@
             // btnModificar
             // 
             btnModificar.BackColor = Color.DarkSeaGreen;
+            btnModificar.Cursor = Cursors.Hand;
             btnModificar.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
             btnModificar.Location = new Point(338, 144);
             btnModificar.Name = "btnModificar";

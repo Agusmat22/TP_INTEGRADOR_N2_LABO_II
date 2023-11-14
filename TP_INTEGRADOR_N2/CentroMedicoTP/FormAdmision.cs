@@ -36,9 +36,10 @@ namespace CentroMedicoTP
                 this.cmbTipoGuardia.Items.Add(item);
             }
 
+            this.restablecerControles();
 
             //ejecuto en un subproceso la actualizacion de la lista
-            Task tarea = Task.Run(() =>this.actualizarListBox(this.lstbPacientesEnEspera, paciente => paciente.Atendido == false));
+            Task tarea = Task.Run(() => this.actualizarListBox(this.lstbPacientesEnEspera, paciente => paciente.Atendido == false));
         }
 
         private void btnDesbloquear_Click(object sender, EventArgs e)
@@ -78,7 +79,7 @@ namespace CentroMedicoTP
             this.Close();
         }
 
-        
+
 
 
         private void btnBuscar_Click(object sender, EventArgs e)

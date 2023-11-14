@@ -121,10 +121,10 @@
             // label6
             // 
             label6.AutoSize = true;
-            label6.Font = new Font("Arial", 10F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            label6.Font = new Font("Arial", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
             label6.Location = new Point(527, 51);
             label6.Name = "label6";
-            label6.Size = new Size(125, 16);
+            label6.Size = new Size(119, 16);
             label6.TabIndex = 30;
             label6.Text = "Ingresar Paciente";
             // 
