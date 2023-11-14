@@ -12,7 +12,6 @@ namespace Entidades
     public class Paciente : Persona, IIdentificadorSql, IGuardia
     {
         private long numeroAfiliado;
-        private bool atendido;
         private EObrasSocial obraSocial;
         private string historiaClinica;
 
@@ -28,8 +27,6 @@ namespace Entidades
         {
             this.numeroAfiliado = numeroAfiliado;
 
-            //El paciente cuando se cargue por defecto no estara atendido
-            this.atendido = false;
             this.obraSocial = obraSocial;
 
         }
@@ -45,19 +42,8 @@ namespace Entidades
 
 
         //Aca aplicare la logica para cuando el paciente sea atendido
-        public bool Atendido
-        {
-            get 
-            { 
-                return this.atendido; 
-            }
-
-            set 
-            {              
-                this.atendido = value;
-            }
-        }
-
+        public bool EnEspera { get; set; }
+        
         public long NumeroAfiliado
         {
             get {return this.numeroAfiliado; } 
@@ -89,25 +75,6 @@ namespace Entidades
         [JsonIgnore]
         public string TipoGuardia { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
-        public bool EnEspera { get; set; }
-
-
-        /// <summary>
-        /// El paciente realizara una consulta
-        /// </summary>
-        /// <returns>True si pudo consultar, False en caso que ya haya sido atendido</returns>
-        public bool Atenderse()
-        {
-            if(this.Atendido is false)
-            {
-                this.Atendido = true;
-
-                return true;
-            }
-
-            return false;
-
-        }
 
         //POLIMORFISMO
 

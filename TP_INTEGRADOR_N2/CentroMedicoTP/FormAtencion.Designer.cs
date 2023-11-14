@@ -43,6 +43,7 @@
             // 
             // cmbMedicos
             // 
+            cmbMedicos.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbMedicos.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
             cmbMedicos.FormattingEnabled = true;
             cmbMedicos.Location = new Point(291, 99);
@@ -63,10 +64,11 @@
             // lblAtencion
             // 
             lblAtencion.AutoSize = true;
+            lblAtencion.BorderStyle = BorderStyle.Fixed3D;
             lblAtencion.Font = new Font("Segoe UI Semibold", 20.25F, FontStyle.Bold, GraphicsUnit.Point);
-            lblAtencion.Location = new Point(312, 9);
+            lblAtencion.Location = new Point(307, 9);
             lblAtencion.Name = "lblAtencion";
-            lblAtencion.Size = new Size(127, 37);
+            lblAtencion.Size = new Size(129, 39);
             lblAtencion.TabIndex = 2;
             lblAtencion.Text = "Atencion";
             // 
@@ -92,19 +94,20 @@
             // btnAtender
             // 
             btnAtender.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            btnAtender.Location = new Point(335, 184);
+            btnAtender.Location = new Point(12, 406);
             btnAtender.Name = "btnAtender";
-            btnAtender.Size = new Size(81, 32);
+            btnAtender.Size = new Size(125, 32);
             btnAtender.TabIndex = 5;
             btnAtender.Text = "Atender";
             btnAtender.UseVisualStyleBackColor = true;
+            btnAtender.Click += btnAtender_Click;
             // 
             // btnHistoriaClinica
             // 
             btnHistoriaClinica.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            btnHistoriaClinica.Location = new Point(335, 237);
+            btnHistoriaClinica.Location = new Point(180, 406);
             btnHistoriaClinica.Name = "btnHistoriaClinica";
-            btnHistoriaClinica.Size = new Size(81, 32);
+            btnHistoriaClinica.Size = new Size(118, 32);
             btnHistoriaClinica.TabIndex = 6;
             btnHistoriaClinica.Text = "Hc";
             btnHistoriaClinica.UseVisualStyleBackColor = true;
@@ -130,7 +133,7 @@
             // btnVolver
             // 
             btnVolver.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            btnVolver.Location = new Point(335, 295);
+            btnVolver.Location = new Point(336, 184);
             btnVolver.Name = "btnVolver";
             btnVolver.Size = new Size(81, 32);
             btnVolver.TabIndex = 9;

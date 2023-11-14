@@ -28,48 +28,50 @@
         /// </summary>
         private void InitializeComponent()
         {
-            tableLayoutPanel1 = new TableLayoutPanel();
-            button1 = new Button();
+            tlpBotones = new TableLayoutPanel();
+            btnSalir = new Button();
             btnInformacion = new Button();
             btnAdmision = new Button();
             btnRegistrar = new Button();
-            btnAtender = new Button();
+            btnAtencion = new Button();
             panelForm = new Panel();
             label1 = new Label();
-            tableLayoutPanel1.SuspendLayout();
+            tlpBotones.SuspendLayout();
             panelForm.SuspendLayout();
             SuspendLayout();
             // 
-            // tableLayoutPanel1
+            // tlpBotones
             // 
-            tableLayoutPanel1.BackColor = SystemColors.ActiveCaption;
-            tableLayoutPanel1.ColumnCount = 1;
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
-            tableLayoutPanel1.Controls.Add(button1, 0, 4);
-            tableLayoutPanel1.Controls.Add(btnInformacion, 0, 3);
-            tableLayoutPanel1.Controls.Add(btnAdmision, 0, 0);
-            tableLayoutPanel1.Controls.Add(btnRegistrar, 0, 2);
-            tableLayoutPanel1.Controls.Add(btnAtender, 0, 1);
-            tableLayoutPanel1.Location = new Point(3, 3);
-            tableLayoutPanel1.Name = "tableLayoutPanel1";
-            tableLayoutPanel1.RowCount = 5;
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 64F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 253F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 66F));
-            tableLayoutPanel1.Size = new Size(209, 512);
-            tableLayoutPanel1.TabIndex = 1;
+            tlpBotones.BackColor = SystemColors.ActiveCaption;
+            tlpBotones.ColumnCount = 1;
+            tlpBotones.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            tlpBotones.Controls.Add(btnSalir, 0, 4);
+            tlpBotones.Controls.Add(btnInformacion, 0, 3);
+            tlpBotones.Controls.Add(btnAdmision, 0, 0);
+            tlpBotones.Controls.Add(btnRegistrar, 0, 2);
+            tlpBotones.Controls.Add(btnAtencion, 0, 1);
+            tlpBotones.Cursor = Cursors.Hand;
+            tlpBotones.Location = new Point(3, 3);
+            tlpBotones.Name = "tlpBotones";
+            tlpBotones.RowCount = 5;
+            tlpBotones.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+            tlpBotones.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+            tlpBotones.RowStyles.Add(new RowStyle(SizeType.Absolute, 64F));
+            tlpBotones.RowStyles.Add(new RowStyle(SizeType.Absolute, 253F));
+            tlpBotones.RowStyles.Add(new RowStyle(SizeType.Absolute, 66F));
+            tlpBotones.Size = new Size(209, 512);
+            tlpBotones.TabIndex = 1;
             // 
-            // button1
+            // btnSalir
             // 
-            button1.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            button1.Location = new Point(3, 448);
-            button1.Name = "button1";
-            button1.Size = new Size(203, 61);
-            button1.TabIndex = 6;
-            button1.Text = "SALIR";
-            button1.UseVisualStyleBackColor = true;
+            btnSalir.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            btnSalir.Location = new Point(3, 448);
+            btnSalir.Name = "btnSalir";
+            btnSalir.Size = new Size(203, 61);
+            btnSalir.TabIndex = 6;
+            btnSalir.Text = "SALIR";
+            btnSalir.UseVisualStyleBackColor = true;
+            btnSalir.Click += btnSalir_Click;
             // 
             // btnInformacion
             // 
@@ -104,15 +106,16 @@
             btnRegistrar.UseVisualStyleBackColor = true;
             btnRegistrar.Click += btnRegistrar_Click;
             // 
-            // btnAtender
+            // btnAtencion
             // 
-            btnAtender.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            btnAtender.Location = new Point(3, 67);
-            btnAtender.Name = "btnAtender";
-            btnAtender.Size = new Size(203, 58);
-            btnAtender.TabIndex = 3;
-            btnAtender.Text = "Atender";
-            btnAtender.UseVisualStyleBackColor = true;
+            btnAtencion.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            btnAtencion.Location = new Point(3, 67);
+            btnAtencion.Name = "btnAtencion";
+            btnAtencion.Size = new Size(203, 58);
+            btnAtencion.TabIndex = 3;
+            btnAtencion.Text = "Atencion";
+            btnAtencion.UseVisualStyleBackColor = true;
+            btnAtencion.Click += btnAtencion_Click;
             // 
             // panelForm
             // 
@@ -139,7 +142,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(987, 518);
             Controls.Add(panelForm);
-            Controls.Add(tableLayoutPanel1);
+            Controls.Add(tlpBotones);
             Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
             FormBorderStyle = FormBorderStyle.FixedSingle;
             MaximizeBox = false;
@@ -147,8 +150,9 @@
             Name = "FormMenuPrincipal";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Centro Medico";
+            FormClosing += FormMenuPrincipal_FormClosing;
             Load += FormMenuPrincipal_Load;
-            tableLayoutPanel1.ResumeLayout(false);
+            tlpBotones.ResumeLayout(false);
             panelForm.ResumeLayout(false);
             panelForm.PerformLayout();
             ResumeLayout(false);
@@ -156,13 +160,13 @@
 
         #endregion
 
-        private TableLayoutPanel tableLayoutPanel1;
+        private TableLayoutPanel tlpBotones;
         private Button btnInformacion;
         private Button btnAdmision;
-        private Button btnAtender;
+        private Button btnAtencion;
         private Button btnRegistrar;
         private Panel panelForm;
         private Label label1;
-        private Button button1;
+        private Button btnSalir;
     }
 }

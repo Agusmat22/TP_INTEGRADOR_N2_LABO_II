@@ -6,7 +6,7 @@ apellido VARCHAR(50) NOT NULL,
 dni INT NOT NULL,
 fecha_nacimiento DATE NOT NULL,
 numero BIGINT NOT NULL, --NUMERO DE AFILIADO
-atendido BIT NOT NULL,
+enEspera BIT NOT NULL,
 obra_social VARCHAR(80) NOT NULL,
 historia_clinica VARCHAR(MAX),
 fecha_alta DATE NOT NULL,
@@ -37,12 +37,16 @@ DROP TABLE Medicos
 
 --AGREGO UN PACIENTE
 
-INSERT INTO Pacientes (nombre,apellido,dni,fecha_nacimiento,numero,atendido,obra_social,fecha_alta) 
+INSERT INTO Pacientes (nombre,apellido,dni,fecha_nacimiento,numero,enEspera,obra_social,fecha_alta) 
 VALUES ('agustin','garcia',43173652,'2001-02-24',1231354,1,'UP','2023-11-10')
 
-INSERT INTO Pacientes (nombre,apellido,dni,fecha_nacimiento,numero,atendido,obra_social,fecha_alta) 
+INSERT INTO Pacientes (nombre,apellido,dni,fecha_nacimiento,numero,enEspera,obra_social,fecha_alta) 
 VALUES ('vanesa','pinto',5141541,'1976-02-18',321313,1,'UP','2023-02-01')
 
-INSERT INTO Pacientes (nombre,apellido,dni,fecha_nacimiento,numero,atendido,obra_social,fecha_alta) 
+INSERT INTO Pacientes (nombre,apellido,dni,fecha_nacimiento,numero,enEspera,obra_social,fecha_alta) 
 VALUES ('sofia','isunza',43615289,'2001-10-15',1231354,1,'UP','2022-01-10')
 
+--AGREGO UN MEDICO
+
+INSERT INTO Medicos (nombre,apellido,dni,fecha_nacimiento,matricula,especialidad,fecha_alta) 
+VALUES ('Julian','Alvarez',1148569,'2001-09-15',45879,'Clinico','2022-01-10')

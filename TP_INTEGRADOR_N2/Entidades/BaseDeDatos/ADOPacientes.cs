@@ -50,7 +50,7 @@ namespace Entidades.BaseDeDatos
                         paciente.Dni = reader.GetInt32(3);
                         paciente.FechaNacimiento = reader.GetDateTime(4);
                         paciente.NumeroAfiliado = reader.GetInt64(5);
-                        paciente.Atendido = reader.GetBoolean(6);
+                        paciente.EnEspera = reader.GetBoolean(6);
                         
                         if (Enum.TryParse(reader.GetString(7), out EObrasSocial obraSocial))
                         {
@@ -86,23 +86,24 @@ namespace Entidades.BaseDeDatos
 
 
         /// <summary>
-        /// Obtiene una lista del total de pacientes atendidos o sin atender, bajo una condicion por parametros
+        /// Obtiene una lista del total de pacientes atendidos o sin atender, bajo una condicion por parametros. 
+        /// Los int representan un valor booleano.
         /// </summary>
         /// <param name="paciente"></param>
-        /// <param name="booleano">1=true o 0=false</param>
+        /// <param name="valor">1=true o 0=false</param>
         /// <exception cref="FalloObtenerPacienteException"></exception>
         public static List<Paciente> ObtenerPacientesTotales(int valor)
         {
             try
             {
-                string sentencia = "SELECT * FROM Pacientes WHERE atendido = @atendido";
+                string sentencia = "SELECT * FROM Pacientes WHERE enEspera = @enEspera";
                 List<Paciente> listaPacientes = new List<Paciente>();
 
                 using (SqlConnection connection = new SqlConnection(ADOPacientes.stringConnection))
                 {
 
                     SqlCommand command = new SqlCommand(sentencia, connection);
-                    command.Parameters.AddWithValue("atendido", valor);
+                    command.Parameters.AddWithValue("enEspera", valor);
                     connection.Open();
 
                     SqlDataReader reader = command.ExecuteReader();
@@ -117,7 +118,7 @@ namespace Entidades.BaseDeDatos
                         paciente.Dni = reader.GetInt32(3);
                         paciente.FechaNacimiento = reader.GetDateTime(4);
                         paciente.NumeroAfiliado = reader.GetInt64(5);
-                        paciente.Atendido = reader.GetBoolean(6);
+                        paciente.EnEspera = reader.GetBoolean(6);
 
                         if (Enum.TryParse(reader.GetString(7), out EObrasSocial obraSocial))
                         {
@@ -153,7 +154,7 @@ namespace Entidades.BaseDeDatos
         }
         
         /// <summary>
-        /// Devuelve el paciente encontrado por su clave
+        /// Devuelve el paciente encontrado por su clave valor
         /// </summary>
         /// <param name="clave"></param>
         /// <param name="valor"></param>
@@ -166,15 +167,7 @@ namespace Entidades.BaseDeDatos
                 string sentencia = "SELECT * FROM Pacientes WHERE ";
                 string columna;
 
-                /* IBA A VALIDAR PERO MEJOR VA SER TIRAR UNA EXCEPCION
-                if (clave == "numero_afiliado")
-                {
-                    columna = 
-                }
-                else if (clave == "dni")
-                {
-
-                }*/
+             
                 clave.ToLower();
 
                 sentencia += $"{clave} = @{clave}";
@@ -204,7 +197,7 @@ namespace Entidades.BaseDeDatos
                             paciente.Dni = reader.GetInt32(3);
                             paciente.FechaNacimiento = reader.GetDateTime(4);
                             paciente.NumeroAfiliado = reader.GetInt64(5);
-                            paciente.Atendido = reader.GetBoolean(6);
+                            paciente.EnEspera = reader.GetBoolean(6);
 
                             if (Enum.TryParse(reader.GetString(7), out EObrasSocial obraSocial))
                             {
@@ -254,8 +247,8 @@ namespace Entidades.BaseDeDatos
         {
             try
             {
-                string sentencia = "INSERT INTO Pacientes (nombre,apellido,dni,fecha_nacimiento,numero,atendido,obra_social,historia_clinica,fecha_alta)" +
-                    "VALUES (@nombre,@apellido,@dni,@fecha_nacimiento,@numero,@atendido,@obra_social,@historia_clinica,@fecha_alta)";
+                string sentencia = "INSERT INTO Pacientes (nombre,apellido,dni,fecha_nacimiento,numero,enEspera,obra_social,historia_clinica,fecha_alta)" +
+                    "VALUES (@nombre,@apellido,@dni,@fecha_nacimiento,@numero,@enEspera,@obra_social,@historia_clinica,@fecha_alta)";
 
                 using (SqlConnection connection = new SqlConnection(ADOPacientes.stringConnection))
                 {
@@ -266,7 +259,7 @@ namespace Entidades.BaseDeDatos
                     command.Parameters.AddWithValue("dni", paciente.Dni);
                     command.Parameters.AddWithValue("fecha_nacimiento", paciente.FechaNacimiento);
                     command.Parameters.AddWithValue("numero", paciente.NumeroAfiliado);
-                    command.Parameters.AddWithValue("atendido", paciente.Atendido);
+                    command.Parameters.AddWithValue("enEspera", paciente.EnEspera);
                     command.Parameters.AddWithValue("obra_social", paciente.ObraSocial.ToString());
 
                     //PREGUNTAR AL PROFE
@@ -341,10 +334,10 @@ namespace Entidades.BaseDeDatos
                             command.Parameters.AddWithValue("numero", pacienteModificado.NumeroAfiliado);
                         }
 
-                        if (pacienteModificado.Atendido != pacienteOriginal.Atendido)
+                        if (pacienteModificado.EnEspera != pacienteOriginal.EnEspera)
                         {
-                            sentencia += "atendido = @atendido, ";
-                            command.Parameters.AddWithValue("atendido", pacienteModificado.Atendido);
+                            sentencia += "enEspera = @enEspera, ";
+                            command.Parameters.AddWithValue("enEspera", pacienteModificado.EnEspera);
                         }
 
                         if (pacienteModificado.ObraSocial != pacienteOriginal.ObraSocial)

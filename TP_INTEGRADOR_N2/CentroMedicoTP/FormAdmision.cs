@@ -39,7 +39,7 @@ namespace CentroMedicoTP
             this.restablecerControles();
 
             //ejecuto en un subproceso la actualizacion de la lista
-            Task tarea = Task.Run(() => this.actualizarListBox(this.lstbPacientesEnEspera, paciente => paciente.Atendido == false));
+            Task tarea = Task.Run(() => this.actualizarListBox(this.lstbPacientesEnEspera, paciente => paciente.EnEspera == true));
         }
 
         private void btnDesbloquear_Click(object sender, EventArgs e)
@@ -68,7 +68,7 @@ namespace CentroMedicoTP
             //this.grpCargarPaciente.Enabled = false;
             this.lstbPacientesEnEspera.DataSource = null;
             //le paso una funcion lambda para que me traiga solo los pacientes que no estan atendidos
-            this.lstbPacientesEnEspera.DataSource = (centroMedico.Pacientes).Where(paciente => paciente.Atendido == false).ToList();
+            this.lstbPacientesEnEspera.DataSource = (centroMedico.Pacientes).Where(paciente => paciente.EnEspera == false).ToList();
 
             this.restablecerControles();
         }
@@ -171,7 +171,7 @@ namespace CentroMedicoTP
             try
             {
                 //cambio la propiedad, para que figure que no esta atendido
-                this.pacienteEncotrado.Atendido = false;
+                this.pacienteEncotrado.EnEspera = true;
                 //modifico en la DB para que el medico pueda visualizar los pacientes en guardia
                 ADOPacientes.Modificar(this.pacienteEncotrado);
                 centroMedico.Agregar(this.pacienteEncotrado);

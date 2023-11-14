@@ -52,11 +52,7 @@ namespace Entidades
             this.especialidad = especialidad;
         }
 
-        public Medico(string nombre, string apellido, int dni, long numeroMatricula, DateTime fechaNacimiento, EEspecialidad especialidad, int id)
-            : this(nombre, apellido, dni,numeroMatricula, fechaNacimiento, especialidad)
-        {
-            this.Id = id;
-        }
+
 
         //PROPIEDADES
 
@@ -86,7 +82,14 @@ namespace Entidades
         /// <returns>Retornara true si el paciente no estaba atendido, caso contrario false</returns>
         public bool AtenderPaciente(Paciente paciente)
         {
-            return paciente.Atenderse();
+            if (paciente.EnEspera)
+            {
+                paciente.EnEspera = false; //lo quito de la espera ya que esta atendido
+
+                return true;
+            }
+
+            return false;
         }
 
         /// <summary>

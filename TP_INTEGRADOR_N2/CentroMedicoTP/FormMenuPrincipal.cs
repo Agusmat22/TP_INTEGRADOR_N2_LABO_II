@@ -7,14 +7,14 @@ namespace CentroMedicoTP
 {
     public delegate void RestablecerMenuPrincipal();
 
-    public delegate void ActualizarListboxGenerico(ListBox listBox,Func<Paciente,bool> condicion);
+    public delegate void ActualizarListboxGenerico(ListBox listBox, Func<Paciente, bool> condicion);
 
     public partial class FormMenuPrincipal : Form
     {
         private CentroMedico centroMedico;
         private RestablecerMenuPrincipal restablecerMenu;
         private ActualizarListboxGenerico actualizarListBox;
-        
+
 
 
         public FormMenuPrincipal()
@@ -35,8 +35,6 @@ namespace CentroMedicoTP
             //agrego el metodo al delegado que actualizara todos los listBox de todos los formularios
             this.actualizarListBox = this.RefrescarListBox;
 
-            //HILO, SUBPROCESO VOY A PROBAR
-            //Task tarea = Task.Run(() => this.actualizarListBox);
 
         }
 
@@ -62,7 +60,7 @@ namespace CentroMedicoTP
             //aca muestro el formulario
             formulario.Show();
         }
- 
+
         /// <summary>
         /// Limpia todos los controles del panel, para luego podes ser utilizado por otro formulario
         /// </summary>
@@ -82,7 +80,7 @@ namespace CentroMedicoTP
 
         private void btnAdmision_Click(object sender, EventArgs e)
         {
-            this.MostrarFormulario(new FormAdmision(centroMedico, restablecerMenu,this.actualizarListBox));
+            this.MostrarFormulario(new FormAdmision(centroMedico, restablecerMenu, this.actualizarListBox));
         }
 
         private void btnRegistrar_Click(object sender, EventArgs e)
@@ -94,22 +92,21 @@ namespace CentroMedicoTP
 
         private void btnInformacion_Click(object sender, EventArgs e)
         {
-            FormInformacion formInformacion = new FormInformacion(this.centroMedico,this.actualizarListBox);
+            FormInformacion formInformacion = new FormInformacion(this.centroMedico, this.actualizarListBox);
             this.MostrarFormulario(formInformacion);
         }
 
-        /*
-        private void ActualizarListBoxPacientes(ListBox listBox)
-        {
-            listBox.DataSource = null;
-            listBox.DataSource = this.centroMedico.Pacientes;
-        }*/
-
-        private void ActualizarListBoxPacientes(ListBox listBox,Func<Paciente,bool> condicion)
+        /// <summary>
+        /// Actualiza el listBox pasado por parametros agregandole una lista de pacientes bajo una condicion.
+        /// Este metodo ingresara al hilo principal del form para poder ejecutarse en un subproceso
+        /// </summary>
+        /// <param name="listBox"></param>
+        /// <param name="condicion"></param>
+        private void ActualizarListBoxPacientes(ListBox listBox, Func<Paciente, bool> condicion)
         {
             if (this.InvokeRequired)
             {
-                this.BeginInvoke(ActualizarListBoxPacientes,listBox,condicion);
+                this.BeginInvoke(ActualizarListBoxPacientes, listBox, condicion);
             }
             else
             {
@@ -117,7 +114,7 @@ namespace CentroMedicoTP
                 //filtra dentro de la lista los pacientes con el delegado Func pasado por parametro
                 listBox.DataSource = this.centroMedico.Pacientes.Where(condicion).ToList();
             }
-            
+
         }
 
         /// <summary>
@@ -126,7 +123,7 @@ namespace CentroMedicoTP
         /// </summary>
         /// <param name="listBox"></param>
         /// <param name="condicion"></param>
-        private void RefrescarListBox(ListBox listBox,Func<Paciente,bool> condicion)
+        private void RefrescarListBox(ListBox listBox, Func<Paciente, bool> condicion)
         {
 
             while (true)
@@ -134,6 +131,38 @@ namespace CentroMedicoTP
                 this.ActualizarListBoxPacientes(listBox, condicion);
                 //Cada 1 minuto actualiza
                 Thread.Sleep(1000 * 60);
+            }
+        }
+
+        private void btnAtencion_Click(object sender, EventArgs e)
+        {
+            FormAtencion formAtencionMedica = new FormAtencion(this.centroMedico, this.actualizarListBox);
+            this.MostrarFormulario(formAtencionMedica);
+        }
+
+        /// <summary>
+        /// Cierra la aplicacion
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnSalir_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        /// <summary>
+        /// Encargado se consultar en el momento de estar cerrando la aplicacion para determinar si se cierra
+        /// completamente
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void FormMenuPrincipal_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            DialogResult resultado = MessageBox.Show("Esta seguro que desea cerrar?", "Cerrando", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+            if (resultado == DialogResult.No)
+            {
+                e.Cancel = true;
             }
         }
     }
