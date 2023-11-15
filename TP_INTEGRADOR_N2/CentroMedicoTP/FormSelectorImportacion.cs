@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Nodes;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -39,13 +40,17 @@ namespace CentroMedicoTP
                 {
                     //guardo la ruta seleccionada
                     this.rutaAlmacenamiento = folderBrowser.SelectedPath;
+                    //this.rutaAlmacenamiento = Path.Combine(folderBrowser.SelectedPath, this.txtNombreArchivo.Text + ".json");
                     this.txtRuta.Text = this.rutaAlmacenamiento;
                     this.txtRuta.BackColor = Color.Green;
+
+                    //habilito para que coloque el nombre
+                    this.txtNombreArchivo.Enabled = true;
                 }
                 else
                 {
                     this.txtRuta.PlaceholderText = "Error al seleccionar el directorio";
-                    this.BackColor = Color.Red;
+                    this.txtRuta.BackColor = Color.Red;
                 }
             }
         }
@@ -58,13 +63,12 @@ namespace CentroMedicoTP
         //TESTEAR QUE FUNCIONE PORQUE NO LA PROBE TODAVIA
         private void btnImportar_Click(object sender, EventArgs e)
         {
-            
+
             if (this.rutaAlmacenamiento is not null)
             {
-                //this.rutaAlmacenamiento = string.Empty; //actualizo la ruta
 
                 try
-                {
+                {/*
                     //combino la ruta con el nombre del archivo ingresado por el textBox
                     this.rutaAlmacenamiento = Path.Combine(this.rutaAlmacenamiento, this.txtNombreArchivo.Text +".json");
 
@@ -97,14 +101,32 @@ namespace CentroMedicoTP
 
                         this.DialogResult |= DialogResult.OK;
 
-                    }
+                    }*/
 
+                    this.rutaAlmacenamiento = Path.Combine(this.rutaAlmacenamiento, this.txtNombreArchivo.Text + ".json");
+
+
+                    GestorArchivos<Paciente> gestorArchivos = new GestorArchivos<Paciente>(this.rutaAlmacenamiento, this.centroMedico.Pacientes);
+
+                    //serializo el objeto sino no puedo exporatar la lista de pacientes
+                    gestorArchivos.SerializarObjeto();
+
+                    //guarda el archivo
+                    gestorArchivos.GuardarArchivo();
+
+                    this.DialogResult = DialogResult.OK;
+
+                }
+                catch (NotSupportedException ex)
+                {
+                    MessageBox.Show(ex.Message);
                 }
                 catch (Exception ex)
                 {
 
                     MessageBox.Show(ex.Message);
                 }
+
 
 
             }

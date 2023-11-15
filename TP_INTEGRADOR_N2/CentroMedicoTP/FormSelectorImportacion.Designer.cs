@@ -71,6 +71,7 @@
             // 
             // btnImportar
             // 
+            btnImportar.Enabled = false;
             btnImportar.Font = new Font("Segoe UI Semibold", 11F, FontStyle.Bold, GraphicsUnit.Point);
             btnImportar.Location = new Point(189, 342);
             btnImportar.Name = "btnImportar";
@@ -93,6 +94,7 @@
             // 
             // txtRuta
             // 
+            txtRuta.Enabled = false;
             txtRuta.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             txtRuta.Location = new Point(65, 179);
             txtRuta.Name = "txtRuta";
@@ -101,6 +103,7 @@
             // 
             // txtNombreArchivo
             // 
+            txtNombreArchivo.Enabled = false;
             txtNombreArchivo.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             txtNombreArchivo.Location = new Point(65, 272);
             txtNombreArchivo.Name = "txtNombreArchivo";
@@ -136,7 +139,7 @@
             MinimizeBox = false;
             Name = "FormSelectorImportacion";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "Importacion";
+            Text = "Importacion de pacientes";
             Load += FormSelectorImportacion_Load;
             ResumeLayout(false);
             PerformLayout();

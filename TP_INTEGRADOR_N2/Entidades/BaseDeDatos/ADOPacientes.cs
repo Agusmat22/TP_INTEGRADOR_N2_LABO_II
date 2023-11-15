@@ -372,13 +372,35 @@ namespace Entidades.BaseDeDatos
                 }
             }
             catch (Exception ex) 
-            { 
-            
+            {            
                 throw new FalloModificarPacienteException("Error, no pudo modificar el paciente",ex);
             }
+        }
 
 
+        public static void Eliminar(Paciente paciente)
+        {
+            try
+            {
+                string sentencia = "DELETE FROM Pacientes WHERE id=@id";
+
+                using (SqlConnection connection = new SqlConnection(ADOPacientes.stringConnection))
+                {
+                    SqlCommand command = new SqlCommand(sentencia, connection);
+                    command.Parameters.AddWithValue("id", paciente.Id);
+
+                    command.ExecuteNonQuery();
+                }
+
+
+            }
+            catch(Exception)
+            {
+                throw new Exception("No se pudo eliminar el paciente");
+            }
 
         }
+
+
     }
 }

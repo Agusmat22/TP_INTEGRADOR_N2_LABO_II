@@ -45,6 +45,18 @@ namespace CentroMedicoTP
 
         }
 
-
+        /// <summary>
+        /// Elimina el paciente de la DB
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            if (this.lstbPacientes.SelectedItem is not null)
+            {
+                //lo elimino del centro medico
+                this.centroMedico.EliminarPacientes((Paciente)this.lstbPacientes.SelectedItem);
+            }
+        }
     }
 }

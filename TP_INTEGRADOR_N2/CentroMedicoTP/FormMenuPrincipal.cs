@@ -26,8 +26,10 @@ namespace CentroMedicoTP
 
         private void FormMenuPrincipal_Load(object sender, EventArgs e)
         {
-            centroMedico.Pacientes = ADOPacientes.ObtenerPacientesTotales();
-            centroMedico.Medicos = ADOMedicos.ObtenerMedicosTotales();
+            //centroMedico.Pacientes = ADOPacientes.ObtenerPacientesTotales();
+
+
+            centroMedico.Medicos = ADOMedicos.ObtenerMedicosTotales(); //--> SOLO INICIO LOS MEDICOS YA QUE LOS PACIENTES SE ESTARAN ACTUALIZANDO
 
             //agrego metodo al delegado
             this.restablecerMenu = this.AgregarTitulo;
@@ -110,6 +112,9 @@ namespace CentroMedicoTP
             }
             else
             {
+                //ACTUALIZO LOS PACIENTES OBTENIENDOLO DESDE LA DB
+                this.centroMedico.Pacientes = ADOPacientes.ObtenerPacientesTotales();
+
                 listBox.DataSource = null;
                 //filtra dentro de la lista los pacientes con el delegado Func pasado por parametro
                 listBox.DataSource = this.centroMedico.Pacientes.Where(condicion).ToList();
@@ -130,7 +135,7 @@ namespace CentroMedicoTP
             {
                 this.ActualizarListBoxPacientes(listBox, condicion);
                 //Cada 1 minuto actualiza
-                Thread.Sleep(1000 * 60);
+                Thread.Sleep(1000 * 10);
             }
         }
 

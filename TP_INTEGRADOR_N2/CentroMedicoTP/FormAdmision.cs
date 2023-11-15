@@ -36,7 +36,7 @@ namespace CentroMedicoTP
                 this.cmbTipoGuardia.Items.Add(item);
             }
 
-            this.restablecerControles();
+            this.RestablecerGroupBox();
 
             //ejecuto en un subproceso la actualizacion de la lista
             Task tarea = Task.Run(() => this.actualizarListBox(this.lstbPacientesEnEspera, paciente => paciente.EnEspera == true));
@@ -54,7 +54,7 @@ namespace CentroMedicoTP
             else
             {
                 //deshabilito el grp
-                this.restablecerControles();
+                this.RestablecerGroupBox();
             }
 
 
@@ -68,9 +68,9 @@ namespace CentroMedicoTP
             //this.grpCargarPaciente.Enabled = false;
             this.lstbPacientesEnEspera.DataSource = null;
             //le paso una funcion lambda para que me traiga solo los pacientes que no estan atendidos
-            this.lstbPacientesEnEspera.DataSource = (centroMedico.Pacientes).Where(paciente => paciente.EnEspera == false).ToList();
+            this.lstbPacientesEnEspera.DataSource = (centroMedico.Pacientes).Where(paciente => paciente.EnEspera == true).ToList();
 
-            this.restablecerControles();
+            this.RestablecerGroupBox();
         }
 
         private void btnVolver_Click(object sender, EventArgs e)
@@ -176,7 +176,7 @@ namespace CentroMedicoTP
                 ADOPacientes.Modificar(this.pacienteEncotrado);
                 centroMedico.Agregar(this.pacienteEncotrado);
 
-
+                this.ActualizarElementos(); //ACTUALIZA LA LISTA DE FORMA MANUAL Y BLOQUEA EL GROUPBOX
             }
             catch (FalloModificarPacienteException ex)
             {
@@ -186,13 +186,13 @@ namespace CentroMedicoTP
 
 
             //actualizo la listBox Y REVISAR ESTA PARTE PORQUE DEBO AGREGARLA A LA DB
-            this.ActualizarElementos();
+            //this.ActualizarElementos();
         }
 
         /// <summary>
         /// Limpia todos los controles del groupBox
         /// </summary>
-        private void restablecerControles()
+        private void RestablecerGroupBox()
         {
             this.txtDatosBusqueda.Clear();
             this.txtAfiliadoEncontrado.Clear();
