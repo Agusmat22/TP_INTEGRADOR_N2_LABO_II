@@ -19,13 +19,15 @@ namespace CentroMedicoTP
         private CentroMedico centroMedico;
         private RestablecerMenuPrincipal restablecer;
         private Paciente pacienteEncotrado;
+        private ActualizarListboxGenerico listBox;
         //private ActualizarListboxGenerico actualizarListBox;
 
-        public FormAdmision(CentroMedico centroMedico, RestablecerMenuPrincipal restablecer)
+        public FormAdmision(CentroMedico centroMedico, RestablecerMenuPrincipal restablecer,ActualizarListboxGenerico listBox)
         {
             InitializeComponent();
             this.centroMedico = centroMedico;
             this.restablecer = restablecer;
+            this.listBox = listBox;
         }
 
         private void FormAdmision_Load(object sender, EventArgs e)
@@ -37,10 +39,10 @@ namespace CentroMedicoTP
 
             this.RestablecerGroupBox();
 
-            //ejecuto en un subproceso la actualizacion de la lista
-            //Task tarea = Task.Run(() => this.actualizarListBox(this.lstbPacientesEnEspera, paciente => paciente.EnEspera == true));
+            this.listBox = this.Actualizar;
+            this.listBox();
+            //this.centroMedico.OnActualizarLista += this.ActualizarListBox;
 
-            this.centroMedico.OnActualizarLista += this.ActualizarListBox;
 
         }
 
@@ -207,6 +209,13 @@ namespace CentroMedicoTP
 
         }
 
+        public void Actualizar()
+        {
+            this.lstbPacientesEnEspera.DataSource = null;
+            this.lstbPacientesEnEspera.DataSource = this.centroMedico.Pacientes.Where(paciente => paciente.EnEspera == true).ToList();
+        }
+
+        /*
         public void ActualizarListBox(List<Paciente> pacientes,int intervaloTiempo)
         {
             if (this.InvokeRequired)
@@ -219,9 +228,10 @@ namespace CentroMedicoTP
                 {
                     this.lstbPacientesEnEspera.DataSource = null;
                     this.lstbPacientesEnEspera.DataSource = pacientes.Where(pacientes => pacientes.EnEspera == true).ToList();
+                    
                 }
             }
 
-        }
+        }*/
     }
 }

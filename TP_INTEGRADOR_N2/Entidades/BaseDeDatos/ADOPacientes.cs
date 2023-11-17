@@ -12,11 +12,12 @@ namespace Entidades.BaseDeDatos
     public static class ADOPacientes
     {
         private static string stringConnection;
+        private static DateTime fechaComparacion;
 
         static ADOPacientes() 
         {
             ADOPacientes.stringConnection = "Server = .; Database = CentroMedicoTP; Trusted_Connection = True;";
-            
+            ADOPacientes.fechaComparacion = DateTime.Now;
         }
         
         /// <summary>
@@ -24,7 +25,7 @@ namespace Entidades.BaseDeDatos
         /// </summary>
         /// <returns></returns>
         /// <exception cref="FalloBusquedaPacienteException"></exception>
-        public static List<Paciente> ObtenerPacientesTotales()
+        public static List<Paciente> ObtenerLista()
         {
 
             try
@@ -85,73 +86,78 @@ namespace Entidades.BaseDeDatos
         }
 
 
-        /// <summary>
-        /// Obtiene una lista del total de pacientes atendidos o sin atender, bajo una condicion por parametros. 
-        /// Los int representan un valor booleano.
-        /// </summary>
-        /// <param name="paciente"></param>
-        /// <param name="valor">1=true o 0=false</param>
-        /// <exception cref="FalloObtenerPacienteException"></exception>
-        public static List<Paciente> ObtenerPacientesTotales(int valor)
+        public static List<Paciente> ObtenerModificados()
         {
             try
             {
-                string sentencia = "SELECT * FROM Pacientes WHERE enEspera = @enEspera";
-                List<Paciente> listaPacientes = new List<Paciente>();
+                string sentencia = "SELECT * FROM Pacientes WHERE fecha_modificacion > @fecha_modificacion";
+
 
                 using (SqlConnection connection = new SqlConnection(ADOPacientes.stringConnection))
                 {
-
                     SqlCommand command = new SqlCommand(sentencia, connection);
-                    command.Parameters.AddWithValue("enEspera", valor);
+                    command.Parameters.AddWithValue("fecha_modificacion",ADOPacientes.fechaComparacion);
+
                     connection.Open();
 
                     SqlDataReader reader = command.ExecuteReader();
 
-                    while (reader.Read())
+                    List<Paciente> listaPacientes = new List<Paciente>();
+
+                    //AGREGAR UN IF DONDE VALIDE SI CONTIENE FILAS Y SINO LANZAR UNA EXCEPCION
+                    if(reader.HasRows)
                     {
-                        //ACA APLICO LA LOGICA SEGUN LAS COLUMNAS, ME FALTA CREAR LA DB
-                        Paciente paciente = new Paciente();
-                        paciente.Id = reader.GetInt32(0);
-                        paciente.Nombre = reader.GetString(1);
-                        paciente.Apellido = reader.GetString(2);
-                        paciente.Dni = reader.GetInt32(3);
-                        paciente.FechaNacimiento = reader.GetDateTime(4);
-                        paciente.NumeroAfiliado = reader.GetInt64(5);
-                        paciente.EnEspera = reader.GetBoolean(6);
-
-                        if (Enum.TryParse(reader.GetString(7), out EObrasSocial obraSocial))
+                        ADOPacientes.fechaComparacion = DateTime.Now;
+                        while (reader.Read())
                         {
-                            paciente.ObraSocial = obraSocial;
-                        }
-                        else
-                        {
-                            throw new FalloObtenerPacienteException("Error al internar obtener pacientes de DB");
+                            //ACA APLICO LA LOGICA SEGUN LAS COLUMNAS, ME FALTA CREAR LA DB
+                            Paciente paciente = new Paciente();
+                            paciente.Id = reader.GetInt32(0);
+                            paciente.Nombre = reader.GetString(1);
+                            paciente.Apellido = reader.GetString(2);
+                            paciente.Dni = reader.GetInt32(3);
+                            paciente.FechaNacimiento = reader.GetDateTime(4);
+                            paciente.NumeroAfiliado = reader.GetInt64(5);
+                            paciente.EnEspera = reader.GetBoolean(6);
+
+                            if (Enum.TryParse(reader.GetString(7), out EObrasSocial obraSocial))
+                            {
+                                paciente.ObraSocial = obraSocial;
+                            }
+                            else
+                            {
+                                //ACA LANZAR UNA EXPCECION
+                            }
+
+                            //valido que no sea nulo, ya que la historia clinica puede serlo
+                            if (!reader.IsDBNull(8))
+                            {
+                                paciente.HistoriaClinica = reader.GetString(8);
+                            }
+
+                            listaPacientes.Add(paciente);
                         }
 
-                        //valido que la historial clinica no sea null, por parametro le paso la posicion de la columna
-                        if (!reader.IsDBNull(8))
-                        {
-                            paciente.HistoriaClinica = reader.GetString(8);
-                        }
-
-                        paciente.FechaModificacion = reader.GetDateTime(9);
-
-                        listaPacientes.Add(paciente);
+                        return listaPacientes;
                     }
-
+                    else
+                    {
+                        //LANZO UNA EXCEPCION
+                        return null;
+                    }
+                   
                 }
 
-                return listaPacientes;
+
+
 
             }
-            catch
+            catch(Exception)
             {
-                throw new FalloBusquedaPacienteException("Error al leer los pacientes de la DB");
-
+                throw;
             }
-
         }
+
         
         /// <summary>
         /// Devuelve el paciente encontrado por su clave valor
@@ -160,7 +166,7 @@ namespace Entidades.BaseDeDatos
         /// <param name="valor"></param>
         /// <returns></returns>
         /// <exception cref="FalloBusquedaPacienteException"></exception>
-        public static Paciente ObtenerPaciente(string clave,int valor)
+        public static Paciente Obtener(string clave,int valor)
         {
             try
             {
@@ -299,7 +305,7 @@ namespace Entidades.BaseDeDatos
                     command.Connection = connection;
 
                     //OBTENGO EL PACIENTE DE LA DB PARA BUSCAR LAS DIFERENCIAS Y MODIFICARLO
-                    Paciente pacienteOriginal = ADOPacientes.ObtenerPaciente("id", pacienteModificado.Id);
+                    Paciente pacienteOriginal = ADOPacientes.Obtener("id", pacienteModificado.Id);
 
                     //De esta manera hago mas eficiente y no arbitrariamente debo actualizar todas las columnas
                     if (pacienteModificado == pacienteOriginal)

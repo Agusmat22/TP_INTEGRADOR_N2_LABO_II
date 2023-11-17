@@ -7,15 +7,14 @@ namespace CentroMedicoTP
 {
     public delegate void RestablecerMenuPrincipal();
 
-    //public delegate void ActualizarListboxGenerico(ListBox listBox, Func<Paciente, bool> condicion);
+    //VOY A DIVIDIR LAS TAREA EN UNA PARTE QUE ACTUALICE LA LISTA DE LA CLASE Y OTRA QUE ACTUALICE LOS LISTBOX
+    public delegate void ActualizarListboxGenerico();
 
     public partial class FormMenuPrincipal : Form
     {
         private CentroMedico centroMedico;
         private RestablecerMenuPrincipal restablecerMenu;
-        //private ActualizarListboxGenerico actualizarListBox;
-
-
+        private ActualizarListboxGenerico listBox;
 
 
         public FormMenuPrincipal()
@@ -27,14 +26,18 @@ namespace CentroMedicoTP
 
         private void FormMenuPrincipal_Load(object sender, EventArgs e)
         {
-            //centroMedico.Pacientes = ADOPacientes.ObtenerPacientesTotales();
-
+            centroMedico.Pacientes = ADOPacientes.ObtenerLista();
 
             centroMedico.Medicos = ADOMedicos.ObtenerMedicosTotales(); //--> SOLO INICIO LOS MEDICOS YA QUE LOS PACIENTES SE ESTARAN ACTUALIZANDO
    
             this.restablecerMenu = this.AgregarTitulo;
 
+            //AGREGO MANEJADOR AL DELEGADO
+            //this.listBox = this.ActualizarListBox;
 
+            this.centroMedico.OnActualizarLista += this.ActualizarPacientes;
+
+            //Inicio el hilo para actualizar la lista cuando sucede una modificacion
             this.centroMedico.IniciarActualizacion();
 
         }
@@ -81,7 +84,7 @@ namespace CentroMedicoTP
 
         private void btnAdmision_Click(object sender, EventArgs e)
         {
-            FormAdmision admision = new FormAdmision(centroMedico, restablecerMenu);
+            FormAdmision admision = new FormAdmision(this.centroMedico, this.restablecerMenu,this.listBox);
             this.MostrarFormulario(admision);
 
         }
@@ -135,6 +138,35 @@ namespace CentroMedicoTP
                 //cancelo el hilo
                 this.centroMedico.CancelarActualizacion();
             }
+        }
+
+        /*
+        private void ActualizarListBox(ListBox listBox,Func<Paciente,bool> condicion)
+        {
+
+            listBox.DataSource = null;
+            //agrego la lista a un listBox dependiendo la condicion
+            listBox.DataSource = this.centroMedico.Pacientes.Where(condicion).ToList();
+        }*/
+
+        //PROBADOOOO
+        public void ActualizarPacientes(List<Paciente> pacientes, int intervaloTiempo)
+        {
+            if (this.InvokeRequired)
+            {
+                this.BeginInvoke(ActualizarPacientes, pacientes, intervaloTiempo);
+            }
+            else
+            {
+                if (this.listBox is not null && this.centroMedico.Pacientes.Count > 0)
+                {/*
+                    this.lstbPacientesEnEspera.DataSource = null;
+                    this.lstbPacientesEnEspera.DataSource = pacientes.Where(pacientes => pacientes.EnEspera == true).ToList();
+                    */
+                    this.listBox();
+                }
+            }
+
         }
 
 

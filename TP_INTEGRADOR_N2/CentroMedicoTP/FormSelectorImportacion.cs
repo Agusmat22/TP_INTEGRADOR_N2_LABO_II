@@ -112,7 +112,7 @@ namespace CentroMedicoTP
                     gestorArchivos.SerializarObjeto();
 
                     //guarda el archivo
-                    gestorArchivos.GuardarArchivo();
+                    gestorArchivos.Guardar();
 
                     this.DialogResult = DialogResult.OK;
 

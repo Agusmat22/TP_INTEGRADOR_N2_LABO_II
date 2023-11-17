@@ -24,7 +24,7 @@ namespace Entidades
         /// </summary>
         /// <param name="archivo"></param>
         /// <exception cref="Exception"></exception>
-        public void GuardarArchivo(string archivo)
+        public void Guardar(string archivo)
         {
             try
             {
@@ -43,13 +43,13 @@ namespace Entidades
         /// <summary>
         /// Almacena el objeto serializado
         /// </summary>
-        public void GuardarArchivo()
+        public void Guardar()
         {
             try
             {          
                 if (this.objetoSerializado is not null)
                 {
-                    this.GuardarArchivo(this.objetoSerializado);
+                    this.Guardar(this.objetoSerializado);
                 }
                 
             }

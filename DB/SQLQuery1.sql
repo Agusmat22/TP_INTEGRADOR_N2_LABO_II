@@ -9,7 +9,7 @@ numero BIGINT NOT NULL, --NUMERO DE AFILIADO
 enEspera BIT NOT NULL,
 obra_social VARCHAR(80) NOT NULL,
 historia_clinica VARCHAR(MAX),
-fecha_modificacion DATE NOT NULL,
+fecha_modificacion DATETIME NOT NULL,
 CONSTRAINT pk_id PRIMARY KEY (id)
 )
 
@@ -38,13 +38,28 @@ DROP TABLE Medicos
 --AGREGO UN PACIENTE
 
 INSERT INTO Pacientes (nombre,apellido,dni,fecha_nacimiento,numero,enEspera,obra_social,fecha_modificacion) 
-VALUES ('agustin','garcia',43173652,'2001-02-24',1231354,1,'UP','2023-11-10')
+VALUES ('agustin','garcia',43173652,'2001-02-24',1231354,1,'UP','2023-11-17 14:30:00')
 
 INSERT INTO Pacientes (nombre,apellido,dni,fecha_nacimiento,numero,enEspera,obra_social,fecha_modificacion) 
-VALUES ('vanesa','pinto',5141541,'1976-02-18',321313,1,'UP','2023-02-01')
+VALUES ('vanesa','pinto',5141541,'1976-02-18',321313,1,'UP','2023-01-17 09:30:00')
 
 INSERT INTO Pacientes (nombre,apellido,dni,fecha_nacimiento,numero,enEspera,obra_social,fecha_modificacion) 
-VALUES ('sofia','isunza',43615289,'2001-10-15',1231354,0,'UP','2022-01-10')
+VALUES ('sofia','isunza',43615289,'2001-10-15',1231354,0,'UP','2022-01-10 09:30:00')
+
+INSERT INTO Pacientes (nombre,apellido,dni,fecha_nacimiento,numero,enEspera,obra_social,fecha_modificacion) 
+VALUES ('jorge','roncaglia',123,'2001-10-15',3311,1,'UP','2022-01-10 09:30:00')
+
+
+INSERT INTO Pacientes (nombre,apellido,dni,fecha_nacimiento,numero,enEspera,obra_social,fecha_modificacion) 
+VALUES ('messi','leo',123,'2001-10-15',3311,1,'UP','2022-01-10 09:30:00')
+
+INSERT INTO Pacientes (nombre,apellido,dni,fecha_nacimiento,numero,enEspera,obra_social,fecha_modificacion) 
+VALUES ('jorgeee','leo',123,'2001-10-15',3311,1,'UP','2022-01-10 09:30:00')
+
+INSERT INTO Pacientes (nombre,apellido,dni,fecha_nacimiento,numero,enEspera,obra_social,fecha_modificacion) 
+VALUES ('riquelme','malo',123,'2001-10-15',3311,1,'UP','2023-11-10 12:44:00')
+
+SELECT * FROM Pacientes WHERE fecha_modificacion > '2022-01-01'
 
 --MODIFICAR PACIENTE
 
@@ -60,3 +75,5 @@ UPDATE Pacientes SET enEspera=1 WHERE id=2
 
 INSERT INTO Medicos (nombre,apellido,dni,fecha_nacimiento,matricula,especialidad,fecha_alta) 
 VALUES ('Julian','Alvarez',1148569,'2001-09-15',45879,'Clinico','2022-01-10')
+
+SELECT * FROM Pacientes WHERE fecha_modificacion > '2023-10-10'

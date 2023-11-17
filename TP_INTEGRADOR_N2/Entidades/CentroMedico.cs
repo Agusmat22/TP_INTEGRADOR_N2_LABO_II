@@ -168,14 +168,22 @@ namespace Entidades
             
         }
 
+        /// <summary>
+        /// Actualiza la lista de pacientes mediante un evento
+        /// </summary>
         public void ActualizacionPacientes()
         {
             while (!cancellation.IsCancellationRequested)
             {
                 if (this.OnActualizarLista is not null)
                 {
-                    this.Pacientes = ADOPacientes.ObtenerPacientesTotales();
-                    this.OnActualizarLista.Invoke(this.Pacientes,this.invervaloTiempo);
+                    List<Paciente> pacientesModificados = ADOPacientes.ObtenerModificados();
+                    if (pacientesModificados.Count > 0)
+                    {
+                        this.pacientes.AddRange(pacientesModificados);
+                        this.OnActualizarLista.Invoke(this.Pacientes, this.invervaloTiempo);
+
+                    }
                 }
 
                 Thread.Sleep(this.invervaloTiempo);
@@ -193,8 +201,13 @@ namespace Entidades
                 this.actualizacion = new Task(this.ActualizacionPacientes, this.cancellation);
             }
 
-            //inicio la tarea en segundo plano
-            this.actualizacion.Start();
+            //VALIDAR QUE ONDA ACAAAA
+            if (!(this.actualizacion.Status == TaskStatus.Running || this.actualizacion.Status == TaskStatus.WaitingForActivation))
+            {
+                //inicio la tarea en segundo plano
+                this.actualizacion.Start();
+            }
+            
         }
 
         public void CancelarActualizacion()
