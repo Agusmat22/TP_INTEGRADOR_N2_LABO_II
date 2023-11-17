@@ -9,7 +9,7 @@ numero BIGINT NOT NULL, --NUMERO DE AFILIADO
 enEspera BIT NOT NULL,
 obra_social VARCHAR(80) NOT NULL,
 historia_clinica VARCHAR(MAX),
-fecha_alta DATE NOT NULL,
+fecha_modificacion DATE NOT NULL,
 CONSTRAINT pk_id PRIMARY KEY (id)
 )
 
@@ -37,14 +37,14 @@ DROP TABLE Medicos
 
 --AGREGO UN PACIENTE
 
-INSERT INTO Pacientes (nombre,apellido,dni,fecha_nacimiento,numero,enEspera,obra_social,fecha_alta) 
+INSERT INTO Pacientes (nombre,apellido,dni,fecha_nacimiento,numero,enEspera,obra_social,fecha_modificacion) 
 VALUES ('agustin','garcia',43173652,'2001-02-24',1231354,1,'UP','2023-11-10')
 
-INSERT INTO Pacientes (nombre,apellido,dni,fecha_nacimiento,numero,enEspera,obra_social,fecha_alta) 
+INSERT INTO Pacientes (nombre,apellido,dni,fecha_nacimiento,numero,enEspera,obra_social,fecha_modificacion) 
 VALUES ('vanesa','pinto',5141541,'1976-02-18',321313,1,'UP','2023-02-01')
 
-INSERT INTO Pacientes (nombre,apellido,dni,fecha_nacimiento,numero,enEspera,obra_social,fecha_alta) 
-VALUES ('sofia','isunza',43615289,'2001-10-15',1231354,1,'UP','2022-01-10')
+INSERT INTO Pacientes (nombre,apellido,dni,fecha_nacimiento,numero,enEspera,obra_social,fecha_modificacion) 
+VALUES ('sofia','isunza',43615289,'2001-10-15',1231354,0,'UP','2022-01-10')
 
 --MODIFICAR PACIENTE
 

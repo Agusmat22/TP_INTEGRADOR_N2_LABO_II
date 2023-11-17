@@ -16,7 +16,7 @@ namespace Entidades.Interfaces
         /// <summary>
         /// Fecha que se crea dicho objeto 
         /// </summary>
-        public DateTime FechaAlta { get; set; }
+        public DateTime FechaModificacion { get; set; }
 
     }
 }

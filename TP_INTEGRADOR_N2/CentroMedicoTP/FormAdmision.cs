@@ -19,14 +19,13 @@ namespace CentroMedicoTP
         private CentroMedico centroMedico;
         private RestablecerMenuPrincipal restablecer;
         private Paciente pacienteEncotrado;
-        private ActualizarListboxGenerico actualizarListBox;
+        //private ActualizarListboxGenerico actualizarListBox;
 
-        public FormAdmision(CentroMedico centroMedico, RestablecerMenuPrincipal restablecer, ActualizarListboxGenerico actualizarListBox)
+        public FormAdmision(CentroMedico centroMedico, RestablecerMenuPrincipal restablecer)
         {
             InitializeComponent();
             this.centroMedico = centroMedico;
             this.restablecer = restablecer;
-            this.actualizarListBox = actualizarListBox;
         }
 
         private void FormAdmision_Load(object sender, EventArgs e)
@@ -39,7 +38,10 @@ namespace CentroMedicoTP
             this.RestablecerGroupBox();
 
             //ejecuto en un subproceso la actualizacion de la lista
-            Task tarea = Task.Run(() => this.actualizarListBox(this.lstbPacientesEnEspera, paciente => paciente.EnEspera == true));
+            //Task tarea = Task.Run(() => this.actualizarListBox(this.lstbPacientesEnEspera, paciente => paciente.EnEspera == true));
+
+            this.centroMedico.OnActualizarLista += this.ActualizarListBox;
+
         }
 
         private void btnDesbloquear_Click(object sender, EventArgs e)
@@ -202,6 +204,23 @@ namespace CentroMedicoTP
             this.btnIngresar.Enabled = false;
             this.grpCargarPaciente.Enabled = false;
             this.btnDesbloquear.ImageIndex = 0;
+
+        }
+
+        public void ActualizarListBox(List<Paciente> pacientes,int intervaloTiempo)
+        {
+            if (this.InvokeRequired)
+            {
+                this.BeginInvoke(ActualizarListBox,pacientes,intervaloTiempo);
+            }
+            else
+            {
+                if (this.centroMedico.Pacientes.Count > 0)
+                {
+                    this.lstbPacientesEnEspera.DataSource = null;
+                    this.lstbPacientesEnEspera.DataSource = pacientes.Where(pacientes => pacientes.EnEspera == true).ToList();
+                }
+            }
 
         }
     }

@@ -69,7 +69,7 @@ namespace Entidades
        
         public int Id { get; set; }
        
-        public DateTime FechaAlta { get ; set ; }
+        public DateTime FechaModificacion { get ; set ; }
 
         //DARLE LOGICA REVISARLA
         [JsonIgnore]

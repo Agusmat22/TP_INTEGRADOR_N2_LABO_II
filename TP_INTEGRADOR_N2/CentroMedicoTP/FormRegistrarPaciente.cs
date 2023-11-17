@@ -51,7 +51,7 @@ namespace CentroMedicoTP
                     Paciente paciente = new Paciente(nombre, apellido, dni, fechaNacimiento, obraSocial, numeroAfiliado);
 
                     //PREGUNTAR AL PROFE SI ES UNA BUENA PRACTICA
-                    paciente.FechaAlta = DateTime.Now;
+                    paciente.FechaModificacion = DateTime.Now;
 
 
                     //guardo el paciente en la DB

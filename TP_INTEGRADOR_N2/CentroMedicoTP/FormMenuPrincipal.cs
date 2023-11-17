@@ -7,13 +7,14 @@ namespace CentroMedicoTP
 {
     public delegate void RestablecerMenuPrincipal();
 
-    public delegate void ActualizarListboxGenerico(ListBox listBox, Func<Paciente, bool> condicion);
+    //public delegate void ActualizarListboxGenerico(ListBox listBox, Func<Paciente, bool> condicion);
 
     public partial class FormMenuPrincipal : Form
     {
         private CentroMedico centroMedico;
         private RestablecerMenuPrincipal restablecerMenu;
-        private ActualizarListboxGenerico actualizarListBox;
+        //private ActualizarListboxGenerico actualizarListBox;
+
 
 
 
@@ -21,7 +22,7 @@ namespace CentroMedicoTP
         {
             InitializeComponent();
             //instancio el centro medico
-            centroMedico = new CentroMedico();
+            centroMedico = new CentroMedico(1000);
         }
 
         private void FormMenuPrincipal_Load(object sender, EventArgs e)
@@ -30,13 +31,11 @@ namespace CentroMedicoTP
 
 
             centroMedico.Medicos = ADOMedicos.ObtenerMedicosTotales(); //--> SOLO INICIO LOS MEDICOS YA QUE LOS PACIENTES SE ESTARAN ACTUALIZANDO
-
-            //agrego metodo al delegado
+   
             this.restablecerMenu = this.AgregarTitulo;
 
-            //agrego el metodo al delegado que actualizara todos los listBox de todos los formularios
-            this.actualizarListBox = this.RefrescarListBox;
 
+            this.centroMedico.IniciarActualizacion();
 
         }
 
@@ -82,7 +81,9 @@ namespace CentroMedicoTP
 
         private void btnAdmision_Click(object sender, EventArgs e)
         {
-            this.MostrarFormulario(new FormAdmision(centroMedico, restablecerMenu, this.actualizarListBox));
+            FormAdmision admision = new FormAdmision(centroMedico, restablecerMenu);
+            this.MostrarFormulario(admision);
+
         }
 
         private void btnRegistrar_Click(object sender, EventArgs e)
@@ -94,54 +95,14 @@ namespace CentroMedicoTP
 
         private void btnInformacion_Click(object sender, EventArgs e)
         {
-            FormInformacion formInformacion = new FormInformacion(this.centroMedico, this.actualizarListBox);
+            FormInformacion formInformacion = new FormInformacion(this.centroMedico);
             this.MostrarFormulario(formInformacion);
         }
-
-        /// <summary>
-        /// Actualiza el listBox pasado por parametros agregandole una lista de pacientes bajo una condicion.
-        /// Este metodo ingresara al hilo principal del form para poder ejecutarse en un subproceso
-        /// </summary>
-        /// <param name="listBox"></param>
-        /// <param name="condicion"></param>
-        private void ActualizarListBoxPacientes(ListBox listBox, Func<Paciente, bool> condicion)
-        {
-            if (this.InvokeRequired)
-            {
-                this.BeginInvoke(ActualizarListBoxPacientes, listBox, condicion);
-            }
-            else
-            {
-                //ACTUALIZO LOS PACIENTES OBTENIENDOLO DESDE LA DB
-                this.centroMedico.Pacientes = ADOPacientes.ObtenerPacientesTotales();
-
-                listBox.DataSource = null;
-                //filtra dentro de la lista los pacientes con el delegado Func pasado por parametro
-                listBox.DataSource = this.centroMedico.Pacientes.Where(condicion).ToList();
-            }
-
-        }
-
-        /// <summary>
-        /// Refresca cualquier ListBox pasada por parametro cada 1 minuto
-        /// 
-        /// </summary>
-        /// <param name="listBox"></param>
-        /// <param name="condicion"></param>
-        private void RefrescarListBox(ListBox listBox, Func<Paciente, bool> condicion)
-        {
-
-            while (true)
-            {
-                this.ActualizarListBoxPacientes(listBox, condicion);
-                //Cada 1 minuto actualiza
-                Thread.Sleep(1000 * 10);
-            }
-        }
+  
 
         private void btnAtencion_Click(object sender, EventArgs e)
         {
-            FormAtencion formAtencionMedica = new FormAtencion(this.centroMedico, this.actualizarListBox);
+            FormAtencion formAtencionMedica = new FormAtencion(this.centroMedico);
             this.MostrarFormulario(formAtencionMedica);
         }
 
@@ -169,6 +130,13 @@ namespace CentroMedicoTP
             {
                 e.Cancel = true;
             }
+            else
+            {
+                //cancelo el hilo
+                this.centroMedico.CancelarActualizacion();
+            }
         }
+
+
     }
 }

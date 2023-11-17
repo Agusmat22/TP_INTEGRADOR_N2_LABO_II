@@ -14,12 +14,10 @@ namespace CentroMedicoTP
     public partial class FormInformacion : Form
     {
         private CentroMedico centroMedico;
-        private ActualizarListboxGenerico actualizarListBox;
-        public FormInformacion(CentroMedico centroMedico, ActualizarListboxGenerico actualizarListBox)
+        public FormInformacion(CentroMedico centroMedico)
         {
             InitializeComponent();
             this.centroMedico = centroMedico;
-            this.actualizarListBox = actualizarListBox;
         }
 
         private void btnImportar_Click(object sender, EventArgs e)
@@ -40,8 +38,7 @@ namespace CentroMedicoTP
 
         private void FormInformacion_Load(object sender, EventArgs e)
         {
-            //ejecuto en un subproceso la actualizacion de la lista
-            Task tarea = Task.Run(() => this.actualizarListBox(this.lstbPacientes, paciente => paciente is not null));
+            this.centroMedico.OnActualizarLista += this.ActualizarListBox;
 
         }
 
@@ -57,6 +54,23 @@ namespace CentroMedicoTP
                 //lo elimino del centro medico
                 this.centroMedico.EliminarPacientes((Paciente)this.lstbPacientes.SelectedItem);
             }
+        }
+
+        public void ActualizarListBox(List<Paciente> pacientes, int intervaloTiempo)
+        {
+            if (this.InvokeRequired)
+            {
+                this.BeginInvoke(ActualizarListBox, pacientes, intervaloTiempo);
+            }
+            else
+            {
+                if (this.centroMedico.Pacientes.Count > 0)
+                {
+                    this.lstbPacientes.DataSource = null;
+                    this.lstbPacientes.DataSource = pacientes.Where(pacientes => pacientes.EnEspera == true).ToList();
+                }
+            }
+
         }
     }
 }

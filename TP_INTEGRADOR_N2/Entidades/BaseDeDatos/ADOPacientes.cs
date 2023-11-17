@@ -135,7 +135,7 @@ namespace Entidades.BaseDeDatos
                             paciente.HistoriaClinica = reader.GetString(8);
                         }
 
-                        paciente.FechaAlta = reader.GetDateTime(9);
+                        paciente.FechaModificacion = reader.GetDateTime(9);
 
                         listaPacientes.Add(paciente);
                     }
@@ -211,7 +211,7 @@ namespace Entidades.BaseDeDatos
                                 paciente.HistoriaClinica = reader.GetString(8);
                             }
 
-                            paciente.FechaAlta = reader.GetDateTime(9);
+                            paciente.FechaModificacion = reader.GetDateTime(9);
 
                         }
                     }
@@ -265,7 +265,7 @@ namespace Entidades.BaseDeDatos
                     //PREGUNTAR AL PROFE
                     command.Parameters.AddWithValue("historia_clinica", paciente.HistoriaClinica ?? (object)DBNull.Value);
                     
-                    command.Parameters.AddWithValue("fecha_alta", paciente.FechaAlta);
+                    command.Parameters.AddWithValue("fecha_alta", paciente.FechaModificacion);
                     //command.Parameters.AddWithValue("historia_clinica", paciente.HistoriaClinica);                       
                     
 

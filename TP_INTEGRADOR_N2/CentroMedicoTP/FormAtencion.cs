@@ -16,14 +16,12 @@ namespace CentroMedicoTP
     public partial class FormAtencion : Form
     {
         private CentroMedico centroMedico;
-        private ActualizarListboxGenerico actualizarListbox;
         private Paciente pacienteAtendido;
         private Medico medico;
-        public FormAtencion(CentroMedico centroMedico, ActualizarListboxGenerico actualizarListbox)
+        public FormAtencion(CentroMedico centroMedico)
         {
             InitializeComponent();
             this.centroMedico = centroMedico;
-            this.actualizarListbox = actualizarListbox;
         }
 
         private void FormAtencion_Load(object sender, EventArgs e)
@@ -39,7 +37,9 @@ namespace CentroMedicoTP
 
             this.ActualizarAccesoControlesDiagnostico();
             //ejecuto la ejecucion en un subproceso para la lista
-            Task actualizacionListPacientes = Task.Run(() => this.actualizarListbox(this.lstbpacientes, pacientes => pacientes.EnEspera == true));
+            //Task actualizacionListPacientes = Task.Run(() => this.actualizarListbox(this.lstbpacientes, pacientes => pacientes.EnEspera == true));
+
+            this.centroMedico.OnActualizarLista += this.ActualizarListBox;
         }
 
         /// <summary>
@@ -78,6 +78,23 @@ namespace CentroMedicoTP
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        public void ActualizarListBox(List<Paciente> pacientes, int intervaloTiempo)
+        {
+            if (this.InvokeRequired)
+            {
+                this.BeginInvoke(ActualizarListBox, pacientes, intervaloTiempo);
+            }
+            else
+            {
+                if (this.centroMedico.Pacientes.Count > 0)
+                {
+                    this.lstbpacientes.DataSource = null;
+                    this.lstbpacientes.DataSource = pacientes.Where(pacientes => pacientes.EnEspera == true).ToList();
+                }
+            }
+
         }
     }
 }

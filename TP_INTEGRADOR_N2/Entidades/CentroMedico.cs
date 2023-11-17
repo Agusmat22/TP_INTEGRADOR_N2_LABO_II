@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 
 namespace Entidades
 {
+    public delegate void ActualizaPacientes(List<Paciente> lista,int intervalo);
+
     public enum EObrasSocial
     {
         OSECAC,
@@ -20,12 +22,18 @@ namespace Entidades
         
         private List<Paciente> pacientes;
         private List<Medico> medicos;
+        public event ActualizaPacientes OnActualizarLista;
+        private CancellationTokenSource cancellationTokenSource;
+        private CancellationToken cancellation;
+        private Task actualizacion;
+        private int invervaloTiempo;
 
 
-        public CentroMedico()
+        public CentroMedico(int invervaloTiempo)
         {
             this.pacientes = new List<Paciente>();
             this.medicos = new List<Medico>();
+            this.invervaloTiempo = invervaloTiempo;
 
         }
 
@@ -153,5 +161,47 @@ namespace Entidades
             return null;
         }
         
+
+        public void ConsultarModificacionPacientes()
+        {
+            
+            
+        }
+
+        public void ActualizacionPacientes()
+        {
+            while (!cancellation.IsCancellationRequested)
+            {
+                if (this.OnActualizarLista is not null)
+                {
+                    this.Pacientes = ADOPacientes.ObtenerPacientesTotales();
+                    this.OnActualizarLista.Invoke(this.Pacientes,this.invervaloTiempo);
+                }
+
+                Thread.Sleep(this.invervaloTiempo);
+            }
+        }
+
+        public void IniciarActualizacion()
+        {
+            if(this.actualizacion is null)
+            {
+                this.cancellationTokenSource = new CancellationTokenSource();
+                this.cancellation = this.cancellationTokenSource.Token;
+
+                //instancio el hilo
+                this.actualizacion = new Task(this.ActualizacionPacientes, this.cancellation);
+            }
+
+            //inicio la tarea en segundo plano
+            this.actualizacion.Start();
+        }
+
+        public void CancelarActualizacion()
+        {
+            //cancelo el hilo
+            this.cancellationTokenSource.Cancel();
+        }
+
     }
 }
