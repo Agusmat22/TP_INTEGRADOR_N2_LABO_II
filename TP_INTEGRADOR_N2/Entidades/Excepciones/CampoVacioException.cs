@@ -9,15 +9,15 @@ namespace Entidades.Excepciones
     /// <summary>
     /// Cuando un campo de un elemento de .net se encuentre vacio
     /// </summary>
-    public class CampoVacioExcepcion : Exception
+    public class CampoVacioException : Exception
     {
 
-        public CampoVacioExcepcion(string message):base(message) 
+        public CampoVacioException(string message):base(message) 
         { 
         
         }
 
-        public CampoVacioExcepcion(string message,Exception excepcion) : base(message,excepcion)
+        public CampoVacioException(string message,Exception excepcion) : base(message,excepcion)
         {
 
         }

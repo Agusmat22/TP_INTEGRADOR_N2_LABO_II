@@ -64,11 +64,11 @@ namespace Entidades
 
 
         /// <summary>
-        /// Reemplaza un paciente en la lista
+        /// Reemplaza un paciente en la lista pacientes
         /// </summary>
         /// <param name="persona"></param>
         /// <returns>True si se pudo agregar, False si no se pudo</returns>
-        public void Reemplazar(Paciente paciente2)
+        public bool Reemplazar(Paciente paciente2)
         {
             //Valido que sea del tipo medico y pregunto si no son iguales
             foreach (Paciente paciente in this.Pacientes)
@@ -78,9 +78,10 @@ namespace Entidades
                     //REEMPLAZO EL PACIENTE DE LA LISTA CON EL QUE INGRESO POR PARAMETRO
                     //OBTENGO EL INDICE DEL PACIENTE Y LO REEMPLAZO POR POSICION
                     this.Pacientes[this.Pacientes.IndexOf(paciente)] = paciente2;
-                    break;
+                    return true;
                 }
             }
+            return false;
 
         }
 
@@ -214,8 +215,7 @@ namespace Entidades
                         List<Paciente> pacientesModificados = ADOPacientes.ObtenerModificados();
                         if (pacientesModificados is not null)
                         {
-                            //ACA ESTA EL ERROR
-                            //this.pacientes.AddRange(pacientesModificados);
+
                             this.ExtenderListaPacientes(pacientesModificados, true);
                             this.OnActualizarLista.Invoke();
 
@@ -258,7 +258,11 @@ namespace Entidades
         public void CancelarActualizacion()
         {
             //cancelo el hilo
-            this.cancellationTokenSource.Cancel();
+            if (this.cancellationTokenSource is not null)
+            {
+                this.cancellationTokenSource.Cancel();               
+            }
+            
         }
 
     }

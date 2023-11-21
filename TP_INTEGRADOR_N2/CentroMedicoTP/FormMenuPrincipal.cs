@@ -134,8 +134,16 @@ namespace CentroMedicoTP
             }
             else
             {
-                //cancelo el hilo
-                this.centroMedico.CancelarActualizacion();
+                try
+                {
+                    //cancelo el hilo
+                    this.centroMedico.CancelarActualizacion();
+                }
+                catch (Exception ex)//LE PONGO UN CACHT PARA EN CASO QUE NO PUEDA CARGARLO EN LA BASE DE DATOS SE LOGRE CERRAR SIN PROBLEMAS
+                {
+                    MessageBox.Show($"Cerrando app, la aplicacion no logro conectarse a la BASE DE DATOS\n{ex.Message}");
+                }
+                
             }
         }      
     }

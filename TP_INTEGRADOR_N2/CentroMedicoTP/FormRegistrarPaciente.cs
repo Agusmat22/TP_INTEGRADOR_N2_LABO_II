@@ -109,12 +109,12 @@ namespace CentroMedicoTP
                 }
                 else
                 {
-                    throw new CampoVacioExcepcion("Error, el formulario contiene campos vacios");
+                    throw new CampoVacioException("Error, el formulario contiene campos vacios");
                 }
                
 
             }
-            catch (CampoVacioExcepcion ex)
+            catch (CampoVacioException ex)
             {
                 MessageBox.Show(ex.Message);
             }

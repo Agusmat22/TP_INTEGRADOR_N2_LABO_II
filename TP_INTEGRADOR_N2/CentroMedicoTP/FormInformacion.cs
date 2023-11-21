@@ -11,7 +11,6 @@ using System.Windows.Forms;
 
 namespace CentroMedicoTP
 {
-    //public delegate void SeleccionadorItemListBox(object obj, EventArgs even);
     public partial class FormInformacion : Form
     {
 

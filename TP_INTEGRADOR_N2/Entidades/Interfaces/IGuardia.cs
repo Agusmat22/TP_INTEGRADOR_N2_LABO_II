@@ -8,8 +8,7 @@ using System.Threading.Tasks;
 namespace Entidades.Interfaces
 {
     public interface IGuardia
-    {
-        
+    {       
         public bool EnEspera { get; set; }//sirve para consultar si el paciente se encuentra en espera
     }
 }

@@ -57,10 +57,7 @@ namespace Entidades.BaseDeDatos
                         {
                             medico.Especialidad = especialidad;
                         }
-                        else
-                        {
-                            //ACA LANZAR UNA EXPCECION
-                        }
+                        medico.FechaModificacion = reader.GetDateTime(7);
 
                         listaMedicos.Add(medico);
                     }
@@ -78,63 +75,6 @@ namespace Entidades.BaseDeDatos
 
         }
 
-        /*
-        /// <summary>
-        /// Obtiene un medico de DB por su ID
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns>Un objeto del tipo Medico</returns>
-        /// <exception cref="ArgumentNullException"></exception>
-        /// <exception cref="Exception"></exception>
-        public static Medico ObtenerMedicoPorId(int id)
-        {
-            try
-            {
-                string sentencia = "SELECT * FROM Medicos WHERE id_medico=@id_medico";
-
-                using (SqlConnection connection = new SqlConnection())
-                {
-                    SqlCommand command = new SqlCommand(sentencia, connection);
-                    command.Parameters.AddWithValue("id_medico", id);
-
-                    connection.Open();
-
-                    SqlDataReader reader = command.ExecuteReader();
-
-                    if (reader.Read()) 
-                    { 
-                        Medico medico = new Medico();
-
-                        medico.Id = reader.GetInt32(0);
-                        medico.Nombre = reader.GetString(1);
-                        medico.Apellido = reader.GetString(2);
-                        medico.Dni = reader.GetInt32(3);
-                        medico.FechaNacimiento = reader.GetDateTime(4);
-                        medico.NumeroMatricula = reader.GetInt64(5);
-
-                        if (Enum.TryParse(reader.GetString(6), out EEspecialidad especialidad))
-                        {
-                            medico.Especialidad = especialidad;                          
-                        }
-
-                        return medico;
-                    }
-
-                    throw new ArgumentNullException("No se encontro el medico");
-                }
-            }
-            catch (ArgumentNullException)            
-            {
-                throw;          
-            }
-            catch(Exception)
-            {
-                throw;
-            }
-
-        }
-
-        */
         /// <summary>
         /// Guarda un medico en la DB
         /// </summary>
