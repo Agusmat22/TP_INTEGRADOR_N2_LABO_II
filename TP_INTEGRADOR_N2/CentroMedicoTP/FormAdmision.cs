@@ -19,29 +19,23 @@ namespace CentroMedicoTP
         private CentroMedico centroMedico;
         private RestablecerMenuPrincipal restablecer;
         private Paciente pacienteEncotrado;
-        private ActualizarListboxGenerico listBox;
-        //private ActualizarListboxGenerico actualizarListBox;
 
-        public FormAdmision(CentroMedico centroMedico, RestablecerMenuPrincipal restablecer,ActualizarListboxGenerico listBox)
+        public FormAdmision(CentroMedico centroMedico, RestablecerMenuPrincipal restablecer)
         {
             InitializeComponent();
             this.centroMedico = centroMedico;
             this.restablecer = restablecer;
-            this.listBox = listBox;
         }
 
         private void FormAdmision_Load(object sender, EventArgs e)
         {
-            foreach (EEspecialidad item in Enum.GetValues(typeof(EEspecialidad)))
-            {
-                this.cmbTipoGuardia.Items.Add(item);
-            }
+        
+            this.RestablecerGroupBox(); //bloqueo el groupBox
 
-            this.RestablecerGroupBox();
+            this.AgregarPacientesListBox(); //muestro los pacientes
 
-            this.listBox = this.Actualizar;
-            this.listBox();
-            //this.centroMedico.OnActualizarLista += this.ActualizarListBox;
+            //le agrego un manejador al evento para que al momento que haya una modificacion, lo actualice
+            this.centroMedico.OnActualizarLista += this.Actualizar;
 
 
         }
@@ -64,19 +58,6 @@ namespace CentroMedicoTP
 
         }
 
-        /// <summary>
-        /// Actualiza la listBox y limpia el groupBox
-        /// </summary>
-        private void ActualizarElementos()
-        {
-            //this.grpCargarPaciente.Enabled = false;
-            this.lstbPacientesEnEspera.DataSource = null;
-            //le paso una funcion lambda para que me traiga solo los pacientes que no estan atendidos
-            this.lstbPacientesEnEspera.DataSource = (centroMedico.Pacientes).Where(paciente => paciente.EnEspera == true).ToList();
-
-            this.RestablecerGroupBox();
-        }
-
         private void btnVolver_Click(object sender, EventArgs e)
         {
             this.restablecer();
@@ -85,7 +66,11 @@ namespace CentroMedicoTP
 
 
 
-
+        /// <summary>
+        /// Obtendra el paciente buscado
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnBuscar_Click(object sender, EventArgs e)
         {
 
@@ -106,12 +91,7 @@ namespace CentroMedicoTP
                         tipoBusqueda = "dni";
 
                     }
-                    /*else
-                    {
-                        this.txtAfiliadoEncontrado.Text = "Error, debe seleccionar el tipo de busqueda";
-                        this.txtAfiliadoEncontrado.BackColor = Color.Red;
-                        break;
-                    }*/
+
                 }
                 else if (item is TextBox txt && txt == this.txtDatosBusqueda)
                 {
@@ -174,23 +154,34 @@ namespace CentroMedicoTP
         {
             try
             {
-                //cambio la propiedad, para que figure que no esta atendido
-                this.pacienteEncotrado.EnEspera = true;
-                //modifico en la DB para que el medico pueda visualizar los pacientes en guardia
-                ADOPacientes.Modificar(this.pacienteEncotrado);
-                centroMedico.Agregar(this.pacienteEncotrado);
+                //valido que el paciente NO  este en espera
+                if (!this.pacienteEncotrado.EnEspera)
+                {
 
-                this.ActualizarElementos(); //ACTUALIZA LA LISTA DE FORMA MANUAL Y BLOQUEA EL GROUPBOX
+                    this.pacienteEncotrado.FechaModificacion = DateTime.Now;
+                    this.pacienteEncotrado.EnEspera = true;
+                    //ADOPacientes.Modificar(this.pacienteEncotrado, true);
+                    ADOPacientes.Modificar(this.pacienteEncotrado);
+
+                    this.RestablecerGroupBox();
+                }
+                else
+                {
+                    throw new Exception("ERROR El paciente ya se encuentra en sala de espera.");
+                }
+
+
             }
-            catch (FalloModificarPacienteException ex)
+            catch (FalloModificarRegistroException ex)
             {
-                this.txtAfiliadoEncontrado.Text = ex.Message;
-                this.txtAfiliadoEncontrado.BackColor = Color.Red;
+                MessageBox.Show(ex.Message,"Error");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error");
             }
 
 
-            //actualizo la listBox Y REVISAR ESTA PARTE PORQUE DEBO AGREGARLA A LA DB
-            //this.ActualizarElementos();
         }
 
         /// <summary>
@@ -201,7 +192,6 @@ namespace CentroMedicoTP
             this.txtDatosBusqueda.Clear();
             this.txtAfiliadoEncontrado.Clear();
             this.txtAfiliadoEncontrado.BackColor = Color.White;
-            this.cmbTipoGuardia.SelectedIndex = 0;
             this.rdbNumAfiliado.Checked = true;
             this.btnIngresar.Enabled = false;
             this.grpCargarPaciente.Enabled = false;
@@ -209,29 +199,29 @@ namespace CentroMedicoTP
 
         }
 
+        /// <summary>
+        /// Actualizara el listBox mediante un subProceso (hilo)
+        /// </summary>
         public void Actualizar()
+        {
+            if (this.InvokeRequired)
+            {
+                this.BeginInvoke(Actualizar);
+            }
+            else
+            {
+                this.AgregarPacientesListBox();
+            }
+
+        }
+
+        /// <summary>
+        /// Actualiza el listBox al invocarse por unica vez
+        /// </summary>
+        public void AgregarPacientesListBox()
         {
             this.lstbPacientesEnEspera.DataSource = null;
             this.lstbPacientesEnEspera.DataSource = this.centroMedico.Pacientes.Where(paciente => paciente.EnEspera == true).ToList();
         }
-
-        /*
-        public void ActualizarListBox(List<Paciente> pacientes,int intervaloTiempo)
-        {
-            if (this.InvokeRequired)
-            {
-                this.BeginInvoke(ActualizarListBox,pacientes,intervaloTiempo);
-            }
-            else
-            {
-                if (this.centroMedico.Pacientes.Count > 0)
-                {
-                    this.lstbPacientesEnEspera.DataSource = null;
-                    this.lstbPacientesEnEspera.DataSource = pacientes.Where(pacientes => pacientes.EnEspera == true).ToList();
-                    
-                }
-            }
-
-        }*/
     }
 }

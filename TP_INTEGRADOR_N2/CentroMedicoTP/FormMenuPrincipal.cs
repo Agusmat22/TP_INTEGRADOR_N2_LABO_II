@@ -7,14 +7,11 @@ namespace CentroMedicoTP
 {
     public delegate void RestablecerMenuPrincipal();
 
-    //VOY A DIVIDIR LAS TAREA EN UNA PARTE QUE ACTUALICE LA LISTA DE LA CLASE Y OTRA QUE ACTUALICE LOS LISTBOX
-    public delegate void ActualizarListboxGenerico();
 
     public partial class FormMenuPrincipal : Form
     {
         private CentroMedico centroMedico;
         private RestablecerMenuPrincipal restablecerMenu;
-        private ActualizarListboxGenerico listBox;
 
 
         public FormMenuPrincipal()
@@ -26,19 +23,21 @@ namespace CentroMedicoTP
 
         private void FormMenuPrincipal_Load(object sender, EventArgs e)
         {
-            centroMedico.Pacientes = ADOPacientes.ObtenerLista();
+            try
+            {
+                centroMedico.Pacientes = ADOPacientes.ObtenerLista();
 
-            centroMedico.Medicos = ADOMedicos.ObtenerMedicosTotales(); //--> SOLO INICIO LOS MEDICOS YA QUE LOS PACIENTES SE ESTARAN ACTUALIZANDO
-   
+                centroMedico.Medicos = ADOMedicos.ObtenerMedicosTotales(); //--> SOLO INICIO LOS MEDICOS YA QUE LOS PACIENTES SE ESTARAN ACTUALIZANDO
+                                                                           //Inicio el hilo para actualizar la lista cuando sucede una modificacion
+                this.centroMedico.IniciarActualizacion();
+            }
+            catch (Exception ex) 
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+
             this.restablecerMenu = this.AgregarTitulo;
-
-            //AGREGO MANEJADOR AL DELEGADO
-            //this.listBox = this.ActualizarListBox;
-
-            this.centroMedico.OnActualizarLista += this.ActualizarPacientes;
-
-            //Inicio el hilo para actualizar la lista cuando sucede una modificacion
-            this.centroMedico.IniciarActualizacion();
 
         }
 
@@ -84,14 +83,14 @@ namespace CentroMedicoTP
 
         private void btnAdmision_Click(object sender, EventArgs e)
         {
-            FormAdmision admision = new FormAdmision(this.centroMedico, this.restablecerMenu,this.listBox);
+            FormAdmision admision = new FormAdmision(this.centroMedico, this.restablecerMenu);
             this.MostrarFormulario(admision);
 
         }
 
         private void btnRegistrar_Click(object sender, EventArgs e)
         {
-            FormRegistrarPaciente registrarPaciente = new FormRegistrarPaciente("REGISTRAR PACIENTE", centroMedico, restablecerMenu);
+            FormRegistrarPaciente registrarPaciente = new FormRegistrarPaciente(centroMedico, restablecerMenu);
             this.MostrarFormulario(registrarPaciente);
 
         }
@@ -138,37 +137,6 @@ namespace CentroMedicoTP
                 //cancelo el hilo
                 this.centroMedico.CancelarActualizacion();
             }
-        }
-
-        /*
-        private void ActualizarListBox(ListBox listBox,Func<Paciente,bool> condicion)
-        {
-
-            listBox.DataSource = null;
-            //agrego la lista a un listBox dependiendo la condicion
-            listBox.DataSource = this.centroMedico.Pacientes.Where(condicion).ToList();
-        }*/
-
-        //PROBADOOOO
-        public void ActualizarPacientes(List<Paciente> pacientes, int intervaloTiempo)
-        {
-            if (this.InvokeRequired)
-            {
-                this.BeginInvoke(ActualizarPacientes, pacientes, intervaloTiempo);
-            }
-            else
-            {
-                if (this.listBox is not null && this.centroMedico.Pacientes.Count > 0)
-                {/*
-                    this.lstbPacientesEnEspera.DataSource = null;
-                    this.lstbPacientesEnEspera.DataSource = pacientes.Where(pacientes => pacientes.EnEspera == true).ToList();
-                    */
-                    this.listBox();
-                }
-            }
-
-        }
-
-
+        }      
     }
 }

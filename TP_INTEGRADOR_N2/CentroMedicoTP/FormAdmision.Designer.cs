@@ -46,8 +46,6 @@
             txtAfiliadoEncontrado = new TextBox();
             label3 = new Label();
             txtDatosBusqueda = new TextBox();
-            cmbTipoGuardia = new ComboBox();
-            label7 = new Label();
             grpCargarPaciente = new GroupBox();
             btnIngresar = new Button();
             grbBuscarPaciente.SuspendLayout();
@@ -122,7 +120,7 @@
             // 
             label6.AutoSize = true;
             label6.Font = new Font("Arial", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            label6.Location = new Point(527, 51);
+            label6.Location = new Point(524, 81);
             label6.Name = "label6";
             label6.Size = new Size(119, 16);
             label6.TabIndex = 30;
@@ -138,7 +136,7 @@
             grbBuscarPaciente.Controls.Add(txtAfiliadoEncontrado);
             grbBuscarPaciente.Controls.Add(label3);
             grbBuscarPaciente.Controls.Add(txtDatosBusqueda);
-            grbBuscarPaciente.Location = new Point(26, 109);
+            grbBuscarPaciente.Location = new Point(19, 22);
             grbBuscarPaciente.Name = "grbBuscarPaciente";
             grbBuscarPaciente.Size = new Size(257, 178);
             grbBuscarPaciente.TabIndex = 29;
@@ -223,37 +221,14 @@
             txtDatosBusqueda.Size = new Size(223, 23);
             txtDatosBusqueda.TabIndex = 15;
             // 
-            // cmbTipoGuardia
-            // 
-            cmbTipoGuardia.Cursor = Cursors.Hand;
-            cmbTipoGuardia.DropDownStyle = ComboBoxStyle.DropDownList;
-            cmbTipoGuardia.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            cmbTipoGuardia.FormattingEnabled = true;
-            cmbTipoGuardia.Location = new Point(26, 53);
-            cmbTipoGuardia.Name = "cmbTipoGuardia";
-            cmbTipoGuardia.Size = new Size(257, 23);
-            cmbTipoGuardia.TabIndex = 28;
-            // 
-            // label7
-            // 
-            label7.AutoSize = true;
-            label7.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            label7.Location = new Point(102, 31);
-            label7.Name = "label7";
-            label7.Size = new Size(107, 19);
-            label7.TabIndex = 27;
-            label7.Text = "Tipo de guardia:";
-            // 
             // grpCargarPaciente
             // 
             grpCargarPaciente.BackColor = SystemColors.GradientInactiveCaption;
             grpCargarPaciente.Controls.Add(btnIngresar);
             grpCargarPaciente.Controls.Add(grbBuscarPaciente);
-            grpCargarPaciente.Controls.Add(label7);
-            grpCargarPaciente.Controls.Add(cmbTipoGuardia);
-            grpCargarPaciente.Location = new Point(433, 70);
+            grpCargarPaciente.Location = new Point(430, 100);
             grpCargarPaciente.Name = "grpCargarPaciente";
-            grpCargarPaciente.Size = new Size(308, 349);
+            grpCargarPaciente.Size = new Size(308, 269);
             grpCargarPaciente.TabIndex = 31;
             grpCargarPaciente.TabStop = false;
             // 
@@ -261,7 +236,7 @@
             // 
             btnIngresar.BackColor = SystemColors.ScrollBar;
             btnIngresar.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            btnIngresar.Location = new Point(26, 302);
+            btnIngresar.Location = new Point(19, 215);
             btnIngresar.Name = "btnIngresar";
             btnIngresar.Size = new Size(260, 30);
             btnIngresar.TabIndex = 32;
@@ -292,7 +267,6 @@
             grbBuscarPaciente.ResumeLayout(false);
             grbBuscarPaciente.PerformLayout();
             grpCargarPaciente.ResumeLayout(false);
-            grpCargarPaciente.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -313,8 +287,6 @@
         private TextBox txtAfiliadoEncontrado;
         private Label label3;
         private TextBox txtDatosBusqueda;
-        private ComboBox cmbTipoGuardia;
-        private Label label7;
         private GroupBox grpCargarPaciente;
         private Button btnIngresar;
         private ImageList imageList1;

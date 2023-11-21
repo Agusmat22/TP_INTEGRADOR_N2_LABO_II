@@ -30,30 +30,31 @@
         {
             components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormInformacion));
-            btnImportar = new Button();
+            btnExportar = new Button();
             imageList1 = new ImageList(components);
             label1 = new Label();
             lstbMedicos = new ListBox();
             btnEliminar = new Button();
-            btnModificar = new Button();
             label3 = new Label();
             lstbPacientes = new ListBox();
             label6 = new Label();
+            btnImportar = new Button();
+            toolTip = new ToolTip(components);
             SuspendLayout();
             // 
-            // btnImportar
+            // btnExportar
             // 
-            btnImportar.BackColor = Color.White;
-            btnImportar.Cursor = Cursors.Hand;
-            btnImportar.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            btnImportar.ImageIndex = 0;
-            btnImportar.ImageList = imageList1;
-            btnImportar.Location = new Point(351, 256);
-            btnImportar.Name = "btnImportar";
-            btnImportar.Size = new Size(50, 49);
-            btnImportar.TabIndex = 42;
-            btnImportar.UseVisualStyleBackColor = false;
-            btnImportar.Click += btnImportar_Click;
+            btnExportar.BackColor = Color.White;
+            btnExportar.Cursor = Cursors.Hand;
+            btnExportar.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            btnExportar.ImageIndex = 0;
+            btnExportar.ImageList = imageList1;
+            btnExportar.Location = new Point(348, 192);
+            btnExportar.Name = "btnExportar";
+            btnExportar.Size = new Size(50, 49);
+            btnExportar.TabIndex = 42;
+            btnExportar.UseVisualStyleBackColor = false;
+            btnExportar.Click += btnExportar_Click;
             // 
             // imageList1
             // 
@@ -61,6 +62,7 @@
             imageList1.ImageStream = (ImageListStreamer)resources.GetObject("imageList1.ImageStream");
             imageList1.TransparentColor = Color.Transparent;
             imageList1.Images.SetKeyName(0, "import.png");
+            imageList1.Images.SetKeyName(1, "importar.png");
             // 
             // label1
             // 
@@ -86,25 +88,13 @@
             btnEliminar.BackColor = Color.IndianRed;
             btnEliminar.Cursor = Cursors.Hand;
             btnEliminar.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            btnEliminar.Location = new Point(338, 192);
+            btnEliminar.Location = new Point(335, 144);
             btnEliminar.Name = "btnEliminar";
             btnEliminar.Size = new Size(75, 42);
             btnEliminar.TabIndex = 39;
             btnEliminar.Text = "Eliminar";
             btnEliminar.UseVisualStyleBackColor = false;
             btnEliminar.Click += btnEliminar_Click;
-            // 
-            // btnModificar
-            // 
-            btnModificar.BackColor = Color.DarkSeaGreen;
-            btnModificar.Cursor = Cursors.Hand;
-            btnModificar.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            btnModificar.Location = new Point(338, 144);
-            btnModificar.Name = "btnModificar";
-            btnModificar.Size = new Size(75, 42);
-            btnModificar.TabIndex = 38;
-            btnModificar.Text = "Modificar";
-            btnModificar.UseVisualStyleBackColor = false;
             // 
             // label3
             // 
@@ -136,6 +126,20 @@
             label6.TabIndex = 35;
             label6.Text = "Registros";
             // 
+            // btnImportar
+            // 
+            btnImportar.BackColor = Color.White;
+            btnImportar.Cursor = Cursors.Hand;
+            btnImportar.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            btnImportar.ImageIndex = 1;
+            btnImportar.ImageList = imageList1;
+            btnImportar.Location = new Point(348, 247);
+            btnImportar.Name = "btnImportar";
+            btnImportar.Size = new Size(50, 49);
+            btnImportar.TabIndex = 43;
+            btnImportar.UseVisualStyleBackColor = false;
+            btnImportar.Click += btnImportar_Click;
+            // 
             // FormInformacion
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -143,10 +147,10 @@
             BackColor = SystemColors.GradientInactiveCaption;
             ClientSize = new Size(752, 473);
             Controls.Add(btnImportar);
+            Controls.Add(btnExportar);
             Controls.Add(label1);
             Controls.Add(lstbMedicos);
             Controls.Add(btnEliminar);
-            Controls.Add(btnModificar);
             Controls.Add(label3);
             Controls.Add(lstbPacientes);
             Controls.Add(label6);
@@ -159,14 +163,15 @@
 
         #endregion
 
-        private Button btnImportar;
+        private Button btnExportar;
         private Label label1;
         private ListBox lstbMedicos;
         private Button btnEliminar;
-        private Button btnModificar;
         private Label label3;
         private ListBox lstbPacientes;
         private Label label6;
         private ImageList imageList1;
+        private Button btnImportar;
+        private ToolTip toolTip;
     }
 }

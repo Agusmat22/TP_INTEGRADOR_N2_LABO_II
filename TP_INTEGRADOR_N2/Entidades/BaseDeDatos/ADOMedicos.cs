@@ -23,7 +23,7 @@ namespace Entidades.BaseDeDatos
         /// Obtiene todos los medicos de la DB
         /// </summary>
         /// <returns></returns>
-        /// <exception cref="FalloBusquedaPacienteException"></exception>
+        /// <exception cref="Exception"></exception>
         public static List<Medico> ObtenerMedicosTotales()
         {
 
@@ -72,19 +72,20 @@ namespace Entidades.BaseDeDatos
             }
             catch(Exception ex)
             {
-                throw new FalloBusquedaPacienteException("Error al leer los medicos de la DB");
+                throw new Exception("Error al obtener los medicos de la base de datos",ex);
 
             }
 
         }
 
-
+        /*
         /// <summary>
         /// Obtiene un medico de DB por su ID
         /// </summary>
         /// <param name="id"></param>
         /// <returns>Un objeto del tipo Medico</returns>
-        /// <exception cref="FalloBusquedaPacienteException"></exception>
+        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="Exception"></exception>
         public static Medico ObtenerMedicoPorId(int id)
         {
             try
@@ -122,25 +123,29 @@ namespace Entidades.BaseDeDatos
                     throw new ArgumentNullException("No se encontro el medico");
                 }
             }
-            catch (Exception ex)            
+            catch (ArgumentNullException)            
             {
-                throw new FalloBusquedaPacienteException("Error al obtener el medico por su ID");
-            
+                throw;          
             }
-            
-            
-            
-            
-
+            catch(Exception)
+            {
+                throw;
+            }
 
         }
 
+        */
+        /// <summary>
+        /// Guarda un medico en la DB
+        /// </summary>
+        /// <param name="medico"></param>
+        /// <exception cref="FalloGuardarRegistroException"></exception>
         public static void Guardar(Medico medico)
         {
             try
             {
-                string sentencia = "INSERT INTO Medicos (nombre,apellido,dni,fecha_nacimiento,matricula,especialidad)" +
-                    "VALUES (@nombre,@apellido,@dni,@fecha_nacimiento,@matricula,@especialidad)";
+                string sentencia = "INSERT INTO Medicos (nombre,apellido,dni,fecha_nacimiento,matricula,especialidad,fecha_modificacion)" +
+                    "VALUES (@nombre,@apellido,@dni,@fecha_nacimiento,@matricula,@especialidad,@fecha_modificacion)";
 
                 using (SqlConnection connection = new SqlConnection(ADOMedicos.stringConnection))
                 {
@@ -152,23 +157,44 @@ namespace Entidades.BaseDeDatos
                     command.Parameters.AddWithValue("fecha_nacimiento", medico.FechaNacimiento);
                     command.Parameters.AddWithValue("matricula", medico.NumeroMatricula);
                     command.Parameters.AddWithValue("especialidad", medico.Especialidad.ToString());
+                    command.Parameters.AddWithValue("fecha_modificacion", medico.FechaModificacion);
 
                     connection.Open();
 
                     command.ExecuteNonQuery();
-
-
                 }
-
-
             }
             catch
             {
-                throw new InvalidOperationException("Error al guardar el medico en la DB");
-
+                throw new FalloGuardarRegistroException("Error al guardar el medico en la DB");
             }
 
+        }
 
+        /// <summary>
+        /// Elimina un medico de la base de datos
+        /// </summary>
+        /// <param name="medico"></param>
+        /// <exception cref="Exception"></exception>
+        public static void Eliminar(Medico medico)
+        {
+            try
+            {
+                string sentencia = "DELETE FROM Medicos WHERE id_medico=@id_medico";
+
+                using (SqlConnection connection = new SqlConnection(ADOMedicos.stringConnection))
+                {
+                    SqlCommand command = new SqlCommand(sentencia, connection);
+                    command.Parameters.AddWithValue("id_medico", medico.Id);
+
+                    connection.Open();
+                    command.ExecuteNonQuery();
+                }
+            }
+            catch(Exception ex)
+            {
+                throw new Exception("Error al eliminar el medico en la base de datos",ex);
+            }
         }
     }
 }

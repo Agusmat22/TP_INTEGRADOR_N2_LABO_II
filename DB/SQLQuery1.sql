@@ -26,7 +26,7 @@ dni INT NOT NULL,
 fecha_nacimiento DATE NOT NULL,
 matricula BIGINT NOT NULL, --NUMERO DE MATRICULA
 especialidad VARCHAR(60) NOT NULL,
-fecha_alta DATE NOT NULL,
+fecha_modificacion DATETIME NOT NULL,
 
 
 CONSTRAINT pk_id_medico PRIMARY KEY (id_medico)
@@ -57,7 +57,26 @@ INSERT INTO Pacientes (nombre,apellido,dni,fecha_nacimiento,numero,enEspera,obra
 VALUES ('jorgeee','leo',123,'2001-10-15',3311,1,'UP','2022-01-10 09:30:00')
 
 INSERT INTO Pacientes (nombre,apellido,dni,fecha_nacimiento,numero,enEspera,obra_social,fecha_modificacion) 
-VALUES ('riquelme','malo',123,'2001-10-15',3311,1,'UP','2023-11-10 12:44:00')
+VALUES ('riquelme','malo',123,'2001-10-15',3311,1,'UP','2023-11-10 15:17:00')
+
+INSERT INTO Pacientes (nombre,apellido,dni,fecha_nacimiento,numero,enEspera,obra_social,fecha_modificacion) 
+VALUES ('riquelme','malo',123,'2001-10-15',3311,1,'UP','2023-11-10 18:27:00')
+
+INSERT INTO Pacientes (nombre,apellido,dni,fecha_nacimiento,numero,enEspera,obra_social,fecha_modificacion) 
+VALUES ('riquelme','malo',123,'2001-10-15',3311,1,'UP','2023-11-10 18:29:00')
+
+INSERT INTO Pacientes (nombre,apellido,dni,fecha_nacimiento,numero,enEspera,obra_social,fecha_modificacion) 
+VALUES ('PRUEBA SI FUNCIONA','malo',123,'2001-10-15',3311,1,'UP','2023-11-17 19:21:10')
+
+
+
+IF NOT EXISTS(SELECT numero FROM Pacientes WHERE numero = 3311)
+INSERT INTO Pacientes (nombre,apellido,dni,fecha_nacimiento,numero,enEspera,obra_social,fecha_modificacion) 
+VALUES ('PRUEBA SI FUNCIONA','malo',123,'2001-10-15',3311,1,'UP','2023-11-17 19:21:10')
+ELSE
+PRINT 'Este paciente esta repetido';
+
+DELETE FROM Pacientes WHERE id = 15
 
 SELECT * FROM Pacientes WHERE fecha_modificacion > '2022-01-01'
 
@@ -77,3 +96,9 @@ INSERT INTO Medicos (nombre,apellido,dni,fecha_nacimiento,matricula,especialidad
 VALUES ('Julian','Alvarez',1148569,'2001-09-15',45879,'Clinico','2022-01-10')
 
 SELECT * FROM Pacientes WHERE fecha_modificacion > '2023-10-10'
+
+
+--REALIZA EL BACKUP SIN PROBLEMAS
+BACKUP DATABASE CentroMedicoTP
+TO DISK = 'C:\TP_INTEGRADOR_N2_LABO_II\DB\CentroMedicoTP.bak'
+WITH FORMAT, INIT;

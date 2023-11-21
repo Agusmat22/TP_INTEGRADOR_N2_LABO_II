@@ -39,6 +39,7 @@
             label3 = new Label();
             btnVolver = new Button();
             btnDiagnosticar = new Button();
+            lblMatricula = new Label();
             SuspendLayout();
             // 
             // cmbMedicos
@@ -111,6 +112,7 @@
             btnHistoriaClinica.TabIndex = 6;
             btnHistoriaClinica.Text = "Hc";
             btnHistoriaClinica.UseVisualStyleBackColor = true;
+            btnHistoriaClinica.Click += btnHistoriaClinica_Click;
             // 
             // rtbDiagnostico
             // 
@@ -149,6 +151,17 @@
             btnDiagnosticar.TabIndex = 10;
             btnDiagnosticar.Text = "Diagnosticar";
             btnDiagnosticar.UseVisualStyleBackColor = true;
+            btnDiagnosticar.Click += btnDiagnosticar_Click;
+            // 
+            // lblMatricula
+            // 
+            lblMatricula.AutoSize = true;
+            lblMatricula.Font = new Font("Arial Rounded MT Bold", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
+            lblMatricula.Location = new Point(12, 25);
+            lblMatricula.Name = "lblMatricula";
+            lblMatricula.Size = new Size(85, 17);
+            lblMatricula.TabIndex = 11;
+            lblMatricula.Text = "Matricula: ";
             // 
             // FormAtencion
             // 
@@ -156,6 +169,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.GradientInactiveCaption;
             ClientSize = new Size(752, 473);
+            Controls.Add(lblMatricula);
             Controls.Add(btnDiagnosticar);
             Controls.Add(btnVolver);
             Controls.Add(label3);
@@ -187,5 +201,6 @@
         private Label label3;
         private Button btnVolver;
         private Button btnDiagnosticar;
+        private Label lblMatricula;
     }
 }

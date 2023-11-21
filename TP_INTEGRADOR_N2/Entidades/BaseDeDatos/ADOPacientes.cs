@@ -19,12 +19,12 @@ namespace Entidades.BaseDeDatos
             ADOPacientes.stringConnection = "Server = .; Database = CentroMedicoTP; Trusted_Connection = True;";
             ADOPacientes.fechaComparacion = DateTime.Now;
         }
-        
+
         /// <summary>
         /// Obtiene una lista del total de pacientes almacenados en la DB
         /// </summary>
         /// <returns></returns>
-        /// <exception cref="FalloBusquedaPacienteException"></exception>
+        /// <exception cref="Exception"></exception>
         public static List<Paciente> ObtenerLista()
         {
 
@@ -68,6 +68,9 @@ namespace Entidades.BaseDeDatos
                             paciente.HistoriaClinica = reader.GetString(8);
                         }
 
+                        paciente.FechaModificacion = reader.GetDateTime(9);
+
+
                         listaPacientes.Add(paciente);
                     }
 
@@ -79,13 +82,17 @@ namespace Entidades.BaseDeDatos
             }
             catch (Exception ex) 
             {
-                throw new FalloBusquedaPacienteException("Error al leer los pacientes de la DB",ex);
+                throw new Exception("Error al leer los pacientes de la DB",ex);
 
             }
 
         }
 
-
+        /// <summary>
+        /// Obtiene pacientes que hayan sido modificados recientemente
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
         public static List<Paciente> ObtenerModificados()
         {
             try
@@ -135,6 +142,9 @@ namespace Entidades.BaseDeDatos
                                 paciente.HistoriaClinica = reader.GetString(8);
                             }
 
+                            //ACA ESTABA EL ERROR
+                            paciente.FechaModificacion = reader.GetDateTime(9);
+
                             listaPacientes.Add(paciente);
                         }
 
@@ -152,39 +162,33 @@ namespace Entidades.BaseDeDatos
 
 
             }
-            catch(Exception)
+            catch(Exception ex)
             {
-                throw;
+                throw new Exception("Error al guardar el paciente modificado",ex);
             }
         }
 
         
+
         /// <summary>
-        /// Devuelve el paciente encontrado por su clave valor
+        /// Obtiene un paciente de la DB por su ID
         /// </summary>
         /// <param name="clave"></param>
         /// <param name="valor"></param>
         /// <returns></returns>
         /// <exception cref="FalloBusquedaPacienteException"></exception>
-        public static Paciente Obtener(string clave,int valor)
+        public static Paciente Obtener(int id)
         {
             try
             {
-                string sentencia = "SELECT * FROM Pacientes WHERE ";
+                string sentencia = "SELECT * FROM Pacientes WHERE id=@id ";
                 string columna;
-
-             
-                clave.ToLower();
-
-                sentencia += $"{clave} = @{clave}";
-
-
-
+            
                 using (SqlConnection connection = new SqlConnection(ADOPacientes.stringConnection))
                 {
                     SqlCommand command = new SqlCommand(sentencia, connection);
 
-                    command.Parameters.AddWithValue($"{clave}", valor);
+                    command.Parameters.AddWithValue("id", id);
 
                     connection.Open();
 
@@ -223,7 +227,7 @@ namespace Entidades.BaseDeDatos
                     }
                     else
                     {
-                        throw new PacienteNoEncontradoException("No se encontro el paciente");
+                        throw new ArgumentNullException("No se encontro el paciente");
                     }
                     
                     return paciente;
@@ -232,29 +236,31 @@ namespace Entidades.BaseDeDatos
 
 
             }
-            catch (PacienteNoEncontradoException ex)
+            catch (ArgumentNullException)
             {
-                throw ex;
+                throw;
             }
-            catch (Exception) 
+            catch (Exception ex) 
             {
-                throw new FalloBusquedaPacienteException("Error al buscar el paciente");
+                throw new Exception("Error al obtener paciente",ex);
             }
         }
 
 
 
         /// <summary>
-        /// Guarda en la DB un paciente nuevo
+        /// Guarda en la DB un paciente nuevo que no exista
         /// </summary>
         /// <param name="paciente"></param>
-        /// <exception cref="FalloObtenerPacienteException"></exception>
+        /// <exception cref="FalloGuardarRegistroException"></exception>
         public static void Guardar(Paciente paciente)
         {
             try
             {
-                string sentencia = "INSERT INTO Pacientes (nombre,apellido,dni,fecha_nacimiento,numero,enEspera,obra_social,historia_clinica,fecha_alta)" +
-                    "VALUES (@nombre,@apellido,@dni,@fecha_nacimiento,@numero,@enEspera,@obra_social,@historia_clinica,@fecha_alta)";
+                //VALIDO QUE NO EXISTA EL PACIENTE CON EL NUMERO DE AFILIADO
+                string sentencia = "IF NOT EXISTS(SELECT numero FROM Pacientes WHERE numero=@numero)" +
+                    "INSERT INTO Pacientes (nombre,apellido,dni,fecha_nacimiento,numero,enEspera,obra_social,historia_clinica,fecha_modificacion)" +
+                    "VALUES (@nombre,@apellido,@dni,@fecha_nacimiento,@numero,@enEspera,@obra_social,@historia_clinica,@fecha_modificacion)";
 
                 using (SqlConnection connection = new SqlConnection(ADOPacientes.stringConnection))
                 {
@@ -271,29 +277,39 @@ namespace Entidades.BaseDeDatos
                     //PREGUNTAR AL PROFE
                     command.Parameters.AddWithValue("historia_clinica", paciente.HistoriaClinica ?? (object)DBNull.Value);
                     
-                    command.Parameters.AddWithValue("fecha_alta", paciente.FechaModificacion);
+                    command.Parameters.AddWithValue("fecha_modificacion", paciente.FechaModificacion);
                     //command.Parameters.AddWithValue("historia_clinica", paciente.HistoriaClinica);                       
                     
 
                     connection.Open();
 
-                    command.ExecuteNonQuery();
+                    //valido las filas afectadas para saber si lo guardo o no
+                    int cantidadDeFilasAfectadas = command.ExecuteNonQuery();
+
+                    if (cantidadDeFilasAfectadas == -1)
+                    {
+                        throw new FalloGuardarRegistroException("No se pudo guardar el paciente ya que existen registros con el mismo numerod de afiliado");
+                    }
 
                 }
             }
-            catch 
+            catch(FalloGuardarRegistroException)
             {
-                throw new FalloObtenerPacienteException("Error al guardar un paciente");
-
+                throw;
             }
+            catch(Exception ex)
+            {
+                throw new Exception("Error al intertar guardar el paciente",ex);
+            }
+           
 
         }
 
         /// <summary>
-        /// REVISAR
+        /// GUARDA UN PACIENTE MODIFICADO EN LA BASE DE DATOS
         /// </summary>
         /// <param name="pacienteModificado"></param>
-        /// <exception cref="FalloModificarPacienteException"></exception>
+        /// <exception cref="FalloModificarRegistroException"></exception>
         public static void Modificar(Paciente pacienteModificado)
         {
             try
@@ -305,7 +321,7 @@ namespace Entidades.BaseDeDatos
                     command.Connection = connection;
 
                     //OBTENGO EL PACIENTE DE LA DB PARA BUSCAR LAS DIFERENCIAS Y MODIFICARLO
-                    Paciente pacienteOriginal = ADOPacientes.Obtener("id", pacienteModificado.Id);
+                    Paciente pacienteOriginal = ADOPacientes.Obtener(pacienteModificado.Id);
 
                     //De esta manera hago mas eficiente y no arbitrariamente debo actualizar todas las columnas
                     if (pacienteModificado == pacienteOriginal)
@@ -357,7 +373,10 @@ namespace Entidades.BaseDeDatos
                             sentencia += "historia_clinica = @historia_clinica, ";
                             command.Parameters.AddWithValue("historia_clinica", pacienteModificado.HistoriaClinica);
                         }
+                        
 
+                        sentencia += "fecha_modificacion = @fecha_modificacion, ";
+                        command.Parameters.AddWithValue("fecha_modificacion", DateTime.Now);
                         //elimino la coma final y el espacio
                         sentencia = sentencia.TrimEnd(',',' ');
 
@@ -379,11 +398,15 @@ namespace Entidades.BaseDeDatos
             }
             catch (Exception ex) 
             {            
-                throw new FalloModificarPacienteException("Error, no pudo modificar el paciente",ex);
+                throw new FalloModificarRegistroException("Error, no pudo modificar el paciente en la BASE DE DATOS",ex);
             }
         }
 
-
+        /// <summary>
+        /// Elimina un paciente de la base de datos
+        /// </summary>
+        /// <param name="paciente"></param>
+        /// <exception cref="Exception"></exception>
         public static void Eliminar(Paciente paciente)
         {
             try
@@ -394,15 +417,16 @@ namespace Entidades.BaseDeDatos
                 {
                     SqlCommand command = new SqlCommand(sentencia, connection);
                     command.Parameters.AddWithValue("id", paciente.Id);
+                    connection.Open();
 
                     command.ExecuteNonQuery();
                 }
 
 
             }
-            catch(Exception)
+            catch(Exception ex)
             {
-                throw new Exception("No se pudo eliminar el paciente");
+                throw new Exception("No se pudo eliminar el paciente",ex);
             }
 
         }

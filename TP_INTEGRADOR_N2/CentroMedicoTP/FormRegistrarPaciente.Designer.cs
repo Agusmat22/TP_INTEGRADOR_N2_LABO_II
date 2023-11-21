@@ -30,14 +30,14 @@
         {
             grpRegistrar = new GroupBox();
             dtpFechaNacimiento = new DateTimePicker();
-            label7 = new Label();
-            label6 = new Label();
-            cmbObraSocial = new ComboBox();
-            label5 = new Label();
-            label4 = new Label();
-            label3 = new Label();
-            label2 = new Label();
-            txtNumAfiliado = new TextBox();
+            lblFechaNacimiento = new Label();
+            lblComboBox = new Label();
+            cmbTipo = new ComboBox();
+            lblNumero = new Label();
+            lblDni = new Label();
+            lblApellido = new Label();
+            lblNombre = new Label();
+            txtNumero = new TextBox();
             txtDni = new TextBox();
             txtApellido = new TextBox();
             txtNombre = new TextBox();
@@ -46,7 +46,7 @@
             btnVolver = new Button();
             grpTipoRegistro = new GroupBox();
             rdbMedico = new RadioButton();
-            radioButton1 = new RadioButton();
+            rdbPaciente = new RadioButton();
             grpRegistrar.SuspendLayout();
             grpTipoRegistro.SuspendLayout();
             SuspendLayout();
@@ -54,14 +54,14 @@
             // grpRegistrar
             // 
             grpRegistrar.Controls.Add(dtpFechaNacimiento);
-            grpRegistrar.Controls.Add(label7);
-            grpRegistrar.Controls.Add(label6);
-            grpRegistrar.Controls.Add(cmbObraSocial);
-            grpRegistrar.Controls.Add(label5);
-            grpRegistrar.Controls.Add(label4);
-            grpRegistrar.Controls.Add(label3);
-            grpRegistrar.Controls.Add(label2);
-            grpRegistrar.Controls.Add(txtNumAfiliado);
+            grpRegistrar.Controls.Add(lblFechaNacimiento);
+            grpRegistrar.Controls.Add(lblComboBox);
+            grpRegistrar.Controls.Add(cmbTipo);
+            grpRegistrar.Controls.Add(lblNumero);
+            grpRegistrar.Controls.Add(lblDni);
+            grpRegistrar.Controls.Add(lblApellido);
+            grpRegistrar.Controls.Add(lblNombre);
+            grpRegistrar.Controls.Add(txtNumero);
             grpRegistrar.Controls.Add(txtDni);
             grpRegistrar.Controls.Add(txtApellido);
             grpRegistrar.Controls.Add(txtNombre);
@@ -75,93 +75,91 @@
             // dtpFechaNacimiento
             // 
             dtpFechaNacimiento.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
-            dtpFechaNacimiento.Location = new Point(298, 183);
+            dtpFechaNacimiento.Location = new Point(298, 117);
             dtpFechaNacimiento.Name = "dtpFechaNacimiento";
             dtpFechaNacimiento.Size = new Size(171, 27);
             dtpFechaNacimiento.TabIndex = 11;
             // 
-            // label7
+            // lblFechaNacimiento
             // 
-            label7.AutoSize = true;
-            label7.Font = new Font("Segoe UI Semibold", 8F, FontStyle.Bold, GraphicsUnit.Point);
-            label7.Location = new Point(298, 167);
-            label7.Name = "label7";
-            label7.Size = new Size(116, 13);
-            label7.TabIndex = 10;
-            label7.Text = "Fecha de Nacimiento:";
+            lblFechaNacimiento.AutoSize = true;
+            lblFechaNacimiento.Font = new Font("Segoe UI Semibold", 8F, FontStyle.Bold, GraphicsUnit.Point);
+            lblFechaNacimiento.Location = new Point(298, 101);
+            lblFechaNacimiento.Name = "lblFechaNacimiento";
+            lblFechaNacimiento.Size = new Size(116, 13);
+            lblFechaNacimiento.TabIndex = 10;
+            lblFechaNacimiento.Text = "Fecha de Nacimiento:";
             // 
-            // label6
+            // lblComboBox
             // 
-            label6.AutoSize = true;
-            label6.Font = new Font("Segoe UI Semibold", 8F, FontStyle.Bold, GraphicsUnit.Point);
-            label6.Location = new Point(298, 30);
-            label6.Name = "label6";
-            label6.Size = new Size(68, 13);
-            label6.TabIndex = 8;
-            label6.Text = "Obra Social:";
+            lblComboBox.AutoSize = true;
+            lblComboBox.Font = new Font("Segoe UI Semibold", 8F, FontStyle.Bold, GraphicsUnit.Point);
+            lblComboBox.Location = new Point(42, 169);
+            lblComboBox.Name = "lblComboBox";
+            lblComboBox.Size = new Size(0, 13);
+            lblComboBox.TabIndex = 8;
             // 
-            // cmbObraSocial
+            // cmbTipo
             // 
-            cmbObraSocial.DropDownStyle = ComboBoxStyle.DropDownList;
-            cmbObraSocial.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
-            cmbObraSocial.FormattingEnabled = true;
-            cmbObraSocial.Location = new Point(298, 46);
-            cmbObraSocial.Name = "cmbObraSocial";
-            cmbObraSocial.Size = new Size(171, 28);
-            cmbObraSocial.TabIndex = 7;
+            cmbTipo.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbTipo.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
+            cmbTipo.FormattingEnabled = true;
+            cmbTipo.Location = new Point(42, 185);
+            cmbTipo.Name = "cmbTipo";
+            cmbTipo.Size = new Size(171, 28);
+            cmbTipo.TabIndex = 7;
             // 
-            // label5
+            // lblNumero
             // 
-            label5.AutoSize = true;
-            label5.Font = new Font("Segoe UI Semibold", 8F, FontStyle.Bold, GraphicsUnit.Point);
-            label5.Location = new Point(298, 101);
-            label5.Name = "label5";
-            label5.Size = new Size(66, 13);
-            label5.TabIndex = 6;
-            label5.Text = "Nº Afiliado:";
+            lblNumero.AutoSize = true;
+            lblNumero.Font = new Font("Segoe UI Semibold", 8F, FontStyle.Bold, GraphicsUnit.Point);
+            lblNumero.Location = new Point(298, 170);
+            lblNumero.Name = "lblNumero";
+            lblNumero.Size = new Size(0, 13);
+            lblNumero.TabIndex = 6;
             // 
-            // label4
+            // lblDni
             // 
-            label4.AutoSize = true;
-            label4.Font = new Font("Segoe UI Semibold", 8F, FontStyle.Bold, GraphicsUnit.Point);
-            label4.Location = new Point(42, 168);
-            label4.Name = "label4";
-            label4.Size = new Size(27, 13);
-            label4.TabIndex = 5;
-            label4.Text = "Dni:";
+            lblDni.AutoSize = true;
+            lblDni.Font = new Font("Segoe UI Semibold", 8F, FontStyle.Bold, GraphicsUnit.Point);
+            lblDni.Location = new Point(303, 31);
+            lblDni.Name = "lblDni";
+            lblDni.Size = new Size(27, 13);
+            lblDni.TabIndex = 5;
+            lblDni.Text = "Dni:";
             // 
-            // label3
+            // lblApellido
             // 
-            label3.AutoSize = true;
-            label3.Font = new Font("Segoe UI Semibold", 8F, FontStyle.Bold, GraphicsUnit.Point);
-            label3.Location = new Point(42, 101);
-            label3.Name = "label3";
-            label3.Size = new Size(53, 13);
-            label3.TabIndex = 4;
-            label3.Text = "Apellido:";
+            lblApellido.AutoSize = true;
+            lblApellido.Font = new Font("Segoe UI Semibold", 8F, FontStyle.Bold, GraphicsUnit.Point);
+            lblApellido.Location = new Point(42, 101);
+            lblApellido.Name = "lblApellido";
+            lblApellido.Size = new Size(53, 13);
+            lblApellido.TabIndex = 4;
+            lblApellido.Text = "Apellido:";
             // 
-            // label2
+            // lblNombre
             // 
-            label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI Semibold", 8F, FontStyle.Bold, GraphicsUnit.Point);
-            label2.Location = new Point(42, 31);
-            label2.Name = "label2";
-            label2.Size = new Size(52, 13);
-            label2.TabIndex = 3;
-            label2.Text = "Nombre:";
+            lblNombre.AutoSize = true;
+            lblNombre.Font = new Font("Segoe UI Semibold", 8F, FontStyle.Bold, GraphicsUnit.Point);
+            lblNombre.Location = new Point(42, 31);
+            lblNombre.Name = "lblNombre";
+            lblNombre.Size = new Size(52, 13);
+            lblNombre.TabIndex = 3;
+            lblNombre.Text = "Nombre:";
             // 
-            // txtNumAfiliado
+            // txtNumero
             // 
-            txtNumAfiliado.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
-            txtNumAfiliado.Location = new Point(298, 117);
-            txtNumAfiliado.Name = "txtNumAfiliado";
-            txtNumAfiliado.Size = new Size(171, 27);
-            txtNumAfiliado.TabIndex = 3;
+            txtNumero.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
+            txtNumero.Location = new Point(298, 186);
+            txtNumero.Name = "txtNumero";
+            txtNumero.Size = new Size(171, 27);
+            txtNumero.TabIndex = 3;
             // 
             // txtDni
             // 
             txtDni.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
-            txtDni.Location = new Point(42, 183);
+            txtDni.Location = new Point(298, 47);
             txtDni.Name = "txtDni";
             txtDni.Size = new Size(171, 27);
             txtDni.TabIndex = 2;
@@ -198,7 +196,7 @@
             // 
             lblTitulo.AutoSize = true;
             lblTitulo.Font = new Font("Arial", 15F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
-            lblTitulo.Location = new Point(257, 19);
+            lblTitulo.Location = new Point(304, 19);
             lblTitulo.Name = "lblTitulo";
             lblTitulo.Size = new Size(127, 24);
             lblTitulo.TabIndex = 12;
@@ -219,7 +217,7 @@
             // grpTipoRegistro
             // 
             grpTipoRegistro.Controls.Add(rdbMedico);
-            grpTipoRegistro.Controls.Add(radioButton1);
+            grpTipoRegistro.Controls.Add(rdbPaciente);
             grpTipoRegistro.Location = new Point(257, 72);
             grpTipoRegistro.Name = "grpTipoRegistro";
             grpTipoRegistro.Size = new Size(220, 65);
@@ -238,16 +236,16 @@
             rdbMedico.Text = "Medico";
             rdbMedico.UseVisualStyleBackColor = true;
             // 
-            // radioButton1
+            // rdbPaciente
             // 
-            radioButton1.AutoSize = true;
-            radioButton1.Location = new Point(16, 31);
-            radioButton1.Name = "radioButton1";
-            radioButton1.Size = new Size(70, 19);
-            radioButton1.TabIndex = 0;
-            radioButton1.TabStop = true;
-            radioButton1.Text = "Paciente";
-            radioButton1.UseVisualStyleBackColor = true;
+            rdbPaciente.AutoSize = true;
+            rdbPaciente.Location = new Point(16, 31);
+            rdbPaciente.Name = "rdbPaciente";
+            rdbPaciente.Size = new Size(70, 19);
+            rdbPaciente.TabIndex = 0;
+            rdbPaciente.TabStop = true;
+            rdbPaciente.Text = "Paciente";
+            rdbPaciente.UseVisualStyleBackColor = true;
             // 
             // FormRegistrarPaciente
             // 
@@ -279,14 +277,14 @@
 
         private GroupBox grpRegistrar;
         private DateTimePicker dtpFechaNacimiento;
-        private Label label7;
-        private Label label6;
-        private ComboBox cmbObraSocial;
-        private Label label5;
-        private Label label4;
-        private Label label3;
-        private Label label2;
-        private TextBox txtNumAfiliado;
+        private Label lblFechaNacimiento;
+        private Label lblComboBox;
+        private ComboBox cmbTipo;
+        private Label lblNumero;
+        private Label lblDni;
+        private Label lblApellido;
+        private Label lblNombre;
+        private TextBox txtNumero;
         private TextBox txtDni;
         private TextBox txtApellido;
         private TextBox txtNombre;
@@ -294,7 +292,7 @@
         private Label lblTitulo;
         private Button btnVolver;
         private GroupBox grpTipoRegistro;
-        private RadioButton radioButton1;
+        private RadioButton rdbPaciente;
         private RadioButton rdbMedico;
     }
 }

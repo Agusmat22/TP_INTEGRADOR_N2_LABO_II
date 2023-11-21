@@ -1,4 +1,5 @@
 ﻿using Entidades.BaseDeDatos;
+using Entidades.MetodosDeExtension;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Entidades
 {
-    public delegate void ActualizaPacientes(List<Paciente> lista,int intervalo);
+    public delegate void ActualizaPacientes();
 
     public enum EObrasSocial
     {
@@ -63,36 +64,37 @@ namespace Entidades
 
 
         /// <summary>
-        /// Agrega un paciente a la lista
+        /// Reemplaza un paciente en la lista
         /// </summary>
         /// <param name="persona"></param>
         /// <returns>True si se pudo agregar, False si no se pudo</returns>
-        public bool Agregar(Paciente paciente2)
+        public void Reemplazar(Paciente paciente2)
         {
             //Valido que sea del tipo medico y pregunto si no son iguales
             foreach (Paciente paciente in this.Pacientes)
             {
                 if (paciente2.Equals(paciente))
                 {
-                    return false;
+                    //REEMPLAZO EL PACIENTE DE LA LISTA CON EL QUE INGRESO POR PARAMETRO
+                    //OBTENGO EL INDICE DEL PACIENTE Y LO REEMPLAZO POR POSICION
+                    this.Pacientes[this.Pacientes.IndexOf(paciente)] = paciente2;
+                    break;
                 }
             }
 
-            this.Pacientes.Add(paciente2);
-            return true;
         }
 
         /// <summary>
-        /// Agrega un paciente a la lista
+        /// Agrega un medico a la lista
         /// </summary>
         /// <param name="persona"></param>
         /// <returns>True si se pudo agregar, False si no se pudo</returns>
         public bool Agregar(Medico medico2)
         {
             //Valido que sea del tipo medico y pregunto si no son iguales
-            foreach (Medico paciente in this.Medicos)
+            foreach (Medico medico in this.Medicos)
             {
-                if (medico2.Equals(paciente))
+                if (medico2.Equals(medico))
                 {
                     return false;
                 }
@@ -103,42 +105,59 @@ namespace Entidades
         }
 
         /// <summary>
-        /// Elimina un paciente si es que se encuentra registrado
+        /// Elimina un paciente de la DB y lista pacientes
         /// </summary>
         /// <param name="paciente"></param>
         /// <returns></returns>
         public bool EliminarPacientes(Paciente paciente)
         {
-            foreach (Paciente item in this.Pacientes)
+            try
             {
-                if (paciente.Equals(item))
+                foreach (Paciente item in this.Pacientes)
                 {
-                    //indico que remueva este paciente
-                    this.Pacientes.Remove(paciente);
-                    ADOPacientes.Eliminar(paciente);
-                    return true;
+                    if (paciente.Equals(item))
+                    {
+                        //indico que remueva este paciente
+                        this.Pacientes.Remove(paciente);
+                        ADOPacientes.Eliminar(paciente);
+                        return true;
+                    }
                 }
             }
+            catch (Exception) 
+            {
+                throw;
+            }
+            
 
             return false;
         }
 
         /// <summary>
-        /// Elimina un medico si es que se encuentra registrado
+        /// Elimina un medico de la DB y lista 
         /// </summary>
         /// <param name="paciente"></param>
         /// <returns></returns>
         public bool EliminarMedico(Medico medico)
         {
-            foreach (Medico item in this.Medicos)
+            try
             {
-                if (medico.Equals(item))
+                foreach (Medico item in this.Medicos)
                 {
-                    //indico que remueva este medico
-                    this.Medicos.Remove(medico);
-                    return true;
+                    if (medico.Equals(item))
+                    {
+                        //indico que remueva este medico
+                        this.Medicos.Remove(medico);
+                        ADOMedicos.Eliminar(medico);
+                        return true;
+                    }
                 }
             }
+            catch (Exception) 
+            { 
+                throw; 
+            }
+            
 
             return false;
         }
@@ -150,7 +169,7 @@ namespace Entidades
         /// <returns></returns>
         public Paciente ObtenerPaciente(Func<Paciente,bool> busqueda)
         {
-            foreach (Paciente item in this.pacientes)
+            foreach (Paciente item in this.Pacientes)
             {
                 if (busqueda(item))
                 {
@@ -160,36 +179,62 @@ namespace Entidades
 
             return null;
         }
-        
 
-        public void ConsultarModificacionPacientes()
+        /// <summary>
+        /// Devuelve un medico dependiendo el delagado pasado por parametro
+        /// </summary>
+        /// <param name="busqueda"></param>
+        /// <returns></returns>
+        public Medico ObtenerMedico(Func<Medico, bool> busqueda)
         {
-            
-            
+            foreach (Medico item in this.Medicos)
+            {
+                if (busqueda(item))
+                {
+                    return item;
+                }
+            }
+
+            return null;
         }
+
+
 
         /// <summary>
         /// Actualiza la lista de pacientes mediante un evento
         /// </summary>
         public void ActualizacionPacientes()
         {
-            while (!cancellation.IsCancellationRequested)
+            try
             {
-                if (this.OnActualizarLista is not null)
+                while (!cancellation.IsCancellationRequested)
                 {
-                    List<Paciente> pacientesModificados = ADOPacientes.ObtenerModificados();
-                    if (pacientesModificados.Count > 0)
+                    if (this.OnActualizarLista is not null)
                     {
-                        this.pacientes.AddRange(pacientesModificados);
-                        this.OnActualizarLista.Invoke(this.Pacientes, this.invervaloTiempo);
+                        List<Paciente> pacientesModificados = ADOPacientes.ObtenerModificados();
+                        if (pacientesModificados is not null)
+                        {
+                            //ACA ESTA EL ERROR
+                            //this.pacientes.AddRange(pacientesModificados);
+                            this.ExtenderListaPacientes(pacientesModificados, true);
+                            this.OnActualizarLista.Invoke();
 
+                        }
                     }
-                }
 
-                Thread.Sleep(this.invervaloTiempo);
+                    Thread.Sleep(this.invervaloTiempo);
+                }
             }
+            catch (Exception ex) 
+            {
+                throw new Exception("Error al obtener los pacientes modificados de la DB en el hilo secundario", ex);
+            }
+            
         }
 
+        /// <summary>
+        /// Inicia el hilo
+        /// </summary>
         public void IniciarActualizacion()
         {
             if(this.actualizacion is null)
@@ -197,7 +242,7 @@ namespace Entidades
                 this.cancellationTokenSource = new CancellationTokenSource();
                 this.cancellation = this.cancellationTokenSource.Token;
 
-                //instancio el hilo
+                //instancio el hilo y le agrego el metodo que quiero en segundo plano
                 this.actualizacion = new Task(this.ActualizacionPacientes, this.cancellation);
             }
 

@@ -1,0 +1,26 @@
+[
+  {
+    "EnEspera": true,
+    "NumeroAfiliado": 12235,
+    "HistoriaClinica": "                                                                                     HISTORIA CLINICA\n--------------------------------------------------------------------------------------------------------------------------\n\nNombre: Agustin                                                    Apellido: Garcia                                        Dni: 43173652\n\nNumero Afiliado: 12235                                           Obra Social: OSMEDICA                                     Nacimiento: 24/02/2001\n\n--------------------------------------------------------------------------------------------------------------------------\nFecha de atencion: 21/11/2023                                                                                                    Medico: LEO MESSI\n\n\nDIAGNOSTICO:\n\nAgustin garcia presenta fiebre de tanto renegar con este trabajo practico.\n\n\n\n--------------------------------------------------------------------------------------------------------------------------",
+    "ObraSocial": 1,
+    "Id": 60,
+    "FechaModificacion": "2023-11-21T00:01:36.67",
+    "Nombre": "Agustin",
+    "Apellido": "Garcia",
+    "Dni": 43173652,
+    "FechaNacimiento": "2001-02-24T00:00:00"
+  },
+  {
+    "EnEspera": false,
+    "NumeroAfiliado": 144566,
+    "HistoriaClinica": null,
+    "ObraSocial": 3,
+    "Id": 61,
+    "FechaModificacion": "2023-11-20T23:58:42.643",
+    "Nombre": "Raul",
+    "Apellido": "Jimenez",
+    "Dni": 87996581,
+    "FechaNacimiento": "2020-07-09T00:00:00"
+  }
+]

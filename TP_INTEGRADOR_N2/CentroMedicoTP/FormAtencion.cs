@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using Entidades;
 using Entidades.BaseDeDatos;
 using Entidades.Excepciones;
+using Entidades.MetodosDeExtension;
 
 namespace CentroMedicoTP
 {
@@ -32,69 +33,138 @@ namespace CentroMedicoTP
                 cmbMedicos.Items.Add(item);
             }
 
-            //SELECCIONO EL PRIMER ITEM DEL CMB
-            this.cmbMedicos.SelectedIndex = 0;
 
-            this.ActualizarAccesoControlesDiagnostico();
-            //ejecuto la ejecucion en un subproceso para la lista
-            //Task actualizacionListPacientes = Task.Run(() => this.actualizarListbox(this.lstbpacientes, pacientes => pacientes.EnEspera == true));
+            //bloqueo el acceso al richTextBox
+            this.ActualizarAccesoControles();
 
-            this.centroMedico.OnActualizarLista += this.ActualizarListBox;
+            this.ActualizarListBox(); //muestro la lista en el listBox
+
+            this.btnAtender.Enabled = false; //solo al principio para que un medico se loguee
+            
+            this.cmbMedicos.SelectedIndexChanged += this.SeleccionarMedico;
+
+            this.centroMedico.OnActualizarLista += this.ActualizarListBox; //agrego el manejador para que se actualice cuando ocurra una modificacion
+
+            
+
         }
 
         /// <summary>
         /// Actualiza el acceso a los controlores del para realizar el diagnostico
         /// </summary>
-        private void ActualizarAccesoControlesDiagnostico()
+        private void ActualizarAccesoControles()
         {
             bool acceso;
 
-            if (this.rtbDiagnostico.Enabled == true && this.btnDiagnosticar.Enabled == true)
+            if (this.rtbDiagnostico.Enabled == true)
             {
                 acceso = false;
+                this.btnAtender.Enabled = true;
+                this.rtbDiagnostico.Text = string.Empty;
             }
             else
             {
                 acceso = true;
+                this.btnAtender.Enabled = false;
+
             }
 
             this.rtbDiagnostico.Enabled = acceso;
             this.btnDiagnosticar.Enabled = acceso;
+            this.btnHistoriaClinica.Enabled = acceso;
         }
 
+        /// <summary>
+        /// Atiende el medico al paciente
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnAtender_Click(object sender, EventArgs e)
         {
+            
+            //guardo al paciente atendido en mi atributo
             this.pacienteAtendido = (Paciente)lstbpacientes.SelectedItem;
 
-            try
+            if (this.pacienteAtendido is not null)
             {
-                //le cambio el valor de "enEspera"
-                medico.AtenderPaciente(this.pacienteAtendido);
-
-                //realizo el cambio en la DB
-                //ADOPacientes.Modificar(this.pacienteAtendido);
-            }
-            catch (FalloModificarPacienteException ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
-        public void ActualizarListBox(List<Paciente> pacientes, int intervaloTiempo)
-        {
-            if (this.InvokeRequired)
-            {
-                this.BeginInvoke(ActualizarListBox, pacientes, intervaloTiempo);
+                this.ActualizarAccesoControles();
             }
             else
             {
-                if (this.centroMedico.Pacientes.Count > 0)
-                {
-                    this.lstbpacientes.DataSource = null;
-                    this.lstbpacientes.DataSource = pacientes.Where(pacientes => pacientes.EnEspera == true).ToList();
-                }
+                MessageBox.Show("Debe seleccionar un paciente");
             }
 
+
+        }
+
+        public void ActualizarListBox()
+        {
+            if (this.InvokeRequired)
+            {
+                this.BeginInvoke(ActualizarListBox);
+            }
+            else
+            {
+                this.lstbpacientes.DataSource = null;
+                this.lstbpacientes.DataSource = centroMedico.Pacientes.Where(pacientes => pacientes.EnEspera == true).ToList();
+            }
+
+        }
+
+        /// <summary>
+        /// Es un manejador para el comboBox, cuando se cambie de item se instanciara el medico
+        /// </summary>
+        /// <param name="cmb"></param>
+        /// <param name="ev"></param>
+        public void SeleccionarMedico(object cmb, EventArgs ev)
+        {
+            string nombreMedico = this.cmbMedicos.SelectedItem.ToString();
+
+            if (nombreMedico is not null)
+            {
+                this.medico = this.centroMedico.ObtenerMedico(medico => medico == nombreMedico);
+                this.lblMatricula.Text = $"Matricula: {this.medico.NumeroMatricula}";
+            }
+
+            this.btnAtender.Enabled = true; //cuando selecciona un medico, se activa el boton
+
+        }
+
+        private void btnDiagnosticar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (rtbDiagnostico.Text != string.Empty)
+                {
+                    //genero la historia clinica
+                    string historiaClinica = this.centroMedico.GenerarHistoriaClinica(this.rtbDiagnostico.Text, this.pacienteAtendido, this.medico);
+
+                    //GUARDO LA HISTORIA CLINICA EN EL PACIENTE
+                    this.pacienteAtendido.HistoriaClinica = historiaClinica;
+
+                    //ATIENDO AL PACIENTE GUARDANDO EL VALOR DE enEspera
+                    this.medico.AtenderPaciente(this.pacienteAtendido);
+
+
+                    //GUARDO DICHOS CAMBIOS EN LA BASE DE DATOS
+                    ADOPacientes.Modificar(this.pacienteAtendido);
+
+                    this.ActualizarAccesoControles();
+                }
+            }
+            catch (FalloModificarRegistroException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            
+
+        }
+
+        
+        private void btnHistoriaClinica_Click(object sender, EventArgs e)
+        {
+            FormHistoriaClinica formHC = new FormHistoriaClinica(this.pacienteAtendido.HistoriaClinica);
+            formHC.ShowDialog(); 
         }
     }
 }

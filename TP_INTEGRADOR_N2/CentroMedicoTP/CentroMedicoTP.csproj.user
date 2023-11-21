@@ -4,10 +4,16 @@
     <Compile Update="FormAtencion.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="FormHistoriaClinica.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="FormInformacion.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="FormMenuPrincipal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="FormSelectorImportacion.cs">
       <SubType>Form</SubType>
     </Compile>
   </ItemGroup>

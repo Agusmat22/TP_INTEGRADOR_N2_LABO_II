@@ -7,24 +7,38 @@ using System.Threading.Tasks;
 
 namespace Entidades
 {
-    public class GestorArchivos<T>
+    public class GestorArchivos<T> where T : class
     {
         private string rutaArchivo;
         private string objetoSerializado;
         private List<T> registros;
 
-        public GestorArchivos(string rutaArchivo, List<T> registros)
+        public GestorArchivos(string rutaArchivo)
         {
             this.rutaArchivo = rutaArchivo;
+        }
+
+        public GestorArchivos(string rutaArchivo, List<T> registros):this(rutaArchivo)
+        {
             this.registros = registros;
         }
 
+        public string ObjetoDeserializado
+        {
+            get { return objetoSerializado; }
+        }
+
+        public List<T> Registros
+        {
+            get { return this.registros; }
+        }
+
         /// <summary>
-        /// Almacena el archivo pasado por parametros
+        /// Exporta una cadena en formato de archivo
         /// </summary>
         /// <param name="archivo"></param>
         /// <exception cref="Exception"></exception>
-        public void Guardar(string archivo)
+        public void Exportar(string archivo)
         {
             try
             {
@@ -34,22 +48,22 @@ namespace Entidades
                 }
 
             }
-            catch (Exception) 
+            catch (Exception ex) 
             {
-                throw new Exception("Error al guardar el archivo");
+                throw new Exception("Error al guardar el archivo", ex);
             }
         }
 
         /// <summary>
-        /// Almacena el objeto serializado
+        /// Exporta una lista serializada
         /// </summary>
-        public void Guardar()
+        public void Exportar()
         {
             try
             {          
                 if (this.objetoSerializado is not null)
                 {
-                    this.Guardar(this.objetoSerializado);
+                    this.Exportar(this.objetoSerializado);
                 }
                 
             }
@@ -62,8 +76,8 @@ namespace Entidades
         /// <summary>
         /// Serializa el objeto
         /// </summary>
-        /// <exception cref="NotSupportedException"></exception>
-        public void SerializarObjeto()
+        /// <exception cref="Exception"></exception>
+        public void Serializar()
         {
             try
             {
@@ -74,9 +88,28 @@ namespace Entidades
                 this.objetoSerializado = JsonSerializer.Serialize(this.registros,options);
 
             }
-            catch(NotSupportedException ex)
+            catch(Exception ex)
             {
-                throw new NotSupportedException("Error al serializar el objeto", ex);
+                throw new Exception("Error al serializar el objeto", ex);
+            }
+        }
+
+        /// <summary>
+        /// Deserializa un archivo
+        /// </summary>
+        public void Deserializar()
+        {
+            try
+            {
+                using (StreamReader streamReader = new StreamReader(this.rutaArchivo))
+                {
+                    string archivoLeido = streamReader.ReadToEnd();
+                    this.registros = JsonSerializer.Deserialize<List<T>>(archivoLeido);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al deserializar el archivo",ex);
             }
         }
 

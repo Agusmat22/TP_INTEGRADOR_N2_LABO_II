@@ -31,12 +31,12 @@ namespace Entidades
 
         }
 
-        public Paciente(string nombre, string apellido, int dni, DateTime fechaNacimiento, EObrasSocial obraSocial, long numeroAfiliado,int id)
+        public Paciente(string nombre, string apellido, int dni, DateTime fechaNacimiento, EObrasSocial obraSocial, long numeroAfiliado,DateTime fechaModificacion)
             : this(nombre, apellido, dni, fechaNacimiento,obraSocial,numeroAfiliado)
         {
            
-            //Le asigno a la propiedad hederada de la interfaz
-            this.Id = id;
+            //Le asigno a la propiedad implementada de la interfaz
+            this.FechaModificacion = fechaModificacion;
 
         }
 
@@ -71,22 +71,19 @@ namespace Entidades
        
         public DateTime FechaModificacion { get ; set ; }
 
-        //DARLE LOGICA REVISARLA
-        [JsonIgnore]
-        public string TipoGuardia { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
 
         //POLIMORFISMO
 
         /// <summary>
-        /// Sobreescribo el metodo llamando a la sobrecarga del == en la clase base y ademas digo que si los pacientes tienen
+        /// Sobreescribo el metodo validando si los pacientes tienen
         /// el mismo numero de afiliado seran iguales
         /// </summary>
         /// <param name="obj"></param>
         /// <returns></returns>
         public override bool Equals(object? obj)
         {
-            return obj is not null && obj is Paciente paciente && paciente == this && paciente.numeroAfiliado == this.numeroAfiliado;
+            return obj is not null && obj is Paciente paciente && paciente.numeroAfiliado == this.numeroAfiliado;
         }
 
 

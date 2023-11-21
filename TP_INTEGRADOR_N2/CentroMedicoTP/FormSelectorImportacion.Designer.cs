@@ -28,118 +28,65 @@
         /// </summary>
         private void InitializeComponent()
         {
-            cmbLista = new ComboBox();
-            label1 = new Label();
-            btnSeleccionar = new Button();
+            btnSeleccionarArchivo = new Button();
+            lstbPacientes = new ListBox();
             btnImportar = new Button();
-            btnCancelar = new Button();
-            txtRuta = new TextBox();
-            txtNombreArchivo = new TextBox();
-            label2 = new Label();
+            label1 = new Label();
             SuspendLayout();
             // 
-            // cmbLista
+            // btnSeleccionarArchivo
             // 
-            cmbLista.DropDownStyle = ComboBoxStyle.DropDownList;
-            cmbLista.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            cmbLista.FormattingEnabled = true;
-            cmbLista.Location = new Point(65, 63);
-            cmbLista.Name = "cmbLista";
-            cmbLista.Size = new Size(233, 29);
-            cmbLista.TabIndex = 0;
+            btnSeleccionarArchivo.Location = new Point(44, 56);
+            btnSeleccionarArchivo.Name = "btnSeleccionarArchivo";
+            btnSeleccionarArchivo.Size = new Size(283, 35);
+            btnSeleccionarArchivo.TabIndex = 0;
+            btnSeleccionarArchivo.Text = "Seleccionar Archivo";
+            btnSeleccionarArchivo.UseVisualStyleBackColor = true;
+            btnSeleccionarArchivo.Click += btnSeleccionarArchivo_Click;
+            // 
+            // lstbPacientes
+            // 
+            lstbPacientes.Enabled = false;
+            lstbPacientes.FormattingEnabled = true;
+            lstbPacientes.ItemHeight = 15;
+            lstbPacientes.Location = new Point(44, 118);
+            lstbPacientes.Name = "lstbPacientes";
+            lstbPacientes.Size = new Size(283, 244);
+            lstbPacientes.TabIndex = 1;
+            // 
+            // btnImportar
+            // 
+            btnImportar.Location = new Point(44, 387);
+            btnImportar.Name = "btnImportar";
+            btnImportar.Size = new Size(283, 35);
+            btnImportar.TabIndex = 2;
+            btnImportar.Text = "Importar";
+            btnImportar.UseVisualStyleBackColor = true;
+            btnImportar.Click += btnImportar_Click;
             // 
             // label1
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI Semibold", 12.75F, FontStyle.Bold, GraphicsUnit.Point);
-            label1.Location = new Point(109, 27);
+            label1.Location = new Point(107, 9);
             label1.Name = "label1";
-            label1.Size = new Size(143, 23);
-            label1.TabIndex = 1;
-            label1.Text = "Seleccione la lista";
-            // 
-            // btnSeleccionar
-            // 
-            btnSeleccionar.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            btnSeleccionar.Location = new Point(65, 126);
-            btnSeleccionar.Name = "btnSeleccionar";
-            btnSeleccionar.Size = new Size(233, 34);
-            btnSeleccionar.TabIndex = 2;
-            btnSeleccionar.Text = "Seleccionar ruta";
-            btnSeleccionar.UseVisualStyleBackColor = true;
-            btnSeleccionar.Click += btnSeleccionar_Click;
-            // 
-            // btnImportar
-            // 
-            btnImportar.Enabled = false;
-            btnImportar.Font = new Font("Segoe UI Semibold", 11F, FontStyle.Bold, GraphicsUnit.Point);
-            btnImportar.Location = new Point(189, 342);
-            btnImportar.Name = "btnImportar";
-            btnImportar.Size = new Size(109, 34);
-            btnImportar.TabIndex = 3;
-            btnImportar.Text = "Importar";
-            btnImportar.UseVisualStyleBackColor = true;
-            btnImportar.Click += btnImportar_Click;
-            // 
-            // btnCancelar
-            // 
-            btnCancelar.Font = new Font("Segoe UI Semibold", 11F, FontStyle.Bold, GraphicsUnit.Point);
-            btnCancelar.Location = new Point(65, 342);
-            btnCancelar.Name = "btnCancelar";
-            btnCancelar.Size = new Size(109, 34);
-            btnCancelar.TabIndex = 4;
-            btnCancelar.Text = "Cancelar";
-            btnCancelar.UseVisualStyleBackColor = true;
-            btnCancelar.Click += btnCancelar_Click;
-            // 
-            // txtRuta
-            // 
-            txtRuta.Enabled = false;
-            txtRuta.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            txtRuta.Location = new Point(65, 179);
-            txtRuta.Name = "txtRuta";
-            txtRuta.Size = new Size(233, 29);
-            txtRuta.TabIndex = 5;
-            // 
-            // txtNombreArchivo
-            // 
-            txtNombreArchivo.Enabled = false;
-            txtNombreArchivo.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            txtNombreArchivo.Location = new Point(65, 272);
-            txtNombreArchivo.Name = "txtNombreArchivo";
-            txtNombreArchivo.Size = new Size(233, 29);
-            txtNombreArchivo.TabIndex = 6;
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            label2.Location = new Point(109, 237);
-            label2.Name = "label2";
-            label2.Size = new Size(155, 21);
-            label2.TabIndex = 7;
-            label2.Text = "Nombre del archivo";
+            label1.Size = new Size(154, 23);
+            label1.TabIndex = 4;
+            label1.Text = "Importar pacientes";
             // 
             // FormSelectorImportacion
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.GradientInactiveCaption;
-            ClientSize = new Size(365, 402);
-            Controls.Add(label2);
-            Controls.Add(txtNombreArchivo);
-            Controls.Add(txtRuta);
-            Controls.Add(btnCancelar);
-            Controls.Add(btnImportar);
-            Controls.Add(btnSeleccionar);
+            ClientSize = new Size(375, 443);
             Controls.Add(label1);
-            Controls.Add(cmbLista);
-            FormBorderStyle = FormBorderStyle.FixedSingle;
-            MaximizeBox = false;
-            MinimizeBox = false;
+            Controls.Add(btnImportar);
+            Controls.Add(lstbPacientes);
+            Controls.Add(btnSeleccionarArchivo);
             Name = "FormSelectorImportacion";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "Importacion de pacientes";
+            Text = "Importacion";
             Load += FormSelectorImportacion_Load;
             ResumeLayout(false);
             PerformLayout();
@@ -147,13 +94,9 @@
 
         #endregion
 
-        private ComboBox cmbLista;
-        private Label label1;
-        private Button btnSeleccionar;
+        private Button btnSeleccionarArchivo;
+        private ListBox lstbPacientes;
         private Button btnImportar;
-        private Button btnCancelar;
-        private TextBox txtRuta;
-        private TextBox txtNombreArchivo;
-        private Label label2;
+        private Label label1;
     }
 }

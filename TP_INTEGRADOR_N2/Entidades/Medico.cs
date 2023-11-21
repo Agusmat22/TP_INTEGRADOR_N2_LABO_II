@@ -52,6 +52,12 @@ namespace Entidades
             this.especialidad = especialidad;
         }
 
+        public Medico(string nombre, string apellido, int dni, long numeroMatricula, DateTime fechaNacimiento, EEspecialidad especialidad,DateTime fechaModificacion)
+            : this(nombre, apellido, dni, numeroMatricula, fechaNacimiento, especialidad)
+        {
+            this.FechaModificacion = fechaModificacion;
+        }
+
 
 
         //PROPIEDADES
@@ -100,6 +106,22 @@ namespace Entidades
         public override bool Equals(object? obj)
         {
             return obj is not null && obj is Medico medico && this == medico && this.NumeroMatricula == medico.NumeroMatricula;
+        }
+
+
+        public static bool operator ==(Medico medico, string coincidencia)
+        {
+            string nombreMedico = $"{medico.nombre} {medico.apellido}".ToLower();
+            if (nombreMedico == coincidencia.ToLower())
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public static bool operator !=(Medico medico, string coincidencia)
+        {
+            return !(medico == coincidencia);
         }
     }
 }
