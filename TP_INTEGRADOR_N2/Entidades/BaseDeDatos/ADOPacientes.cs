@@ -164,7 +164,7 @@ namespace Entidades.BaseDeDatos
             }
             catch(Exception ex)
             {
-                throw new Exception("Error al guardar el paciente modificado",ex);
+                throw new Exception("Error al guardar el paciente modificado en la base de datos",ex);
             }
         }
 
@@ -242,7 +242,7 @@ namespace Entidades.BaseDeDatos
             }
             catch (Exception ex) 
             {
-                throw new Exception("Error al obtener paciente",ex);
+                throw new Exception("Error al obtener paciente de la base de datos",ex);
             }
         }
 
@@ -299,7 +299,7 @@ namespace Entidades.BaseDeDatos
             }
             catch(Exception ex)
             {
-                throw new Exception("Error al intertar guardar el paciente",ex);
+                throw new Exception("Error al intertar guardar el paciente en la base de datos",ex);
             }
            
 
@@ -426,7 +426,7 @@ namespace Entidades.BaseDeDatos
             }
             catch(Exception ex)
             {
-                throw new Exception("No se pudo eliminar el paciente",ex);
+                throw new Exception("No se pudo eliminar el paciente en la base de datos",ex);
             }
 
         }

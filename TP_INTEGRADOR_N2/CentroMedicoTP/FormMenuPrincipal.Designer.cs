@@ -28,6 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMenuPrincipal));
             tlpBotones = new TableLayoutPanel();
             btnSalir = new Button();
             btnInformacion = new Button();
@@ -36,6 +38,7 @@
             btnAtencion = new Button();
             panelForm = new Panel();
             label1 = new Label();
+            imageList1 = new ImageList(components);
             tlpBotones.SuspendLayout();
             panelForm.SuspendLayout();
             SuspendLayout();
@@ -51,23 +54,24 @@
             tlpBotones.Controls.Add(btnRegistrar, 0, 2);
             tlpBotones.Controls.Add(btnAtencion, 0, 1);
             tlpBotones.Cursor = Cursors.Hand;
-            tlpBotones.Location = new Point(3, 3);
+            tlpBotones.Dock = DockStyle.Left;
+            tlpBotones.Location = new Point(0, 0);
             tlpBotones.Name = "tlpBotones";
             tlpBotones.RowCount = 5;
             tlpBotones.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
             tlpBotones.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tlpBotones.RowStyles.Add(new RowStyle(SizeType.Absolute, 64F));
-            tlpBotones.RowStyles.Add(new RowStyle(SizeType.Absolute, 253F));
+            tlpBotones.RowStyles.Add(new RowStyle(SizeType.Absolute, 67F));
+            tlpBotones.RowStyles.Add(new RowStyle(SizeType.Absolute, 250F));
             tlpBotones.RowStyles.Add(new RowStyle(SizeType.Absolute, 66F));
-            tlpBotones.Size = new Size(209, 512);
+            tlpBotones.Size = new Size(214, 518);
             tlpBotones.TabIndex = 1;
             // 
             // btnSalir
             // 
             btnSalir.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            btnSalir.Location = new Point(3, 448);
+            btnSalir.Location = new Point(3, 454);
             btnSalir.Name = "btnSalir";
-            btnSalir.Size = new Size(203, 61);
+            btnSalir.Size = new Size(206, 61);
             btnSalir.TabIndex = 6;
             btnSalir.Text = "SALIR";
             btnSalir.UseVisualStyleBackColor = true;
@@ -76,9 +80,9 @@
             // btnInformacion
             // 
             btnInformacion.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            btnInformacion.Location = new Point(3, 195);
+            btnInformacion.Location = new Point(3, 204);
             btnInformacion.Name = "btnInformacion";
-            btnInformacion.Size = new Size(203, 60);
+            btnInformacion.Size = new Size(206, 63);
             btnInformacion.TabIndex = 5;
             btnInformacion.Text = "Informacion";
             btnInformacion.UseVisualStyleBackColor = true;
@@ -89,7 +93,7 @@
             btnAdmision.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
             btnAdmision.Location = new Point(3, 3);
             btnAdmision.Name = "btnAdmision";
-            btnAdmision.Size = new Size(203, 58);
+            btnAdmision.Size = new Size(206, 61);
             btnAdmision.TabIndex = 2;
             btnAdmision.Text = "Admision";
             btnAdmision.UseVisualStyleBackColor = true;
@@ -98,9 +102,9 @@
             // btnRegistrar
             // 
             btnRegistrar.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            btnRegistrar.Location = new Point(3, 131);
+            btnRegistrar.Location = new Point(3, 137);
             btnRegistrar.Name = "btnRegistrar";
-            btnRegistrar.Size = new Size(203, 58);
+            btnRegistrar.Size = new Size(206, 61);
             btnRegistrar.TabIndex = 4;
             btnRegistrar.Text = "Registrar";
             btnRegistrar.UseVisualStyleBackColor = true;
@@ -109,9 +113,9 @@
             // btnAtencion
             // 
             btnAtencion.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            btnAtencion.Location = new Point(3, 67);
+            btnAtencion.Location = new Point(3, 70);
             btnAtencion.Name = "btnAtencion";
-            btnAtencion.Size = new Size(203, 58);
+            btnAtencion.Size = new Size(206, 61);
             btnAtencion.TabIndex = 3;
             btnAtencion.Text = "Atencion";
             btnAtencion.UseVisualStyleBackColor = true;
@@ -119,10 +123,12 @@
             // 
             // panelForm
             // 
+            panelForm.BackColor = Color.Transparent;
             panelForm.Controls.Add(label1);
-            panelForm.Location = new Point(215, 3);
+            panelForm.Dock = DockStyle.Right;
+            panelForm.Location = new Point(212, 0);
             panelForm.Name = "panelForm";
-            panelForm.Size = new Size(768, 512);
+            panelForm.Size = new Size(775, 518);
             panelForm.TabIndex = 2;
             // 
             // label1
@@ -130,11 +136,18 @@
             label1.AutoSize = true;
             label1.BorderStyle = BorderStyle.Fixed3D;
             label1.Font = new Font("Segoe UI Semibold", 26F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
-            label1.Location = new Point(218, 65);
+            label1.Location = new Point(223, 82);
             label1.Name = "label1";
             label1.Size = new Size(341, 49);
             label1.TabIndex = 0;
             label1.Text = "Centro de Urgencias";
+            // 
+            // imageList1
+            // 
+            imageList1.ColorDepth = ColorDepth.Depth8Bit;
+            imageList1.ImageStream = (ImageListStreamer)resources.GetObject("imageList1.ImageStream");
+            imageList1.TransparentColor = Color.Transparent;
+            imageList1.Images.SetKeyName(0, "fondoMenuPrincipal.jpg");
             // 
             // FormMenuPrincipal
             // 
@@ -168,5 +181,6 @@
         private Panel panelForm;
         private Label label1;
         private Button btnSalir;
+        private ImageList imageList1;
     }
 }

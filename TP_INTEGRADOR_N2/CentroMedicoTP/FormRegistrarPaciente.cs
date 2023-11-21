@@ -34,7 +34,7 @@ namespace CentroMedicoTP
 
         private void FormRegistrarPaciente_Load(object sender, EventArgs e)
         {
-                
+
             //agrego manejador al evento de rdb para guardarme que button fue seleccionado
             this.rdbMedico.CheckedChanged += this.CheckearCambioRadioButton;
             this.rdbPaciente.CheckedChanged += this.CheckearCambioRadioButton;
@@ -78,13 +78,13 @@ namespace CentroMedicoTP
                     {
                         //casteo el item seleccionado a la Obra Social
                         Enum.TryParse(cmbTipo, out EObrasSocial obraSocial);
-                        Paciente paciente = new Paciente(nombre,apellido,dni,fechaNacimiento,obraSocial,numero,DateTime.Now);
+                        Paciente paciente = new Paciente(nombre, apellido, dni, fechaNacimiento, obraSocial, numero, DateTime.Now);
                         ADOPacientes.Guardar(paciente);
 
                         MessageBox.Show($"Registro de {paciente}");
 
                     }
-                    else if(this.rdbSeleccionado == this.rdbMedico && !this.centroMedico.ValidarMatricula(numero))
+                    else if (this.rdbSeleccionado == this.rdbMedico && !this.centroMedico.ValidarMatricula(numero))
                     {
                         Enum.TryParse(cmbTipo, out EEspecialidad especialidad);
                         Medico medico = new Medico(nombre, apellido, dni, numero, fechaNacimiento, especialidad, DateTime.Now);
@@ -109,9 +109,9 @@ namespace CentroMedicoTP
                 }
                 else
                 {
-                    throw new CampoVacioException("Error, el formulario contiene campos vacios");
+                    throw new CampoVacioException("Error, complete todos los campos con los datos solicitados");
                 }
-               
+
 
             }
             catch (CampoVacioException ex)
@@ -124,13 +124,13 @@ namespace CentroMedicoTP
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error al intentar registrar al paciente.\n {ex.Message}");
+                MessageBox.Show(ex.Message);
             }
 
 
         }
 
-        
+
 
         private void btnVolver_Click(object sender, EventArgs e)
         {
@@ -155,10 +155,7 @@ namespace CentroMedicoTP
                 {
                     cmb.SelectedIndex = 0;
                 }
-                else if (item is DateTimePicker dtp)
-                {
-                    dtp.Value = DateTime.Now;
-                }
+                
             }
         }
 
@@ -186,22 +183,30 @@ namespace CentroMedicoTP
                         cmbTipo.Items.Add(item);
                     }
 
+                    //pacientes recien nacidos pueden registrarse
+                    this.dtpFechaNacimiento.MaxDate = DateTime.Now;
+
 
                 }
                 else
                 {
                     //cargo las especialidad medicas en COMBO BOX
-                    foreach(EEspecialidad item in Enum.GetValues(typeof(EEspecialidad)))
+                    foreach (EEspecialidad item in Enum.GetValues(typeof(EEspecialidad)))
                     {
                         cmbTipo.Items.Add(item);
                     }
 
                     this.lblComboBox.Text = "Especialidad: ";
                     this.lblNumero.Text = "Numero Matricula: ";
+
+                    //medicos con 21 en adelante pueden registrarse
+                    this.dtpFechaNacimiento.MaxDate = DateTime.Now.AddYears(-21);
+
+
                 }
 
                 this.cmbTipo.SelectedIndex = 0;
-
+                this.dtpFechaNacimiento.Value = this.dtpFechaNacimiento.MaxDate;
 
             }
         }

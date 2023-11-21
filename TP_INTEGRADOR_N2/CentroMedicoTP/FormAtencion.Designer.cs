@@ -141,6 +141,7 @@
             btnVolver.TabIndex = 9;
             btnVolver.Text = "Volver";
             btnVolver.UseVisualStyleBackColor = true;
+            btnVolver.Click += btnVolver_Click;
             // 
             // btnDiagnosticar
             // 

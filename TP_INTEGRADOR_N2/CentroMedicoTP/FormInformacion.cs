@@ -16,10 +16,13 @@ namespace CentroMedicoTP
 
         private CentroMedico centroMedico;
         private EventHandler seleccionador;
-        public FormInformacion(CentroMedico centroMedico)
+        private RestablecerMenuPrincipal restablecerMenu;
+
+        public FormInformacion(CentroMedico centroMedico, RestablecerMenuPrincipal restablecerMenu)
         {
             InitializeComponent();
             this.centroMedico = centroMedico;
+            this.restablecerMenu = restablecerMenu;
         }
 
 
@@ -152,5 +155,10 @@ namespace CentroMedicoTP
 
         }
 
+        private void btnVolver_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            this.restablecerMenu();
+        }
     }
 }

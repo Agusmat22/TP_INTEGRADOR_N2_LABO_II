@@ -19,10 +19,12 @@ namespace CentroMedicoTP
         private CentroMedico centroMedico;
         private Paciente pacienteAtendido;
         private Medico medico;
-        public FormAtencion(CentroMedico centroMedico)
+        private RestablecerMenuPrincipal restablecer;
+        public FormAtencion(CentroMedico centroMedico, RestablecerMenuPrincipal restablecer)
         {
             InitializeComponent();
             this.centroMedico = centroMedico;
+            this.restablecer = restablecer;
         }
 
         private void FormAtencion_Load(object sender, EventArgs e)
@@ -40,12 +42,12 @@ namespace CentroMedicoTP
             this.ActualizarListBox(); //muestro la lista en el listBox
 
             this.btnAtender.Enabled = false; //solo al principio para que un medico se loguee
-            
+
             this.cmbMedicos.SelectedIndexChanged += this.SeleccionarMedico;
 
             this.centroMedico.OnActualizarLista += this.ActualizarListBox; //agrego el manejador para que se actualice cuando ocurra una modificacion
 
-            
+
 
         }
 
@@ -81,7 +83,7 @@ namespace CentroMedicoTP
         /// <param name="e"></param>
         private void btnAtender_Click(object sender, EventArgs e)
         {
-            
+
             //guardo al paciente atendido en mi atributo
             this.pacienteAtendido = (Paciente)lstbpacientes.SelectedItem;
 
@@ -156,15 +158,21 @@ namespace CentroMedicoTP
             {
                 MessageBox.Show(ex.Message);
             }
-            
+
 
         }
 
-        
+
         private void btnHistoriaClinica_Click(object sender, EventArgs e)
         {
             FormHistoriaClinica formHC = new FormHistoriaClinica(this.pacienteAtendido.HistoriaClinica);
-            formHC.ShowDialog(); 
+            formHC.ShowDialog();
+        }
+
+        private void btnVolver_Click(object sender, EventArgs e)
+        {
+            this.restablecer();
+            this.Close();
         }
     }
 }

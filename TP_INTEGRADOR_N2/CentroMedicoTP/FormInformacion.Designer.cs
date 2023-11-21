@@ -40,6 +40,7 @@
             label6 = new Label();
             btnImportar = new Button();
             toolTip = new ToolTip(components);
+            btnVolver = new Button();
             SuspendLayout();
             // 
             // btnExportar
@@ -49,7 +50,7 @@
             btnExportar.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
             btnExportar.ImageIndex = 0;
             btnExportar.ImageList = imageList1;
-            btnExportar.Location = new Point(348, 192);
+            btnExportar.Location = new Point(346, 240);
             btnExportar.Name = "btnExportar";
             btnExportar.Size = new Size(50, 49);
             btnExportar.TabIndex = 42;
@@ -88,7 +89,7 @@
             btnEliminar.BackColor = Color.IndianRed;
             btnEliminar.Cursor = Cursors.Hand;
             btnEliminar.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            btnEliminar.Location = new Point(335, 144);
+            btnEliminar.Location = new Point(335, 192);
             btnEliminar.Name = "btnEliminar";
             btnEliminar.Size = new Size(75, 42);
             btnEliminar.TabIndex = 39;
@@ -133,12 +134,25 @@
             btnImportar.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
             btnImportar.ImageIndex = 1;
             btnImportar.ImageList = imageList1;
-            btnImportar.Location = new Point(348, 247);
+            btnImportar.Location = new Point(346, 295);
             btnImportar.Name = "btnImportar";
             btnImportar.Size = new Size(50, 49);
             btnImportar.TabIndex = 43;
             btnImportar.UseVisualStyleBackColor = false;
             btnImportar.Click += btnImportar_Click;
+            // 
+            // btnVolver
+            // 
+            btnVolver.BackColor = Color.Gainsboro;
+            btnVolver.Cursor = Cursors.Hand;
+            btnVolver.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            btnVolver.Location = new Point(335, 144);
+            btnVolver.Name = "btnVolver";
+            btnVolver.Size = new Size(75, 42);
+            btnVolver.TabIndex = 44;
+            btnVolver.Text = "Volver";
+            btnVolver.UseVisualStyleBackColor = false;
+            btnVolver.Click += btnVolver_Click;
             // 
             // FormInformacion
             // 
@@ -146,6 +160,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.GradientInactiveCaption;
             ClientSize = new Size(752, 473);
+            Controls.Add(btnVolver);
             Controls.Add(btnImportar);
             Controls.Add(btnExportar);
             Controls.Add(label1);
@@ -173,5 +188,6 @@
         private ImageList imageList1;
         private Button btnImportar;
         private ToolTip toolTip;
+        private Button btnVolver;
     }
 }

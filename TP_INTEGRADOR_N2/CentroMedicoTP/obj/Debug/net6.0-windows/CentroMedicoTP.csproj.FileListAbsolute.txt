@@ -31,3 +31,4 @@ C:\TP_INTEGRADOR_N2_LABO_II\TP_INTEGRADOR_N2\CentroMedicoTP\obj\Debug\net6.0-win
 C:\TP_INTEGRADOR_N2_LABO_II\TP_INTEGRADOR_N2\CentroMedicoTP\obj\Debug\net6.0-windows\CentroMedicoTP.FormAtencion.resources
 C:\TP_INTEGRADOR_N2_LABO_II\TP_INTEGRADOR_N2\CentroMedicoTP\obj\Debug\net6.0-windows\CentroMedicoTP.FormHistoriaClinica.resources
 C:\TP_INTEGRADOR_N2_LABO_II\TP_INTEGRADOR_N2\CentroMedicoTP\obj\Debug\net6.0-windows\CentroMedicoTP.FormSelectorExportacion.resources
+C:\TP_INTEGRADOR_N2_LABO_II\TP_INTEGRADOR_N2\CentroMedicoTP\obj\Debug\net6.0-windows\CentroMedicoTP.Properties.Resources.resources

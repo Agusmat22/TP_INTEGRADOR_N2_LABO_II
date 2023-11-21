@@ -31,7 +31,7 @@ namespace CentroMedicoTP
                                                                            //Inicio el hilo para actualizar la lista cuando sucede una modificacion
                 this.centroMedico.IniciarActualizacion();
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
@@ -90,21 +90,21 @@ namespace CentroMedicoTP
 
         private void btnRegistrar_Click(object sender, EventArgs e)
         {
-            FormRegistrarPaciente registrarPaciente = new FormRegistrarPaciente(centroMedico, restablecerMenu);
+            FormRegistrarPaciente registrarPaciente = new FormRegistrarPaciente(this.centroMedico, this.restablecerMenu);
             this.MostrarFormulario(registrarPaciente);
 
         }
 
         private void btnInformacion_Click(object sender, EventArgs e)
         {
-            FormInformacion formInformacion = new FormInformacion(this.centroMedico);
+            FormInformacion formInformacion = new FormInformacion(this.centroMedico, this.restablecerMenu);
             this.MostrarFormulario(formInformacion);
         }
-  
+
 
         private void btnAtencion_Click(object sender, EventArgs e)
         {
-            FormAtencion formAtencionMedica = new FormAtencion(this.centroMedico);
+            FormAtencion formAtencionMedica = new FormAtencion(this.centroMedico, this.restablecerMenu);
             this.MostrarFormulario(formAtencionMedica);
         }
 
@@ -143,8 +143,8 @@ namespace CentroMedicoTP
                 {
                     MessageBox.Show($"Cerrando app, la aplicacion no logro conectarse a la BASE DE DATOS\n{ex.Message}");
                 }
-                
+
             }
-        }      
+        }
     }
 }

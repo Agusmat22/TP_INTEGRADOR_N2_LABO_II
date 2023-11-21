@@ -76,7 +76,7 @@ namespace CentroMedicoTP
         {
             if (this.pacientesImportados.Count > 0)
             {
-                
+
                 //agrego los pacientes a la lista que no existan
                 centroMedico.ExtenderListaPacientes(this.pacientesImportados);
 
@@ -88,22 +88,28 @@ namespace CentroMedicoTP
                         ADOPacientes.Guardar(item);
                         agregados++;
                     }
-                    catch(FalloGuardarRegistroException)
+                    catch (FalloGuardarRegistroException)
                     {
-                        repetidos++;    
+                        repetidos++;
                     }
-                    catch(Exception ex)
+                    catch (Exception ex)
                     {
                         MessageBox.Show(ex.Message);
                     }
                 }
-                this.DialogResult = DialogResult.OK;              
+                this.DialogResult = DialogResult.OK;
             }
             else
             {
-                MessageBox.Show("Error, no se encontro pacientes para importar","Error");
+                MessageBox.Show("Error, no se encontro pacientes para importar", "Error");
 
             }
+
+        }
+
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.Cancel;
 
         }
     }

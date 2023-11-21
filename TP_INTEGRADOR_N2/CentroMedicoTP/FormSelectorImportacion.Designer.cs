@@ -32,6 +32,7 @@
             lstbPacientes = new ListBox();
             btnImportar = new Button();
             label1 = new Label();
+            btnCancelar = new Button();
             SuspendLayout();
             // 
             // btnSeleccionarArchivo
@@ -56,9 +57,9 @@
             // 
             // btnImportar
             // 
-            btnImportar.Location = new Point(44, 387);
+            btnImportar.Location = new Point(190, 387);
             btnImportar.Name = "btnImportar";
-            btnImportar.Size = new Size(283, 35);
+            btnImportar.Size = new Size(137, 35);
             btnImportar.TabIndex = 2;
             btnImportar.Text = "Importar";
             btnImportar.UseVisualStyleBackColor = true;
@@ -74,12 +75,23 @@
             label1.TabIndex = 4;
             label1.Text = "Importar pacientes";
             // 
+            // btnCancelar
+            // 
+            btnCancelar.Location = new Point(44, 387);
+            btnCancelar.Name = "btnCancelar";
+            btnCancelar.Size = new Size(137, 35);
+            btnCancelar.TabIndex = 5;
+            btnCancelar.Text = "Cancelar";
+            btnCancelar.UseVisualStyleBackColor = true;
+            btnCancelar.Click += btnCancelar_Click;
+            // 
             // FormSelectorImportacion
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.GradientInactiveCaption;
             ClientSize = new Size(375, 443);
+            Controls.Add(btnCancelar);
             Controls.Add(label1);
             Controls.Add(btnImportar);
             Controls.Add(lstbPacientes);
@@ -98,5 +110,6 @@
         private ListBox lstbPacientes;
         private Button btnImportar;
         private Label label1;
+        private Button btnCancelar;
     }
 }
