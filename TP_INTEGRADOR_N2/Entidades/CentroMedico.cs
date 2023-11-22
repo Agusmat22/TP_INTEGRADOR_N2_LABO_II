@@ -244,6 +244,7 @@ namespace Entidades
 
                 //instancio el hilo y le agrego el metodo que quiero en segundo plano
                 this.actualizacion = new Task(this.ActualizacionPacientes, this.cancellation);
+                
             }
 
             //VALIDAR QUE ONDA ACAAAA
