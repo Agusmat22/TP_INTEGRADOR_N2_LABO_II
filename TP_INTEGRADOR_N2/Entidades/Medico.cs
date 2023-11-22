@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace Entidades
 {
     public enum EEspecialidad
-    {
+    {       
         Pediatria,
         Clinico,
         Traumatologia
@@ -107,6 +107,8 @@ namespace Entidades
         {
             return obj is not null && obj is Medico medico && this == medico && this.NumeroMatricula == medico.NumeroMatricula;
         }
+
+
 
 
         public static bool operator ==(Medico medico, string coincidencia)

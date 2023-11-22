@@ -81,7 +81,7 @@ namespace CentroMedicoTP
                         Paciente paciente = new Paciente(nombre, apellido, dni, fechaNacimiento, obraSocial, numero, DateTime.Now);
                         ADOPacientes.Guardar(paciente);
 
-                        MessageBox.Show($"Registro de {paciente}");
+                        MessageBox.Show($"Registrado correctamente\nPaciente: {paciente}");
 
                     }
                     else if (this.rdbSeleccionado == this.rdbMedico && !this.centroMedico.ValidarMatricula(numero))
@@ -93,7 +93,7 @@ namespace CentroMedicoTP
                         //al medico si lo agrego en tiempo de ejecucion ya que no lo actualizo por DB
                         this.centroMedico.Agregar(medico);
 
-                        MessageBox.Show($"Registro de {medico}");
+                        MessageBox.Show($"Registrado correctamente\nMedico: {medico}");
 
                     }
                     else
