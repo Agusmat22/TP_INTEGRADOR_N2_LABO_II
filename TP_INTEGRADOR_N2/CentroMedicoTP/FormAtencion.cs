@@ -153,6 +153,10 @@ namespace CentroMedicoTP
 
                     this.ActualizarAccesoControles();
                 }
+                else
+                {
+                    MessageBox.Show("Error, debe completar el diagnostico");
+                }
             }
             catch (FalloModificarRegistroException ex)
             {
